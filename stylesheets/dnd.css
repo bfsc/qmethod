@@ -1,0 +1,138 @@
+cardRatingJustitication  {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+}
+
+
+ /* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+} 
+
+
+
+.ratings ul[dnd-list] {
+    min-height: 42px;
+	width: 150px;
+	padding-top: 10px;
+    padding-left: 20px;
+}
+
+.ratings ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+.ratings ul[dnd-list] .dndPlaceholder {
+    background-color: #ddd;
+    display: block;
+    min-height: 42px;
+}
+
+.ratings ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding-top: 10px;
+	padding-left:10px;
+    margin-bottom: -1px;
+	max-height: 30px;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+.simpleDemo ul[dnd-list] {
+    min-height: 40px;
+	width: 300px;
+	padding-top: 10px;
+    padding-left: 10px;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+.simpleDemo ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+.simpleDemo ul[dnd-list] .dndPlaceholder {
+    background-color: #ddd;
+    display: block;
+    min-height: 40px;
+}
+
+.simpleDemo ul[dnd-list] li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+}
+
+/**
+ * Show selected elements in green
+ */
+.simpleDemo ul[dnd-list] li.selected {
+    background-color: #dff0d8;
+    color: #3c763d;
+}

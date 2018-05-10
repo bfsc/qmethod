@@ -1,0 +1,90 @@
+<div ng-controller='step5Ctrl'>
+
+	<br/>
+	<br/>
+	
+	<center>If you need to <b>read the instructions of this step again, click on the "Help Me!"</b> button on the bottom right corner.</center>
+
+	<br/>
+	<br/>
+
+	<table align="center">
+		<tr>
+			<td align="center" bgcolor="#c2f0c2" colspan="2" style="font-size: 20px;padding:10px;"><b>AGREE (+3)</b></td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		<tr>
+			<td width="400" style="vertical-align:top">
+				<div class="cardRatingJustitication">
+					({{explanations.agree[0].statement.id}}) {{ explanations.agree[0].statement.statement }}
+				</div>
+			</td>
+			<td width="500">
+				<textarea ng-model="explanations.agree[0].explanation" style="width:99%" rows="4" cols="50"> </textarea>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">
+				<div class="cardRatingJustitication">
+					({{explanations.agree[1].statement.id}}) {{ explanations.agree[1].statement.statement }}
+				</div>
+			</td>
+			<td>
+				<textarea ng-model="explanations.agree[1].explanation" style="width:99%" rows="4" cols="50"> </textarea>
+			</td>
+		</tr>
+		<tr><td style=" padding:10px;"></td></tr>
+		<tr>
+			<td align="center" bgcolor="#ffc2b3" colspan="2" style="font-size: 20px;padding:10px;"><b>DISAGREE (-3)</b></td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		<tr>
+			<td style="vertical-align:top">
+				<div class="cardRatingJustitication">
+					({{explanations.disagree[0].statement.id}}) {{ explanations.disagree[0].statement.statement }}
+				</div>
+			</td>
+			<td>
+				<textarea ng-model="explanations.disagree[0].explanation" style="width:99%" rows="4" cols="50"> </textarea>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top">
+				<div class="cardRatingJustitication">
+					({{explanations.disagree[1].statement.id}}) {{ explanations.disagree[1].statement.statement }}
+				</div>
+			</td>
+			<td>
+				<textarea ng-model="explanations.disagree[1].explanation" style="width:99%" rows="4" cols="50"> </textarea>
+			</td>
+		</tr>
+	</table>
+	
+	<br/>
+	<br/>
+	
+	<table align="center">
+		<tr>
+			<td>
+				<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+					<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
+				</div>
+			</td>
+			<td>
+				<div align="center" ng-show="done()">
+					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+						<a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
+					</div>
+				</div>
+			</td>
+			<td>
+				<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+					<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Help Me!</a>
+				</div>
+			</td>
+		</tr>
+	</table>
+	
+	<br/>
+	<br/>
+</div>

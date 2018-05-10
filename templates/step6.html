@@ -1,0 +1,208 @@
+<div ng-controller='step6Ctrl'>
+	<br/>
+	<br/>
+	
+	<center>If you need to <b>read the instructions of this step again, click on the "Help Me!"</b> button on the bottom right corner.</center>
+
+	<br/>
+	<br/>
+
+	<table align="center">
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*AGE</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>Please enter your year of birth (YYYY, eg. 1980).</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.age" style="width:200px" />
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*GENDER</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>Please select your gender.</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.gender" style="width:50px" type="radio" name="gender" value="male">Male</input>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.gender" style="width:50px" type="radio" name="gender" value="female">Female</input>
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*GEOGRAPHIC LOCATION</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>Please enter the country you currently work on.</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.country" style="width:200px" />
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*EDUCATION</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>Please select your educational level.</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<select ng-model="questionnaire.education" name="cars" style="width:200px">
+				  <option value="phd">PhD</option>
+				  <option value="phdc">PhD Candidate</option>
+				  <option value="msc">Master</option>
+				  <option value="mscc">Master Candidate</option>
+				  <option value="bsc">Undergraduate</option>
+				  <option value="bscc">Undergraduate Candidate</option>
+				</select> 
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*OCCUPATION</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>Please select your main occupation.</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<select ng-model="questionnaire.occupation" name="cars" style="width:200px">
+				  <option value="research-academia">Research in Academia</option>
+				  <option value="research-industry">Research in Industry</option>
+				  <option value="practice-industry">Practice in Industry</option>
+				</select> 
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*Have you ever heard about systematic reviews before?</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.heard_sr" style="width:50px" type="radio" name="heard-sr" value="yes">Yes</input>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.heard_sr" style="width:50px" type="radio" name="heard-sr" value="No">No</input>
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*Have you ever read a systematic review?</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.read_sr" style="width:50px" type="radio" name="read-sr" value="yes">Yes</input>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.read_sr" style="width:50px" type="radio" name="read-sr" value="No">No</input>
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*Have you ever been the author of a systematic review?</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.author_sr" style="width:50px" type="radio" name="author-sr" value="yes">Yes</input>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.author_sr" style="width:50px" type="radio" name="author-sr" value="No">No</input>
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>*Have you ever heard about RAPID REVIEWS before?</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.heard_rr" style="width:50px" type="radio" name="heard-rr" value="yes">Yes</input>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.heard_rr" style="width:50px" type="radio" name="heard-rr" value="No">No</input>
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>COMMENTS</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>If you have any further comment about rapid reviews and/or this research instrument, please let us know.</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<textarea ng-model="questionnaire.comments" style="width:99%" rows="4" cols="50"></textarea>
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+		
+		<tr>
+			<td align="center" bgcolor="#d9d9d9" colspan="2" style="font-size:15px;padding:10px;" width="1024"><b>E-MAIL</b></td>
+		</tr>
+		<tr>
+			<td align="left" colspan="2" style="font-size:12px;padding:10px;"><b>Please enter your e-mail (it will not be disclosed), if you want to participate on the raflle of US$ 100 voucher at Amazon.com</b></td>
+		</tr>
+		<tr>
+			<td style="padding:10px;" bgcolor="#f2f2f2">
+				<input ng-model="questionnaire.email" style="width:200px" />
+			</td>
+		</tr>
+		<tr><td style=" padding:5px;"></td></tr>
+	</table>
+	
+	<br/>
+	<br/>
+	
+	<form>
+		<table align="center">
+			<tr>
+				<td>
+					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+						<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
+					</div>
+				</td>
+				<td>
+					<div align="center" ng-show="done()">
+						<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+							<a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
+						</div>
+					</div>
+				</td>
+				<td>
+					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+						<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Help Me!</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<br/>
+	<br/>
+</div>
