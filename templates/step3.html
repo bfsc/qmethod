@@ -33,10 +33,10 @@
 			<div class="row">
 				<table align="center">
 					<tr>
-						<td style="vertical-align:top">
+						<td style="vertical-align:top" >
 							<div  style="width:320px;padding-right:10px;">
-								<div class="panel panel-info">
-									<div class="panel-heading">
+								<div class="panel panel-info" id="disagree">
+									<div class="panel-heading disagree_panel_heading" >
 										<h3 class="panel-title" align="center">DISAGREE</h3>
 									</div>
 									<ul dnd-list="classifications" dnd-drop="dropDisagreeCallback(index, item, external, type)">
@@ -53,8 +53,8 @@
 						</td>
 						<td style="vertical-align:top">
 							<div  style="width:320px;padding-right:10px;">
-								<div class="panel panel-info">
-									<div class="panel-heading">
+								<div class="panel panel-info" id="neutral">
+									<div class="panel-heading neutral_panel_heading">
 										<h3 class="panel-title" align="center">NEUTRAL</h3>
 									</div>
 									<ul dnd-list="classifications" dnd-drop="dropNeutralCallback(index, item, external, type)">
@@ -71,8 +71,8 @@
 						</td>
 						<td style="vertical-align:top">
 							<div  style="width:320px;padding-right:10px;;">
-								<div class="panel panel-info">
-									<div class="panel-heading">
+								<div class="panel panel-info" id="agree">
+									<div class="panel-heading agree_panel_heading">
 										<h3 class="panel-title" align="center">AGREE</h3>
 									</div>
 									<ul dnd-list="classifications" dnd-drop="dropAgreeCallback(index, item, external, type)">
