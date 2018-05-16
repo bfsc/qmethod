@@ -120,7 +120,7 @@ cardRatingJustitication  {
 }
 
 .simpleDemo ul[dnd-list] li {
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.7);
     border: 1px solid #ddd;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
@@ -136,3 +136,40 @@ cardRatingJustitication  {
     background-color: #dff0d8;
     color: #3c763d;
 }
+
+
+.panel-info>.disagree_panel_heading {
+    background-image: linear-gradient(to bottom, #ff4242 0, #e82a2a 100%)!important;
+    border-color: #e82a2a !important;
+}
+
+.panel-info>.neutral_panel_heading {
+    background-image: linear-gradient(to bottom, #A39E9E 0, #969292 100%) !important;
+    border-color: #969292 !important;
+}
+
+.panel-info>.agree_panel_heading {
+    background-image: linear-gradient(to bottom, #06A10E 0, #06960D 100%) !important;
+    border-color: #06A10E !important;
+}
+
+#disagree {
+    background-color: #ff6666;
+    border-color: #e82a2a;
+}
+
+#neutral {
+    background-color: #BAB9B9;
+    border-color: #969292
+}
+
+#agree {
+    background-color: #00A848;
+    border-color: #06960D
+}
+
+.panel-title {
+    color: white !important;
+}
+
+
