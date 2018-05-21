@@ -178,6 +178,20 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 	$scope.back = function () {
        $state.go('step2');
 	}
+    
+    $scope.showHelpMeDialog = function(ev) {
+        $modal.open({
+            templateUrl: 'modaltest.html'
+            backdrop: true,
+            windowClass: 'modal',
+            controller: function ($scope, $modalInstance, $log) {
+                $scope.cancel = function() {]
+                    $modalInstance.dismiss('cancel');
+                };
+            }
+        })
+  };
+	
 	
 	/*
 	$scope.showHelpMeDialog = function(ev) {
