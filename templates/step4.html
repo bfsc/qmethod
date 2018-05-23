@@ -12,6 +12,8 @@
 	</div>
 	
 	<div class="ratings row" style="margin-top:50px">
+
+		<div class="topRow">
 		<table align="center">
 			<tr>
 				<td style="vertical-align:top">
@@ -186,14 +188,16 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 
 	<div class="simpleDemo row" style="margin:20px">
+        <div class="row">
 		<table align="center">
 			<tr>
 				<td style="vertical-align:top">
 					<div  style="width:320px;padding-right:10px;">
-						<div class="panel panel-info">
-							<div class="panel-heading">
+						<div class="panel panel-info" id="disagree">
+							<div class="panel-heading disagree_panel_heading" >
 								<h3 class="panel-title" align="center">DISAGREE</h3>
 							</div>
 							<ul dnd-list="classifications.DISAGREE" dnd-disable-if="true">
@@ -210,8 +214,8 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:320px;padding-right:10px;">
-						<div class="panel panel-info">
-							<div class="panel-heading">
+						<div class="panel panel-info" id="neutral">
+							<div class="panel-heading neutral_panel_heading">
 								<h3 class="panel-title" align="center">NEUTRAL</h3>
 							</div>
 							<ul dnd-list="classifications.NEUTRAL" dnd-disable-if="true">
@@ -228,8 +232,8 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:320px;padding-right:10px;">
-						<div class="panel panel-info">
-							<div class="panel-heading">
+						<div class="panel panel-info" id="agree">
+							<div class="panel-heading agree_panel_heading">
 								<h3 class="panel-title" align="center">AGREE</h3>
 							</div>
 							<ul dnd-list="classifications.AGREE" dnd-disable-if="true">
@@ -246,6 +250,7 @@
 				</td>
 			</tr>
 		</table>
+        </div>
 	</div>
 	
 		<form>

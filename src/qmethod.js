@@ -58,12 +58,12 @@ app.config(function ($stateProvider, $locationProvider) {
 // ========== UTIL
 
 var config = {
-	apiKey: "AIzaSyCiBklqr0BNdtZHV1fOVLm_39wc2Dk3BB4",
-    authDomain: "easy-htmlq-6e39d.firebaseapp.com",
-    databaseURL: "https://easy-htmlq-6e39d.firebaseio.com",
-    projectId: "easy-htmlq-6e39d",
-    storageBucket: "easy-htmlq-6e39d.appspot.com",
-    messagingSenderId: "229256769126"
+    apiKey: "AIzaSyA15U4F-Q97flUntlLtVCaKDioVOhpszWA",
+    authDomain: "qmethod-87099.firebaseapp.com",
+    databaseURL: "https://qmethod-87099.firebaseio.com",
+    projectId: "qmethod-87099",
+    storageBucket: "qmethod-87099.appspot.com",
+    messagingSenderId: "639626576200"
 };
 firebase.initializeApp(config);
 var rootRef = firebase.database().ref();
@@ -178,10 +178,24 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 	$scope.back = function () {
        $state.go('step2');
 	}
+
+	$scope.aux = function () {
+		for (var i = 0; i < 50; ++i) {
+			var ii = i%3;
+			if (ii == 0) {
+				$scope.classifications.AGREE.push($scope.statements[i]);
+			} else if (ii == 1) {
+				$scope.classifications.NEUTRAL.push($scope.statements[i]);
+			} else if (ii == 2) {
+				$scope.classifications.DISAGREE.push($scope.statements[i]);
+			}
+		}
+       $state.go('step4');
+	}
     
-    $scope.showHelpMeDialog = function(ev) {
+  /*  $scope.showHelpMeDialog = function(ev) {
         $modal.open({
-            templateUrl: 'modaltest.html'
+            templateUrl: 'helpModal.html'
             backdrop: true,
             windowClass: 'modal',
             controller: function ($scope, $modalInstance, $log) {
@@ -190,7 +204,7 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
                 };
             }
         })
-  };
+  };*/
 	
 	
 	/*
