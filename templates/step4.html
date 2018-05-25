@@ -18,7 +18,7 @@
 			<tr>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;min-height:70px">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-n3">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">-3</h3>
 							</div>
@@ -27,7 +27,7 @@
 								dnd-disable-if="ratings.rating_3size >= 2">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
 									ng-repeat="statement in ratings.rating_3">
 									<li 
 										dnd-draggable="statement"
@@ -44,7 +44,7 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-n2">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">-2</h3>
 							</div>
@@ -53,7 +53,7 @@
 								dnd-disable-if="ratings.rating_2size >= 6">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
 									ng-repeat="statement in ratings.rating_2">
 									<li
 										dnd-draggable="statement"
@@ -68,7 +68,7 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-n1">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">-1</h3>
 							</div>
@@ -77,7 +77,8 @@
 							dnd-disable-if="ratings.rating_1size >= 10">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
+									tooltip-size="large"
 									ng-repeat="statement in ratings.rating_1">
 									<li 
 										dnd-draggable="statement"
@@ -92,7 +93,7 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-n0">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">0</h3>
 							</div>
@@ -101,7 +102,8 @@
 							dnd-disable-if="ratings.rating0size >= 14">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
+									tooltip-size="large"
 									ng-repeat="statement in ratings.rating0">
 									<li 
 										dnd-draggable="statement"
@@ -116,7 +118,7 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-p1">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">1</h3>
 							</div>
@@ -125,7 +127,8 @@
 							dnd-disable-if="ratings.rating1size >= 10">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
+									tooltip-size="large"
 									ng-repeat="statement in ratings.rating1">
 									<li 
 										dnd-draggable="statement"
@@ -140,7 +143,7 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-p2">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">2</h3>
 							</div>
@@ -149,7 +152,8 @@
 							dnd-disable-if="ratings.rating2size >= 6">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
+									tooltip-size="large"
 									ng-repeat="statement in ratings.rating2">
 									<li 
 										dnd-draggable="statement"
@@ -164,7 +168,7 @@
 				</td>
 				<td style="vertical-align:top">
 					<div  style="width:150px;padding-right:10px;">
-						<div class="panel panel-info">
+						<div class="panel panel-info" id="td-p3">
 							<div class="panel-heading">
 								<h3 class="panel-title" align="center">3</h3>
 							</div>
@@ -173,7 +177,8 @@
 							dnd-disable-if="ratings.rating3size >= 2">
 								<div 
 									tooltips tooltip-template="{{statement.statement}}"
-									tooltip-side="bottom"
+									tooltip-side="right"
+									tooltip-size="large"
 									ng-repeat="statement in ratings.rating3">
 									<li 
 										dnd-draggable="statement"

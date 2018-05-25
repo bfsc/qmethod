@@ -90,58 +90,61 @@ app.controller("step2Ctrl", function($scope, $rootScope, $state) {
 });
 
 app.controller("step3Ctrl", function($scope, $rootScope, $state) {
-	$rootScope.statements = [
-		{id:1, statement:'The evidence from rapid reviews is good enough to inform low-risk, emergent policy or decision-making needs when the alternative is the use of no evidence.'},
-		{id:2, statement:'When time allows, a comprehensive systematic review of all available evidence should always be conducted.'},
-		{id:3, statement:'Deviating from accepted systematic review methods may introduce bias and impact the validity of the resulting rapid review, which may be an unacceptable risk for some knowledge users (practitioners).'},
-		{id:4, statement:'Further research comparing the methods and results of rapid reviews and systematic reviews is required before I decide how I feel about rapid reviews.'},
-		{id:5, statement:'Rapid reviews are too focused in scope and/or context to be generalizable to a variety of knowledge users (practitioners).'},
-		{id:6, statement:'Rapid reviews mean different things to different people.'},
-		{id:7, statement:'Rapid reviews should only precede a more comprehensive and rigorous systematic review.'},
-		{id:8, statement:'The opportunity cost of a comprehensive systematic review is too high and it is more advantageous to conduct rapid reviews when timeliness is a factor.'},
-		{id:9, statement:'Rapid reviews do not replace systematic reviews.'},
-		{id:10, statement:'All evidence synthesis products, including rapid reviews and systematic reviews, can be conducted very well or very poorly.'},
-		{id:11, statement:'Rapid reviews are comparable to systematic reviews except they are done in a more timely fashion.'},
-		{id:12, statement:'Rapid reviews are \'quick and dirty\' systematic reviews.'},
-		{id:13, statement:'Rapid reviews need to be tailored to the specific needs of the knowledge user (practitioners).'},
-		{id:14, statement:'Rapid reviews meet the needs of knowledge users (practitioners).'},
-		{id:15, statement:'There are few evidence on rapid reviews, so I cannot support or oppose their use in decision-making.'},
-		{id:16, statement:'There is so much overlap across the various evidence synthesis methods that I cannot generalize my opinion to favor one over the other without the context of the decision at hand.'},
-		{id:17, statement:'There is a risk involved in tailoring accepted systematic review methods to produce rapid reviews that we do not yet understand.'},
-		{id:18, statement:'Using rapid reviews to inform decisions is better than using no evidence at all.'},
-		{id:19, statement:'It is always appropriate to conduct a rapid review.'},
-		{id:20, statement:'Rapid reviews and all other evidence synthesis products hold the same value as long as they retain the core value of being transparent in conduct, include the highest quality evidence available and present results with a qualification on the strength of evidence.'},
-		{id:21, statement:'Appropriateness of a rapid review varies with the type of decision being made, and any financial, legal or other important contextual facets tied to the decision.'},
-		{id:22, statement:'My confidence in a rapid review is impacted by which methods are tailored to speed up the review process.'},
-		{id:23, statement:'My confidence in a rapid review is directly tied to results being presented and contextualized by the strength and applicability of the evidence.'},
-		{id:24, statement:'It is important to have minimum standards for the methodological conduct of rapid reviews.'},
-		{id:25, statement:'It is important to have minimum standards for the reporting of rapid reviews.'},
-		{id:26, statement:'Standardization of rapid review methods may conflict with the needs of knowledge users (practitioners).'},
-		{id:27, statement:'The value of rapid reviews in the context of emergent decision-making needs outweighs the disadvantages or risk of bias and potentially \'imperfect\' evidence.'},
-		{id:28, statement:'Knowledge users don\'t always need all of the evidence, they just need the best evidence to support their decision, and what is \'best evidence\' is specific to the knowledge user (practitioner).'},
-		{id:29, statement:'Knowledge users (practitioners) do not fully understand the implications of streamlining evidence synthesis methods to produce a more timely evidence product.'},
-		{id:30, statement:'Reporting of the results of rapid reviews must be tailored to the knowledge user(s) (practitioners) who commissioned the review.'},
-		{id:31, statement:'Rapid reviews that omit an assessment of the quality of included studies are useless to knowledge users (practitioners).'},
-		{id:32, statement:'Rapid reviews can be timely and valid, even when methodological concessions are made.'},
-		{id:33, statement:'Transparency of process is more important than the actual methods used to produce rapid reviews, as transparency allows the knowledge user (practitioners) to make their own assessment on validity and appropriateness.'},
-		{id:34, statement:'It is appropriate to endeavor to define a single, unique methodology for rapid reviews.'},
-		{id:35, statement:'Rapid reviews are not a unique methodology, they are simply a variation of a systematic review that can fall anywhere on the continuum of evidence synthesis methods.'},
-		{id:36, statement:'The results from a systematic review may not differ from those of a rapid review, but more research is needed to support this theory and quantify why results may be the same or different.'},
-		{id:37, statement:'I put more confidence in evidence produced in a systematic review than of a rapid review.'},
-		{id:38, statement:'The more time spent conducting the review of the evidence, the more valid the results of the review will be.'},
-		{id:39, statement:'Achieving a precise estimate of effect (from a systematic review) may not inform the decision-at-hand any better than a general estimate of effect (produced by a rapid review).'},
-		{id:40, statement:'Rapid reviews should only be conducted when the alternate option is the use of no evidence to inform a decision.'},
-		{id:41, statement:'A well-conducted rapid review may produce better evidence than a poorly conducted systematic review.'},
-		{id:42, statement:'Any review of evidence that takes longer than one month to produce is not a rapid review.'},
-		{id:43, statement:'Any review of evidence that takes longer than two weeks to produce is not a rapid review.'},
-		{id:44, statement:'A rapid review must be justified with a valid rationale for both speeding up the process and tailoring rigourous methods for evidence synthesis.'},
-		{id:45, statement:'A good quality review of evidence is determined by the methods used, not by the speed at which it is completed.'},
-		{id:46, statement:'It is difficult to tell a rapid review from a systematic review unless very specific nomenclature is used in the title or description of methods.'},
-		{id:47, statement:'A rapid review cannot be a systematic review.'},
-		{id:48, statement:'\'Rapid review\' is too broad a phrase—doing a review in a more timely way can only be relative to how long it takes the same team to produce a full systematic review.'},
-		{id:49, statement:'Producers (researchers) are more concerned with the methodology and validity of rapid reviews than knowledge users (practitioners).'},
-		{id:50, statement:'It is difficult to judge the validity of a rapid review as the reporting is often truncated and protocols are not published.'},
-	];
+	
+    if ( typeof $rootScope.statements == "undefined" ) {
+        $rootScope.statements = [
+            {id:1, statement:'The evidence from rapid reviews is good enough to inform low-risk, emergent policy or decision-making needs when the alternative is the use of no evidence.'},
+            {id:2, statement:'When time allows, a comprehensive systematic review of all available evidence should always be conducted.'},
+            {id:3, statement:'Deviating from accepted systematic review methods may introduce bias and impact the validity of the resulting rapid review, which may be an unacceptable risk for some knowledge users (practitioners).'},
+            {id:4, statement:'Further research comparing the methods and results of rapid reviews and systematic reviews is required before I decide how I feel about rapid reviews.'},
+            {id:5, statement:'Rapid reviews are too focused in scope and/or context to be generalizable to a variety of knowledge users (practitioners).'},
+            {id:6, statement:'Rapid reviews mean different things to different people.'},
+            {id:7, statement:'Rapid reviews should only precede a more comprehensive and rigorous systematic review.'},
+            {id:8, statement:'The opportunity cost of a comprehensive systematic review is too high and it is more advantageous to conduct rapid reviews when timeliness is a factor.'},
+            {id:9, statement:'Rapid reviews do not replace systematic reviews.'},
+            {id:10, statement:'All evidence synthesis products, including rapid reviews and systematic reviews, can be conducted very well or very poorly.'},
+            {id:11, statement:'Rapid reviews are comparable to systematic reviews except they are done in a more timely fashion.'},
+            {id:12, statement:'Rapid reviews are \'quick and dirty\' systematic reviews.'},
+            {id:13, statement:'Rapid reviews need to be tailored to the specific needs of the knowledge user (practitioners).'},
+            {id:14, statement:'Rapid reviews meet the needs of knowledge users (practitioners).'},
+            {id:15, statement:'There are few evidence on rapid reviews, so I cannot support or oppose their use in decision-making.'},
+            {id:16, statement:'There is so much overlap across the various evidence synthesis methods that I cannot generalize my opinion to favor one over the other without the context of the decision at hand.'},
+            {id:17, statement:'There is a risk involved in tailoring accepted systematic review methods to produce rapid reviews that we do not yet understand.'},
+            {id:18, statement:'Using rapid reviews to inform decisions is better than using no evidence at all.'},
+            {id:19, statement:'It is always appropriate to conduct a rapid review.'},
+            {id:20, statement:'Rapid reviews and all other evidence synthesis products hold the same value as long as they retain the core value of being transparent in conduct, include the highest quality evidence available and present results with a qualification on the strength of evidence.'},
+            {id:21, statement:'Appropriateness of a rapid review varies with the type of decision being made, and any financial, legal or other important contextual facets tied to the decision.'},
+            {id:22, statement:'My confidence in a rapid review is impacted by which methods are tailored to speed up the review process.'},
+            {id:23, statement:'My confidence in a rapid review is directly tied to results being presented and contextualized by the strength and applicability of the evidence.'},
+            {id:24, statement:'It is important to have minimum standards for the methodological conduct of rapid reviews.'},
+            {id:25, statement:'It is important to have minimum standards for the reporting of rapid reviews.'},
+            {id:26, statement:'Standardization of rapid review methods may conflict with the needs of knowledge users (practitioners).'},
+            {id:27, statement:'The value of rapid reviews in the context of emergent decision-making needs outweighs the disadvantages or risk of bias and potentially \'imperfect\' evidence.'},
+            {id:28, statement:'Knowledge users don\'t always need all of the evidence, they just need the best evidence to support their decision, and what is \'best evidence\' is specific to the knowledge user (practitioner).'},
+            {id:29, statement:'Knowledge users (practitioners) do not fully understand the implications of streamlining evidence synthesis methods to produce a more timely evidence product.'},
+            {id:30, statement:'Reporting of the results of rapid reviews must be tailored to the knowledge user(s) (practitioners) who commissioned the review.'},
+            {id:31, statement:'Rapid reviews that omit an assessment of the quality of included studies are useless to knowledge users (practitioners).'},
+            {id:32, statement:'Rapid reviews can be timely and valid, even when methodological concessions are made.'},
+            {id:33, statement:'Transparency of process is more important than the actual methods used to produce rapid reviews, as transparency allows the knowledge user (practitioners) to make their own assessment on validity and appropriateness.'},
+            {id:34, statement:'It is appropriate to endeavor to define a single, unique methodology for rapid reviews.'},
+            {id:35, statement:'Rapid reviews are not a unique methodology, they are simply a variation of a systematic review that can fall anywhere on the continuum of evidence synthesis methods.'},
+            {id:36, statement:'The results from a systematic review may not differ from those of a rapid review, but more research is needed to support this theory and quantify why results may be the same or different.'},
+            {id:37, statement:'I put more confidence in evidence produced in a systematic review than of a rapid review.'},
+            {id:38, statement:'The more time spent conducting the review of the evidence, the more valid the results of the review will be.'},
+            {id:39, statement:'Achieving a precise estimate of effect (from a systematic review) may not inform the decision-at-hand any better than a general estimate of effect (produced by a rapid review).'},
+            {id:40, statement:'Rapid reviews should only be conducted when the alternate option is the use of no evidence to inform a decision.'},
+            {id:41, statement:'A well-conducted rapid review may produce better evidence than a poorly conducted systematic review.'},
+            {id:42, statement:'Any review of evidence that takes longer than one month to produce is not a rapid review.'},
+            {id:43, statement:'Any review of evidence that takes longer than two weeks to produce is not a rapid review.'},
+            {id:44, statement:'A rapid review must be justified with a valid rationale for both speeding up the process and tailoring rigourous methods for evidence synthesis.'},
+            {id:45, statement:'A good quality review of evidence is determined by the methods used, not by the speed at which it is completed.'},
+            {id:46, statement:'It is difficult to tell a rapid review from a systematic review unless very specific nomenclature is used in the title or description of methods.'},
+            {id:47, statement:'A rapid review cannot be a systematic review.'},
+            {id:48, statement:'\'Rapid review\' is too broad a phrase—doing a review in a more timely way can only be relative to how long it takes the same team to produce a full systematic review.'},
+            {id:49, statement:'Producers (researchers) are more concerned with the methodology and validity of rapid reviews than knowledge users (practitioners).'},
+            {id:50, statement:'It is difficult to judge the validity of a rapid review as the reporting is often truncated and protocols are not published.'},
+        ];
+	}
 	
 	//$rootScope.statements = $rootScope.statements.sort(function(a, b){return 0.5 - Math.random()});
 	
@@ -150,25 +153,39 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 		first: 1,
 		statements: $rootScope.statements,
 	};
-	
+    
 	$scope.classifications = {
 		'AGREE': [],
 		'NEUTRAL': [],
 		'DISAGREE': [],
 	};
-	
-	$rootScope.classifications = $scope.classifications;
+    
+	//$rootScope.classifications = $scope.classifications;
+    /*Checks if $rootScope is already defined (the user had made his classifications)*/
+    if ( typeof $rootScope.classifications == "undefined" ) {
+		$rootScope.classifications = $scope.classifications;
+	} else {
+		$scope.classifications = $rootScope.classifications;
+	}
+
 	
 	$scope.done = function () {
-		var counter = 0;
+/*		var counter = 0;
 		
 		for(var i = 0; i < $scope.cards.statements.length; i++) {
 			if($scope.cards.statements[i].statement){
 				counter++;
 			}		
-		}
-		
-		return counter == 0;
+		}*/
+        
+   //     var goal = Object.assign({},$rootScope.statements.length);
+        var goal = 50; //Javascript has handing goal an reference
+        var current = $rootScope.classifications.AGREE.length +
+            $rootScope.classifications.DISAGREE.length +
+            $rootScope.classifications.NEUTRAL.length;
+//        console.log("Goal " + goal + "; Current " + current);
+        return goal == current;
+	//	return counter == 0;
     };
 	
 	$scope.next = function () {
@@ -179,18 +196,19 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
        $state.go('step2');
 	}
 
+	/*Auxiliary function to help skip to step4 */
 	$scope.aux = function () {
 		for (var i = 0; i < 50; ++i) {
 			var ii = i%3;
 			if (ii == 0) {
-				$scope.classifications.AGREE.push($scope.statements[i]);
+				$scope.classifications.AGREE.push($rootScope.statements.shift());
 			} else if (ii == 1) {
-				$scope.classifications.NEUTRAL.push($scope.statements[i]);
+				$scope.classifications.NEUTRAL.push($rootScope.statements.shift());
 			} else if (ii == 2) {
-				$scope.classifications.DISAGREE.push($scope.statements[i]);
+				$scope.classifications.DISAGREE.push($rootScope.statements.shift());
 			}
 		}
-       $state.go('step4');
+       //$state.go('step4');
 	}
     
   /*  $scope.showHelpMeDialog = function(ev) {
@@ -250,7 +268,7 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 		}
 	}
 	*/
-	
+	// Documentation ???
 	$scope.dropAgreeCallback = function (index, item, external, type) {
 		
 		if ($scope.cards.first == item.id) {
@@ -284,7 +302,8 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 });
 
 app.controller("step4Ctrl", function($scope, $rootScope, $state) {
-	$scope.classifications = $rootScope.classifications;
+	//Copies $rootScope.classifications instead of getting the reference
+	$scope.classifications = Object.assign({},$rootScope.classifications);
 	
 	$scope.ratings = {
 		rating_3size:0,
