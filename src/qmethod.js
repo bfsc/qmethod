@@ -195,6 +195,14 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 	$scope.back = function () {
        $state.go('step2');
 	}
+    
+    $scope.help = function() {
+        $scope.showModal = true;
+    }
+    
+    $scope.ok = function() {
+        $scope.showModal = false;
+    }
 
 	/*Auxiliary function to help skip to step4 */
 	$scope.aux = function () {
@@ -303,7 +311,7 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 
 app.controller("step4Ctrl", function($scope, $rootScope, $state) {
 	//Copies $rootScope.classifications instead of getting the reference
-	$scope.classifications = Object.assign({},$rootScope.classifications);
+	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
 	
 	$scope.ratings = {
 		rating_3size:0,
