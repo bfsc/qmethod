@@ -1,4 +1,4 @@
-var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
+var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips','ui.bootstrap']);
 
 // ========== CONFIG
 app.config(function ($stateProvider, $locationProvider) {

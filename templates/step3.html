@@ -7,14 +7,23 @@
 
 	<br/>
 	<br/>
-	
-    <!--<div ng-controller="ModalHelp">
-        <script type="text/ng-template" id="helpModal.html">
-            <div class="modal-header">
-                <h3>Hey!!</h3>
-            </div>
-        </script>
-    </div>-->
+
+    
+    <div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3>I'm a modal!</h3>
+        </div>
+          <div class="modal-body">
+            <label>User name</label>
+            <label>Password</label>
+            <label>Add some notes</label>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+              <input type="submit" class="btn primary-btn" value="Submit" />
+          </div>
+    </script>
     
 	<center>
 		<div ng-show="done()">
@@ -25,16 +34,6 @@
 		
 
 		<ul dnd-list="cards.statements">
-			<!--<li 
-				ng-repeat="statement in cards.statements"
-				dnd-draggable="statement"
-				dnd-moved="cards.statements.splice($index, 1)"
-				dnd-effect-allowed="move"
-				dnd-selected="cards.first == statement.id"
-				ng-class="{'selected': cards.selected === statement}"
-				ng-hide="cards.first != statement.id">
-				({{statement.id}}) {{ statement.statement }}
-			</li>-->
             <li 
 				ng-repeat="statement in cards.statements"
 				dnd-draggable="statement"
