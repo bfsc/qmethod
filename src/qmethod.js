@@ -1,4 +1,4 @@
-var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips','ui.bootstrap']);
+var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
 
 // ========== CONFIG
 app.config(function ($stateProvider, $locationProvider) {
@@ -148,6 +148,7 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 	
 	//$rootScope.statements = $rootScope.statements.sort(function(a, b){return 0.5 - Math.random()});
 	
+    
 	$scope.cards = {
 		selected: null,
 		first: 1,
@@ -159,6 +160,8 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 		'NEUTRAL': [],
 		'DISAGREE': [],
 	};
+    
+    $('#helpModal').modal(show=true);
     
 	//$rootScope.classifications = $scope.classifications;
     /*Checks if $rootScope is already defined (the user had made his classifications)*/
@@ -196,13 +199,6 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
        $state.go('step2');
 	}
     
-    $scope.help = function() {
-        $scope.showModal = true;
-    }
-    
-    $scope.ok = function() {
-        $scope.showModal = false;
-    }
 
 	/*Auxiliary function to help skip to step4 */
 	$scope.aux = function () {
@@ -336,6 +332,8 @@ app.controller("step4Ctrl", function($scope, $rootScope, $state) {
 		var ratings = $scope.ratings;
 		return (ratings.rating_3size + ratings.rating_2size + ratings.rating_1size + ratings.rating0size + ratings.rating1size + ratings.rating2size + ratings.rating3size) == 50;
     };
+    
+    $('#helpModal').modal(show=true);
 	
 	$scope.next = function () {
        $state.go('step5');

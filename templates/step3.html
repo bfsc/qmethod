@@ -1,139 +1,154 @@
 <div class="simpleDemo" ng-controller='step3Ctrl'>
-	<!--ng-keydown="onKeyDown($event)"-->
-	<br/>
-	<br/>
-	
-	<center>If you need to <b>read the instructions of this step again, click on the "Help Me!"</b> button on the bottom right corner.</center>
+    <!--ng-keydown="onKeyDown($event)"-->
+    <br/>
+    <br/>
 
-	<br/>
-	<br/>
+    <center>If you need to <b>read the instructions of this step again, click on the "Help Me!"</b> button on the bottom right corner.</center>
 
-    
-    <div ng-controller="ModalDemoCtrl">
-    <script type="text/ng-template" id="myModalContent.html">
+    <br/>
+    <br/>
+
+    <!--<div modal="showModal" close="cancel()">
         <div class="modal-header">
-            <h3>I'm a modal!</h3>
+            <h4>Step 1 of 5</h4>
         </div>
-          <div class="modal-body">
-            <label>User name</label>
-            <label>Password</label>
-            <label>Add some notes</label>
-          </div>
-          <div class="modal-footer">
-              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-              <input type="submit" class="btn primary-btn" value="Submit" />
-          </div>
-    </script>
-    
-	<center>
-		<div ng-show="done()">
-			<div class="col-xs-4 col-xs-offset-4 next-button">
-				<a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
-			</div>
-		</div>
-		
+        <div class="modal-body">
+            <b><center>PLEASE READ THESE INSTRUCTIONS.</center></b>
+            <br>
+                <br> Read the following statements carefully and split them up into 3 piles:
+                <br>
+                <br> 1. A pile for statements you tend to disagree with;
+                <br> 2. A pile for cards you tend to agree with;
+                <br> 3. A pile for the rest.
+                <br>
+                <br> You may either drag these cards into of those three piles or press 1,2,3 on your keyboard.
+                <br>
+                <br> If you want to read this instruction again, press the help button.
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" ng-click="ok()">Okay</button>
+        </div>
+    </div>-->
+    <!-- Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="helpModalLabel">Step 1 of 5</h4>
+                </div>
+                <div class="modal-body">
+                <b><center>PLEASE READ THESE INSTRUCTIONS.</center></b>
+                <br>
+                <br> Read the following statements carefully and split them up into 3 piles:
+                <br>
+                <br> 1. A pile for statements you tend to disagree with;
+                <br> 2. A pile for cards you tend to agree with;
+                <br> 3. A pile for the rest.
+                <br>
+                <br> You may either drag these cards into of those three piles or press 1,2,3 on your keyboard.
+                <br>
+                <br> If you want to read this instruction again, press the help button.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<ul dnd-list="cards.statements">
-            <li 
-				ng-repeat="statement in cards.statements"
-				dnd-draggable="statement"
-				dnd-moved="cards.statements.splice($index, 1)"
-				dnd-effect-allowed="move"
-				dnd-selected="cards.first == statement.id"
-				ng-class="{'selected': cards.selected === statement}"
-                ng-hide="cards.first != statement.id">
-				({{statement.id}}) {{ statement.statement }}
-			</li>
-		</ul>
+    <center>
+        <div ng-show="done()">
+            <div class="col-xs-4 col-xs-offset-4 next-button">
+                <a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
+            </div>
+        </div>
 
-		<div class="simpleDemo row" style="margin:20px ">
-			<div class="row">
-				<table align="center">
-					<tr>
-						<td style="vertical-align:top" >
-							<div  style="width:320px;padding-right:10px;">
-								<div class="panel panel-info" id="disagree">
-									<div class="panel-heading disagree_panel_heading" >
-										<h3 class="panel-title" align="center">DISAGREE</h3>
-									</div>
-									<ul dnd-list="classifications" dnd-drop="dropDisagreeCallback(index, item, external, type)">
-										<li  
-											ng-repeat="statement in classifications.DISAGREE"
-											dnd-draggable="statement"
-											dnd-moved="classifications.DISAGREE.splice($index, 1)"
-											dnd-effect-allowed="move">
-											({{statement.id}}) {{ statement.statement }}
-										</li>
-									</ul>
-								</div>
-							</div>
-						</td>
-						<td style="vertical-align:top">
-							<div  style="width:320px;padding-right:10px;">
-								<div class="panel panel-info" id="neutral">
-									<div class="panel-heading neutral_panel_heading">
-										<h3 class="panel-title" align="center">NEUTRAL</h3>
-									</div>
-									<ul dnd-list="classifications" dnd-drop="dropNeutralCallback(index, item, external, type)">
-										<li  
-											ng-repeat="statement in classifications.NEUTRAL"
-											dnd-draggable="statement"
-											dnd-moved="classifications.NEUTRAL.splice($index, 1)"
-											dnd-effect-allowed="move">
-											({{statement.id}}) {{ statement.statement }}
-										</li>
-									</ul>
-								</div>
-							</div>
-						</td>
-						<td style="vertical-align:top">
-							<div  style="width:320px;padding-right:10px;;">
-								<div class="panel panel-info" id="agree">
-									<div class="panel-heading agree_panel_heading">
-										<h3 class="panel-title" align="center">AGREE</h3>
-									</div>
-									<ul dnd-list="classifications" dnd-drop="dropAgreeCallback(index, item, external, type)">
-										<li 
-											ng-repeat="statement in classifications.AGREE"
-											dnd-draggable="statement"
-											dnd-moved="classifications.AGREE.splice($index, 1)"
-											dnd-effect-allowed="move">
-											({{statement.id}}) {{ statement.statement }}
-										</li>
-									</ul>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</center>
-	
-		<form>
-		<table align="center">
-			<tr>
-				<td>
-					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-						<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
-					</div>
-				</td>
-				<td>
-					
-				</td>
-				<td>
-					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-						<a href="" ng-click="showHelpMeDialog()" class="btn btn-default btn-lg btn-block" style="width:100px">Help Me!</a>
-					</div>
-				</td>
 
-				<td>
-					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-						<a href="" ng-click="aux()" class="btn btn-default btn-lg btn-block" style="width:100px">Skip</a>
-					</div>
-				</td>
+        <ul dnd-list="cards.statements">
+            <li ng-repeat="statement in cards.statements" dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)" dnd-effect-allowed="move" dnd-selected="cards.first == statement.id" ng-class="{'selected': cards.selected === statement}" ng-hide="cards.first != statement.id">
+                ({{statement.id}}) {{ statement.statement }}
+            </li>
+        </ul>
 
-			</tr>
-		</table>
-	</form>
+        <div class="simpleDemo row" style="margin:20px ">
+            <div class="row">
+                <table align="center">
+                    <tr>
+                        <td style="vertical-align:top">
+                            <div style="width:320px;padding-right:10px;">
+                                <div class="panel panel-info" id="disagree">
+                                    <div class="panel-heading disagree_panel_heading">
+                                        <h3 class="panel-title" align="center">DISAGREE</h3>
+                                    </div>
+                                    <ul dnd-list="classifications" dnd-drop="dropDisagreeCallback(index, item, external, type)">
+                                        <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)" dnd-effect-allowed="move">
+                                            ({{statement.id}}) {{ statement.statement }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="vertical-align:top">
+                            <div style="width:320px;padding-right:10px;">
+                                <div class="panel panel-info" id="neutral">
+                                    <div class="panel-heading neutral_panel_heading">
+                                        <h3 class="panel-title" align="center">NEUTRAL</h3>
+                                    </div>
+                                    <ul dnd-list="classifications" dnd-drop="dropNeutralCallback(index, item, external, type)">
+                                        <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)" dnd-effect-allowed="move">
+                                            ({{statement.id}}) {{ statement.statement }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="vertical-align:top">
+                            <div style="width:320px;padding-right:10px;;">
+                                <div class="panel panel-info" id="agree">
+                                    <div class="panel-heading agree_panel_heading">
+                                        <h3 class="panel-title" align="center">AGREE</h3>
+                                    </div>
+                                    <ul dnd-list="classifications" dnd-drop="dropAgreeCallback(index, item, external, type)">
+                                        <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)" dnd-effect-allowed="move">
+                                            ({{statement.id}}) {{ statement.statement }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </center>
+
+    <form>
+        <table align="center">
+            <tr>
+                <td>
+                    <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+                        <a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
+                    </div>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px" data-toggle="modal" data-target="#helpModal">
+                        <a href="" ng-click="help()" class="btn btn-default btn-lg btn-block" style="width:100px">Help</a>
+                    </div>
+                    
+                    
+                </td>
+
+                <td>
+                    <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+                        <a href="" ng-click="aux()" class="btn btn-default btn-lg btn-block" style="width:100px">Skip</a>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+    </form>
 </div>
