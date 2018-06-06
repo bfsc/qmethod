@@ -44,9 +44,10 @@
 
 
         <ul dnd-list="cards.statements">
-            <li ng-repeat="statement in cards.statements" dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
-             dnd-effect-allowed="move" dnd-selected="cards.first == statement.id" ng-class="{'selected': cards.selected === statement}"
-              ng-hide="cards.first != statement.id">
+            <li ng-repeat="statement in cards.statements | filter: hasNoCategory | limitTo: 1"
+             dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
+             dnd-effect-allowed="move" dnd-selected="cards.first == statement.id"
+              >
                 ({{statement.id}}) {{ statement.statement }}
             </li>
         </ul>
