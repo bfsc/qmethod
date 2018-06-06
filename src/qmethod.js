@@ -384,6 +384,16 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 
 	$('#helpModal').modal(show = true);
 
+	$scope.getStyle = function(statement) {
+		if(statement.category == "agree") {
+			return {"background-color":"#00A848"};
+		} else if (statement.category == "neutral") {
+			return {"background-color":"#BAB9B9"};
+		} else {
+			return {"background-color":"#FF6666"};
+		}
+	}
+
 	$scope.next = function () {
 
 		$rootScope.classifications = $scope.classifications;

@@ -141,6 +141,10 @@ tip-cont>.ng-scope>.ng-binding {
     margin-bottom: -1px;
 }
 
+.simpleDemo ul[dnd-list] li a {
+    color: white;
+}
+
 /**
  * Show selected elements in green
  */
@@ -150,6 +154,12 @@ tip-cont>.ng-scope>.ng-binding {
 }
 
 /*Styles for -3 to 0 ratings*/
+
+table tr td .panel {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(0, 0, 0);
+}
+
 #td-n3>.panel-heading {
 /*    background-image: linear-gradient(to bottom, #FF4242 0, #E82A2A 100%)!important;*/
     background-image: linear-gradient(to bottom, #E82A2A 0, #E82A2A 100%)!important;
@@ -157,10 +167,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #FF4242 !important;
 }
 
-#td-n3 {
-    background-color: #FF4242;
-    border-color: #E82A2A;
-}
+/* #td-n3 {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(0, 0, 0);
+} */
 
 #td-n2>.panel-heading {
 /*    background-image: linear-gradient(to bottom,  #FF7171 0, #E82A2A 100%)!important;*/
@@ -168,10 +178,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #FF8989 !important;
 }
 
-#td-n2 {
+/* #td-n2 {
     background-color: #FF8989;
     border-color: #E82A2A;
-}
+} */
 
 #td-n1>.panel-heading {
 /*    background-image: linear-gradient(to bottom,  #FF8989 0, #E82A2A 100%)!important;*/
@@ -179,10 +189,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #FF8989 !important;
 }
 
-#td-n1 {
+/* #td-n1 {
     background-color: #FFB8B8;
     border-color: #E82A2A;
-}
+} */
 
 /*Styles for 1 to 3 ratings*/
 
@@ -192,10 +202,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #06A10E !important;
 }
 
-#td-p3 {
+/* #td-p3 {
     background-color: #00A848;
     border-color: #06960D
-}
+} */
 
 #td-p2>.panel-heading {
 /*    background-image: linear-gradient(to bottom,  #45B149 0, #06960D 100%)!important;*/
@@ -203,10 +213,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #06A10E !important;
 }
 
-#td-p2 {
+/* #td-p2 {
     background-color: #34BA6C;
     border-color: #06960D;
-}
+} */
 
 #td-p1>.panel-heading {
 /*    background-image: linear-gradient(to bottom,  #5ABA5D 0, #06960D 100%)!important;*/
@@ -214,11 +224,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #06A10E !important;
 }
 
-#td-p1 {
+/* #td-p1 {
     background-color: #68CC90;
     border-color: #06960D;
-}
-
+} */
 
 /**/
 
@@ -228,10 +237,10 @@ tip-cont>.ng-scope>.ng-binding {
     border-color: #969292 !important;
 }
 
-#td-n0 {
+/* #td-n0 {
     background-color: #BAB9B9;
     border-color: #969292
-}
+} */
 
 .panel-info>.disagree_panel_heading {
     background-image: linear-gradient(to bottom, #ff4242 0, #e82a2a 100%)!important;
@@ -272,7 +281,3 @@ tooltip tip {
     text-align: left !important;
     min-width: 300px !important;
 }
-
-
-
-
