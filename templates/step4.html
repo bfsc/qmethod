@@ -5,7 +5,8 @@
 
 
 
-    <center>If you need to <b>read the instructions of this step again, click on the "Help Me!"</b> button on the bottom right corner.</center>
+    <center>If you need to
+        <b>read the instructions of this step again, click on the "Help Me!"</b> button on the bottom right corner.</center>
 
     <div align="center" ng-show="done()">
         <div class="col-xs-4 col-xs-offset-4 next-button">
@@ -21,26 +22,34 @@
                     <h4 class="modal-title" id="helpModalLabel">Step 2 of 5</h4>
                 </div>
                 <div class="modal-body">
-                    <b><center>PLEASE READ THESE INSTRUCTIONS.</center></b>
-<br><br>
-  
-  1. Take the cards from the "AGREE"-pile and read them again. You can scroll through the statements by using the scroll bar.<br><br>
-  
-  2. Next, select the TWO statements you most agree with and place them on right side of the score sheet, below the "+3".<br><br>
-  
-  3. Now read the cards in the "DISAGREE"-pile again.<br><br>
-  
-  4. Just like before, select the TWO statements you most disagree with and place them on the left side of the score sheet, below the "-3".<br><br>
-  
-  5. Next, select the statements you second most agree/disagree with and place them under "+2"/"-2".<br><br>
-  
-  5. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-pile.<br><br>
-  
-  6. Finally, read the "NEUTRAL"-cards again and arange them in the remaining open boxes of the score sheet.<br><br>
-  
-  OBS: The order you put the cards in each colunm is not important.<br><br>
-  
-  IF YOUR CARDS BECOME TOO SMALL TO READ: Point the mouse cursor over the card and a tool tip will appear with the full statement.<br><br>
+                    <b>
+                        <center>PLEASE READ THESE INSTRUCTIONS.</center>
+                    </b>
+                    <br>
+                    <br> 1. Take the cards from the "AGREE"-pile and read them again. You can scroll through the statements by
+                    using the scroll bar.
+                    <br>
+                    <br> 2. Next, select the TWO statements you most agree with and place them on right side of the score sheet,
+                    below the "+3".
+                    <br>
+                    <br> 3. Now read the cards in the "DISAGREE"-pile again.
+                    <br>
+                    <br> 4. Just like before, select the TWO statements you most disagree with and place them on the left side
+                    of the score sheet, below the "-3".
+                    <br>
+                    <br> 5. Next, select the statements you second most agree/disagree with and place them under "+2"/"-2".
+                    <br>
+                    <br> 5. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-pile.
+                    <br>
+                    <br> 6. Finally, read the "NEUTRAL"-cards again and arange them in the remaining open boxes of the score
+                    sheet.
+                    <br>
+                    <br> OBS: The order you put the cards in each colunm is not important.
+                    <br>
+                    <br> IF YOUR CARDS BECOME TOO SMALL TO READ: Point the mouse cursor over the card and a tool tip will appear
+                    with the full statement.
+                    <br>
+                    <br>
                     <br> If you need to read this instruction again, scroll to bottom and press help.
                 </div>
                 <div class="modal-footer">
@@ -49,129 +58,134 @@
             </div>
         </div>
     </div>
-    
+
     <div class="ratings row" style="margin-top:50px">
 
-        <div class="topRow">
-            <table align="center">
-                <tr>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;min-height:70px">
-                            <div class="panel panel-info" id="td-n3">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">-3</h3>
-                                </div>
-                                <ul dnd-list="ratings.rating_3" dnd-drop="dropRating_3Callback(index, item, external, type)" dnd-disable-if="ratings.rating_3size >= 2">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" ng-repeat="statement in ratings.rating_3">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating_3.splice($index, 1);ratings.rating_3size=ratings.rating_3size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                            <!--{{(statement.id) statement.statement | cut:true:100:' ...'}}-->
-                                            <!--({{statement.id}}) {{ statement.statement }}-->
-                                        </li>
-                                    </div>
-                                </ul>
+        <table align="center">
+            <tr>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;min-height:70px">
+                        <div class="panel panel-info" id="td-n3">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">-3</h3>
                             </div>
-                        </div>
-                    </td>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-n2">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">-2</h3>
+                            <ul dnd-list="ratings.rating_3" dnd-drop="dropRating_3Callback(index, item, external, type)" dnd-disable-if="ratings.rating_3size >= 2">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" ng-repeat="statement in ratings.rating_3">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating_3.splice($index, 1);ratings.rating_3size=ratings.rating_3size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        <!--{{(statement.id) statement.statement | cut:true:100:' ...'}}-->
+                                        <!--({{statement.id}}) {{ statement.statement }}-->
+                                    </li>
                                 </div>
-                                <ul dnd-list="ratings.rating_2" dnd-drop="dropRating_2Callback(index, item, external, type)" dnd-disable-if="ratings.rating_2size >= 6">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" ng-repeat="statement in ratings.rating_2">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating_2.splice($index, 1);ratings.rating_2size=ratings.rating_2size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                    </td>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-n1">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">-1</h3>
+                    </div>
+                </td>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;">
+                        <div class="panel panel-info" id="td-n2">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">-2</h3>
+                            </div>
+                            <ul dnd-list="ratings.rating_2" dnd-drop="dropRating_2Callback(index, item, external, type)" dnd-disable-if="ratings.rating_2size >= 6">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" ng-repeat="statement in ratings.rating_2">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating_2.splice($index, 1);ratings.rating_2size=ratings.rating_2size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                    </li>
                                 </div>
-                                <ul dnd-list="ratings.rating_1" dnd-drop="dropRating_1Callback(index, item, external, type)" dnd-disable-if="ratings.rating_1size >= 10">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating_1">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating_1.splice($index, 1);ratings.rating_1size=ratings.rating_1size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                    </td>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-n0">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">0</h3>
+                    </div>
+                </td>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;">
+                        <div class="panel panel-info" id="td-n1">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">-1</h3>
+                            </div>
+                            <ul dnd-list="ratings.rating_1" dnd-drop="dropRating_1Callback(index, item, external, type)" dnd-disable-if="ratings.rating_1size >= 10">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating_1">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating_1.splice($index, 1);ratings.rating_1size=ratings.rating_1size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                    </li>
                                 </div>
-                                <ul dnd-list="ratings.rating0" dnd-drop="dropRating0Callback(index, item, external, type)" dnd-disable-if="ratings.rating0size >= 14">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating0">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating0.splice($index, 1);ratings.rating0size=ratings.rating0size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                    </td>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-p1">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">1</h3>
+                    </div>
+                </td>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;">
+                        <div class="panel panel-info" id="td-n0">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">0</h3>
+                            </div>
+                            <ul dnd-list="ratings.rating0" dnd-drop="dropRating0Callback(index, item, external, type)" dnd-disable-if="ratings.rating0size >= 14">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating0">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating0.splice($index, 1);ratings.rating0size=ratings.rating0size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                    </li>
                                 </div>
-                                <ul dnd-list="ratings.rating1" dnd-drop="dropRating1Callback(index, item, external, type)" dnd-disable-if="ratings.rating1size >= 10">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating1">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating1.splice($index, 1);ratings.rating1size=ratings.rating1size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                    </td>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-p2">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">2</h3>
+                    </div>
+                </td>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;">
+                        <div class="panel panel-info" id="td-p1">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">1</h3>
+                            </div>
+                            <ul dnd-list="ratings.rating1" dnd-drop="dropRating1Callback(index, item, external, type)" dnd-disable-if="ratings.rating1size >= 10">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating1">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating1.splice($index, 1);ratings.rating1size=ratings.rating1size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                    </li>
                                 </div>
-                                <ul dnd-list="ratings.rating2" dnd-drop="dropRating2Callback(index, item, external, type)" dnd-disable-if="ratings.rating2size >= 6">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating2">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating2.splice($index, 1);ratings.rating2size=ratings.rating2size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                    </td>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-p3">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">3</h3>
+                    </div>
+                </td>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;">
+                        <div class="panel panel-info" id="td-p2">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">2</h3>
+                            </div>
+                            <ul dnd-list="ratings.rating2" dnd-drop="dropRating2Callback(index, item, external, type)" dnd-disable-if="ratings.rating2size >= 6">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating2">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating2.splice($index, 1);ratings.rating2size=ratings.rating2size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                    </li>
                                 </div>
-                                <ul dnd-list="ratings.rating3" dnd-drop="dropRating3Callback(index, item, external, type)" dnd-disable-if="ratings.rating3size >= 2">
-                                    <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating3">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating3.splice($index, 1);ratings.rating3size=ratings.rating3size - 1;" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                    </div>
+                </td>
+                <td style="vertical-align:top">
+                    <div style="width:150px;padding-right:10px;">
+                        <div class="panel panel-info" id="td-p3">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" align="center">3</h3>
+                            </div>
+                            <ul dnd-list="ratings.rating3" dnd-drop="dropRating3Callback(index, item, external, type)" dnd-disable-if="ratings.rating3size >= 2">
+                                <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating3">
+                                    <li dnd-draggable="statement" dnd-moved="ratings.rating3.splice($index, 1);ratings.rating3size=ratings.rating3size - 1;"
+                                        dnd-effect-allowed="move">
+                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <div class="simpleDemo row" style="margin:20px">
             <div class="row">
@@ -184,7 +198,8 @@
                                         <h3 class="panel-title" align="center">DISAGREE</h3>
                                     </div>
                                     <ul dnd-list="classifications.DISAGREE" dnd-disable-if="true">
-                                        <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)" dnd-effect-allowed="move">
+                                        <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)"
+                                            dnd-effect-allowed="move">
                                             ({{statement.id}}) {{ statement.statement }}
                                         </li>
                                     </ul>
@@ -198,7 +213,8 @@
                                         <h3 class="panel-title" align="center">NEUTRAL</h3>
                                     </div>
                                     <ul dnd-list="classifications.NEUTRAL" dnd-disable-if="true">
-                                        <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)" dnd-effect-allowed="move">
+                                        <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)"
+                                            dnd-effect-allowed="move">
                                             ({{statement.id}}) {{ statement.statement }}
                                         </li>
                                     </ul>
@@ -212,7 +228,8 @@
                                         <h3 class="panel-title" align="center">AGREE</h3>
                                     </div>
                                     <ul dnd-list="classifications.AGREE" dnd-disable-if="true">
-                                        <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)" dnd-effect-allowed="move">
+                                        <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)"
+                                            dnd-effect-allowed="move">
                                             ({{statement.id}}) {{ statement.statement }}
                                         </li>
                                     </ul>

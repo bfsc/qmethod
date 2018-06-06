@@ -1,3 +1,21 @@
+// -> Fisher–Yates shuffle algorithm
+var shuffleArray = function(array) {
+	var m = array.length, t, i;
+  
+	// While there remain elements to shuffle
+	while (m) {
+	  // Pick a remaining element…
+	  i = Math.floor(Math.random() * m--);
+  
+	  // And swap it with the current element.
+	  t = JSON.parse(JSON.stringify(array[m].statement));
+	  array[m].statement = JSON.parse(JSON.stringify(array[i].statement));
+	  array[i].statement = t;
+	}
+  
+	return array;
+  }
+
 var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
 
 // ========== CONFIG
@@ -92,7 +110,7 @@ app.controller("step2Ctrl", function($scope, $rootScope, $state) {
 app.controller("step3Ctrl", function($scope, $rootScope, $state) {
 	
     if ( typeof $rootScope.statements == "undefined" ) {
-        $rootScope.statements = [
+        statements = [
             {id:1, statement:'The evidence from rapid reviews is good enough to inform low-risk, emergent policy or decision-making needs when the alternative is the use of no evidence.'},
             {id:2, statement:'When time allows, a comprehensive systematic review of all available evidence should always be conducted.'},
             {id:3, statement:'Deviating from accepted systematic review methods may introduce bias and impact the validity of the resulting rapid review, which may be an unacceptable risk for some knowledge users (practitioners).'},
@@ -143,17 +161,19 @@ app.controller("step3Ctrl", function($scope, $rootScope, $state) {
             {id:48, statement:'\'Rapid review\' is too broad a phrase—doing a review in a more timely way can only be relative to how long it takes the same team to produce a full systematic review.'},
             {id:49, statement:'Producers (researchers) are more concerned with the methodology and validity of rapid reviews than knowledge users (practitioners).'},
             {id:50, statement:'It is difficult to judge the validity of a rapid review as the reporting is often truncated and protocols are not published.'},
-        ];
+		];
+		shuffleArray(statements);
+		$rootScope.statements = JSON.parse(JSON.stringify(statements));
+
 	}
 	
-	//$rootScope.statements = $rootScope.statements.sort(function(a, b){return 0.5 - Math.random()});
-	
-    
+
 	$scope.cards = {
 		selected: null,
 		first: 1,
 		statements: $rootScope.statements,
 	};
+	
     
 	$scope.classifications = {
 		'AGREE': [],

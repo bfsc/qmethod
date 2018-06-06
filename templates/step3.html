@@ -7,28 +7,6 @@
 
     <br/>
     <br/>
-
-    <!--<div modal="showModal" close="cancel()">
-        <div class="modal-header">
-            <h4>Step 1 of 5</h4>
-        </div>
-        <div class="modal-body">
-            <b><center>PLEASE READ THESE INSTRUCTIONS.</center></b>
-            <br>
-                <br> Read the following statements carefully and split them up into 3 piles:
-                <br>
-                <br> 1. A pile for statements you tend to disagree with;
-                <br> 2. A pile for cards you tend to agree with;
-                <br> 3. A pile for the rest.
-                <br>
-                <br> You may either drag these cards into of those three piles or press 1,2,3 on your keyboard.
-                <br>
-                <br> If you want to read this instruction again, press the help button.
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-success" ng-click="ok()">Okay</button>
-        </div>
-    </div>-->
     <!-- Modal -->
     <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -66,7 +44,9 @@
 
 
         <ul dnd-list="cards.statements">
-            <li ng-repeat="statement in cards.statements" dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)" dnd-effect-allowed="move" dnd-selected="cards.first == statement.id" ng-class="{'selected': cards.selected === statement}" ng-hide="cards.first != statement.id">
+            <li ng-repeat="statement in cards.statements" dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
+             dnd-effect-allowed="move" dnd-selected="cards.first == statement.id" ng-class="{'selected': cards.selected === statement}"
+              ng-hide="cards.first != statement.id">
                 ({{statement.id}}) {{ statement.statement }}
             </li>
         </ul>
