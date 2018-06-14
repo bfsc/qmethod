@@ -1,24 +1,3 @@
-// -> Fisher–Yates shuffle algorithm
-// var shuffleArray = function(array) {
-// 	var m = array.length, t, i;
-
-// 	// While there remain elements to shuffle
-// 	while (m) {
-// 	  // Pick a remaining element…
-// 	  i = Math.floor(Math.random() * m--);
-
-// 	  // And swap it with the current element.
-// 	  t = JSON.parse(JSON.stringify(array[m].statement));
-// 	  x = JSON.parse(JSON.stringify(array[m].id));
-// 	  array[m].statement = JSON.parse(JSON.stringify(array[i].statement));
-// 	  array[m].id = JSON.parse(JSON.stringify(array[i].id));
-// 	  array[i].statement = t;
-// 	  array[i].id = x;
-// 	}
-
-// 	return array;
-//   }
-
 var shuffleArray = function (array) {
 	var m = array.length, t, i;
 
@@ -243,23 +222,23 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 	}
 
 	/*Auxiliary function to help skip to step4 */
-	$scope.aux = function () {
-		for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
-			var ii = i % 3;
-			var s = $rootScope.statements.shift();
-			if (ii == 0) {
-				s.category = "agree";
-				$scope.classifications.AGREE.push(s);
-			} else if (ii == 1) {
-				s.category = "neutral";
-				$scope.classifications.NEUTRAL.push(s);
-			} else if (ii == 2) {
-				s.category = "disagree";
-				$scope.classifications.DISAGREE.push(s);
-			}
-		}
-		//$state.go('step4');
-	}
+	// $scope.aux = function () {
+	// 	for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
+	// 		var ii = i % 3;
+	// 		var s = $rootScope.statements.shift();
+	// 		if (ii == 0) {
+	// 			s.category = "agree";
+	// 			$scope.classifications.AGREE.push(s);
+	// 		} else if (ii == 1) {
+	// 			s.category = "neutral";
+	// 			$scope.classifications.NEUTRAL.push(s);
+	// 		} else if (ii == 2) {
+	// 			s.category = "disagree";
+	// 			$scope.classifications.DISAGREE.push(s);
+	// 		}
+	// 	}
+	// 	//$state.go('step4');
+	// }
 
 	/*  $scope.showHelpMeDialog = function(ev) {
 		  $modal.open({
