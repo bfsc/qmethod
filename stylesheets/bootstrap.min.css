@@ -4346,6 +4346,7 @@ button.close {
  border:0;
  -webkit-appearance:none
 }
+
 .modal-open {
  overflow:hidden
 }
@@ -4440,7 +4441,7 @@ button.close {
 }
 .modal-footer .btn-block+.btn-block {
  margin-left:0
-}
+}*/
 @media (min-width:768px) {
  .modal-dialog {
   width:600px;
