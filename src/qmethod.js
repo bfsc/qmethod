@@ -71,7 +71,7 @@ app.config(function ($stateProvider, $locationProvider) {
 });
 
 // ========== UTIL
-
+/*
 var config = {
 	apiKey: "AIzaSyA15U4F-Q97flUntlLtVCaKDioVOhpszWA",
 	authDomain: "qmethod-87099.firebaseapp.com",
@@ -82,7 +82,21 @@ var config = {
 };
 firebase.initializeApp(config);
 var rootRef = firebase.database().ref();
+*/
 
+
+  var config = {
+    apiKey: "AIzaSyCZKrox4RKsS9jnpxYXoVj982UdQ-4VUHk",
+    authDomain: "qmethod-16120.firebaseapp.com",
+    databaseURL: "https://qmethod-16120.firebaseio.com",
+    projectId: "qmethod-16120",
+    storageBucket: "qmethod-16120.appspot.com",
+    messagingSenderId: "50670126791"
+  };
+  firebase.initializeApp(config);
+  var rootRef = firebase.database().ref();
+
+  
 // ========== CONTROLLERS
 app.controller("appCtrl", function ($scope, $rootScope, $state) {
 	$state.go('step1');
@@ -504,19 +518,17 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 		$rootScope.questionnaire = $scope.questionnaire;
 
 		var response = {
-			//classifications: null,
+			classifications: {},
 			ratings: {},
 			explanations: {},
 			questionnaire: {},
 		}
 
-		/*
 		if (response.classifications === null || response.classifications === undefined){
 			response.classifications = "no_response";
 		} else {
-			
+			response.classifications = parseClassifications($rootScope.classifications);
 		}
-		*/
 
 		if ($rootScope.ratings === null || $rootScope.ratings === undefined) {
 			response.ratings = "no_response";
@@ -619,7 +631,7 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 
 		rootRef.push(response, function (error) {
 			if (error) {
-				send();
+				$scope.send();
 				return;
 			} else {
 				$state.go('step7');
@@ -634,6 +646,24 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 			}
 
 			return arraydest;
+		}
+		
+		function parseClassifications(classificationsOrig) {
+			var parsedClassifications = {'AGREE': [],'NEUTRAL': [],'DISAGREE': [],};
+			
+			for(var i = 0; i < classificationsOrig.AGREE.length; i++) {
+				parsedClassifications.AGREE.push(classificationsOrig.AGREE[i].id);
+			}
+			
+			for(var i = 0; i < classificationsOrig.NEUTRAL.length; i++) {
+				parsedClassifications.NEUTRAL.push(classificationsOrig.NEUTRAL[i].id);
+			}
+			
+			for(var i = 0; i < classificationsOrig.DISAGREE.length; i++) {
+				parsedClassifications.DISAGREE.push(classificationsOrig.DISAGREE[i].id);
+			}
+			
+			return parsedClassifications;
 		}
 	}
 
