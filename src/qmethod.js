@@ -458,6 +458,8 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 
 	$scope.explanations = $rootScope.explanations;
 
+	$('#helpModal').modal(show = true);
+
 	$scope.done = function () {
 		if ($scope.explanations.agree[0].explanation === null || $scope.explanations.agree[1].explanation === null ||
 			$scope.explanations.disagree[0].explanation === null || $scope.explanations.disagree[1].explanation === null) {
@@ -527,7 +529,8 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 		if (response.classifications === null || response.classifications === undefined){
 			response.classifications = "no_response";
 		} else {
-			response.classifications = parseClassifications($rootScope.classifications);
+			// response.classifications = parseClassifications($rootScope.classifications_step3);
+			response.classifications = JSON.stringify($rootScope.classifications_step3);
 		}
 
 		if ($rootScope.ratings === null || $rootScope.ratings === undefined) {
