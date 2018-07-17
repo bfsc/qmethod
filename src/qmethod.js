@@ -451,11 +451,15 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 });
 
 app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
-	$rootScope.explanations = {
-		agree: [{ statement: $rootScope.ratings.rating3[0], explanation: null }, { statement: $rootScope.ratings.rating3[1], explanation: null }],
-		disagree: [{ statement: $rootScope.ratings.rating_3[0], explanation: null }, { statement: $rootScope.ratings.rating_3[1], explanation: null }],
-	};
 
+	if (typeof $rootScope.explanations == "undefined") {
+		$rootScope.explanations = {
+			agree: [{ statement: $rootScope.ratings.rating3[0], explanation: null }, { statement: $rootScope.ratings.rating3[1], explanation: null }],
+			disagree: [{ statement: $rootScope.ratings.rating_3[0], explanation: null }, { statement: $rootScope.ratings.rating_3[1], explanation: null }],
+		};
+
+	}
+	
 	$scope.explanations = $rootScope.explanations;
 
 	$('#helpModal').modal(show = true);
@@ -529,8 +533,7 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 		if (response.classifications === null || response.classifications === undefined){
 			response.classifications = "no_response";
 		} else {
-			// response.classifications = parseClassifications($rootScope.classifications_step3);
-			response.classifications = JSON.stringify($rootScope.classifications_step3);
+			 response.classifications = parseClassifications($rootScope.classifications_step3);
 		}
 
 		if ($rootScope.ratings === null || $rootScope.ratings === undefined) {
