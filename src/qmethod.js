@@ -41,23 +41,9 @@ app.config(function ($stateProvider, $locationProvider) {
 		templateUrl: 'templates/step3.html',
 		controller: 'step3Ctrl',
 		resolve: {
-			promiseStatements: ($http) =>
-				$http.get('settings/statements.xml')
-					.then(function (response) {
-
-					statements = [];
-					parser = new DOMParser();
-					xmlDoc = parser.parseFromString(response.data,"application/xml");
-					xmlDocStatementNodes = xmlDoc.getElementsByTagName("statement");
-					for (i=0; i < xmlDocStatementNodes.length; i++) {
-						el = xmlDocStatementNodes[i];
-						el_id = el.getAttribute('id');
-						el_value = el.childNodes[0].nodeValue;
-						statements.push({id: el_id, statement: el_value});
-					}
-					shuffleArray(statements);
-					return statements;
-				})
+			'promisedata': ['$http', function($http){
+				return $http.get('settings/statements.xml');
+			}]
 		}
 	});
 
@@ -89,21 +75,6 @@ app.config(function ($stateProvider, $locationProvider) {
 		controller: 'step7Ctrl'
 	});
 });
-
-// ========== UTIL
-/*
-var config = {
-	apiKey: "AIzaSyA15U4F-Q97flUntlLtVCaKDioVOhpszWA",
-	authDomain: "qmethod-87099.firebaseapp.com",
-	databaseURL: "https://qmethod-87099.firebaseio.com",
-	projectId: "qmethod-87099",
-	storageBucket: "qmethod-87099.appspot.com",
-	messagingSenderId: "639626576200"
-};
-firebase.initializeApp(config);
-var rootRef = firebase.database().ref();
-*/
-
 
   var config = {
     apiKey: "AIzaSyCZKrox4RKsS9jnpxYXoVj982UdQ-4VUHk",
@@ -138,10 +109,29 @@ app.controller("step2Ctrl", function ($scope, $rootScope, $state) {
 	}
 });
 
-app.controller("step3Ctrl", function (promiseStatements, $scope, $rootScope, $state) {
+app.controller("step3Ctrl",['$scope', '$rootScope', '$state', function ($scope, $rootScope, $state) {
 
+	statements = [];
+	statements.push({id:0, statement: "Hello world"});
+	statements.push({id:1, statement: "Hello world1"});
+	statements.push({id:2, statement: "Hello world2"});
+	statements.push({id:3, statement: "Hello world3"});
 	if (typeof $rootScope.statements == "undefined") {
-		$rootScope.statements = JSON.parse(JSON.stringify(promiseStatements));
+	/*	statements = [];
+
+		parser = new DOMParser();
+		xmlDoc = parser.parseFromString(promisedata.data,"application/xml");
+		xmlDocStatementNodes = xmlDoc.getElementsByTagName("statement");
+		for (i=0; i < xmlDocStatementNodes.length; i++) {
+			el = xmlDocStatementNodes[i];
+			el_id = el.getAttribute('id');
+			el_value = el.childNodes[0].nodeValue;
+			statements.push({id: el_id, statement: el_value});
+		}
+*/
+		shuffleArray(statements);
+		$scope.numberofstatements = JSON.parse(JSON.stringify(statements.length)); 
+		$rootScope.statements = JSON.parse(JSON.stringify(statements));
 	}
 
 	$scope.cards = {
@@ -173,21 +163,10 @@ app.controller("step3Ctrl", function (promiseStatements, $scope, $rootScope, $st
 
 
 	$scope.done = function () {
-		/*		var counter = 0;
-				
-				for(var i = 0; i < $scope.cards.statements.length; i++) {
-					if($scope.cards.statements[i].statement){
-						counter++;
-					}		
-				}*/
-
-		//     var goal = Object.assign({},$rootScope.statements.length);
-		var goal = 50; //Javascript has handing goal an reference
 		var current = $rootScope.classifications.AGREE.length +
 			$rootScope.classifications.DISAGREE.length +
 			$rootScope.classifications.NEUTRAL.length;
-		//        console.log("Goal " + goal + "; Current " + current);
-		return goal == current;
+		return $scope.numberofstatements == current;
 		//	return counter == 0;
 	};
 
@@ -309,7 +288,7 @@ app.controller("step3Ctrl", function (promiseStatements, $scope, $rootScope, $st
 
 		return item;
 	};
-});
+}]);
 
 app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	//Copies $rootScope.classifications instead of getting the reference
