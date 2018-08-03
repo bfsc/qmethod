@@ -109,16 +109,10 @@ app.controller("step2Ctrl", function ($scope, $rootScope, $state) {
 	}
 });
 
-app.controller("step3Ctrl",['$scope', '$rootScope', '$state', function ($scope, $rootScope, $state) {
+app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
 
 	statements = [];
-	statements.push({id:0, statement: "Hello world"});
-	statements.push({id:1, statement: "Hello world1"});
-	statements.push({id:2, statement: "Hello world2"});
-	statements.push({id:3, statement: "Hello world3"});
 	if (typeof $rootScope.statements == "undefined") {
-	/*	statements = [];
-
 		parser = new DOMParser();
 		xmlDoc = parser.parseFromString(promisedata.data,"application/xml");
 		xmlDocStatementNodes = xmlDoc.getElementsByTagName("statement");
@@ -128,9 +122,7 @@ app.controller("step3Ctrl",['$scope', '$rootScope', '$state', function ($scope, 
 			el_value = el.childNodes[0].nodeValue;
 			statements.push({id: el_id, statement: el_value});
 		}
-*/
 		shuffleArray(statements);
-		$scope.numberofstatements = JSON.parse(JSON.stringify(statements.length)); 
 		$rootScope.statements = JSON.parse(JSON.stringify(statements));
 	}
 
@@ -163,11 +155,7 @@ app.controller("step3Ctrl",['$scope', '$rootScope', '$state', function ($scope, 
 
 
 	$scope.done = function () {
-		var current = $rootScope.classifications.AGREE.length +
-			$rootScope.classifications.DISAGREE.length +
-			$rootScope.classifications.NEUTRAL.length;
-		return $scope.numberofstatements == current;
-		//	return counter == 0;
+		return $rootScope.statements.length == 0;
 	};
 
 	$scope.next = function () {
