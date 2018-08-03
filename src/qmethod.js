@@ -208,22 +208,7 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 
 
 	$scope.done = function () {
-		/*		var counter = 0;
-				
-				for(var i = 0; i < $scope.cards.statements.length; i++) {
-					if($scope.cards.statements[i].statement){
-						counter++;
-					}		
-				}*/
-
-		//     var goal = Object.assign({},$rootScope.statements.length);
-		var goal = 50; //Javascript has handing goal an reference
-		var current = $rootScope.classifications.AGREE.length +
-			$rootScope.classifications.DISAGREE.length +
-			$rootScope.classifications.NEUTRAL.length;
-		//        console.log("Goal " + goal + "; Current " + current);
-		return goal == current;
-		//	return counter == 0;
+		return $rootScope.statements.length == 0;
 	};
 
 	$scope.next = function () {
