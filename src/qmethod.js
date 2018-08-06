@@ -221,82 +221,24 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 	}
 
 	/*Auxiliary function to help skip to step4 */
-	// $scope.aux = function () {
-	// 	for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
-	// 		var ii = i % 3;
-	// 		var s = $rootScope.statements.shift();
-	// 		if (ii == 0) {
-	// 			s.category = "agree";
-	// 			$scope.classifications.AGREE.push(s);
-	// 		} else if (ii == 1) {
-	// 			s.category = "neutral";
-	// 			$scope.classifications.NEUTRAL.push(s);
-	// 		} else if (ii == 2) {
-	// 			s.category = "disagree";
-	// 			$scope.classifications.DISAGREE.push(s);
-	// 		}
-	// 	}
-	// 	//$state.go('step4');
-	// }
+	 $scope.aux = function () {
+	 	for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
+	 		var ii = i % 3;
+	 		var s = $rootScope.statements.shift();
+	 		if (ii == 0) {
+	 			s.category = "agree";
+	 			$scope.classifications.AGREE.push(s);
+	 		} else if (ii == 1) {
+	 			s.category = "neutral";
+	 			$scope.classifications.NEUTRAL.push(s);
+	 		} else if (ii == 2) {
+	 			s.category = "disagree";
+	 			$scope.classifications.DISAGREE.push(s);
+	 		}
+	 	}
+	 	//$state.go('step4');
+	 }
 
-	/*  $scope.showHelpMeDialog = function(ev) {
-		  $modal.open({
-			  templateUrl: 'helpModal.html'
-			  backdrop: true,
-			  windowClass: 'modal',
-			  controller: function ($scope, $modalInstance, $log) {
-				  $scope.cancel = function() {]
-					  $modalInstance.dismiss('cancel');
-				  };
-			  }
-		  })
-	};*/
-
-
-	/*
-	$scope.showHelpMeDialog = function(ev) {
-		$mdDialog.show({
-		  contentElement: '#myDialog',
-		  parent: angular.element(document.body),
-		  targetEvent: ev,
-		  clickOutsideToClose: true
-		});
-	  };
-	
-	$scope.showHelpMeDialog = function(ev) {
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Step 3 of 6 - CLASSIFICATION')
-        .textContent(`
-		<b><center>PLEASE READ THESE INSCRUCTIONS<center></b><br/><br/>
-		Read the folowing statements carefully and split them up into 3 piles:<br/><br/>
-	  1. A pile for statements you tend to disagree with;<br/>
-	  2. A pile for cards you tend to agree with;<br/>
-	  3. A pile for the rest.<br/><br/>
-	  
-	  You can either drag the cards into one of the three piles or press 1, 2, 3 on your keyboard.<br/><br/>
-	  
-	  If you want to read this instruction a second time, press the help-button at the bottom right corner.`)
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Got it!')
-        .targetEvent(ev)
-    );
-  };
-	
-	$scope.onKeyDown = function ($event) {
-		document.write('BLA');
-		if ($event.keyCode === 49) {
-			$scope.classifications.AGREE.push($scope.cards.statements[$scope.cards.first]);
-			$scope.cards.statements.splice($scope.cards.first - 1, 1)
-		} else if($event.keyCode === 50) {
-		} else if ($event.keyCode === 51) {
-			
-		}
-	}
-	*/
-	// Documentation ???
 	$scope.dropAgreeCallback = function (index, item, external, type) {
 
 		if ($scope.cards.first == item.id) {
