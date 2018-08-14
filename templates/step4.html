@@ -70,9 +70,7 @@
                                 <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" ng-repeat="statement in ratings.rating_3">
                                     <li dnd-draggable="statement" dnd-moved="ratings.rating_3.splice($index, 1);ratings.rating_3size=ratings.rating_3size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
-                                        <!--{{(statement.id) statement.statement | cut:true:100:' ...'}}-->
-                                        <!--({{statement.id}}) {{ statement.statement }}-->
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -91,7 +89,7 @@
                                     <li dnd-draggable="statement"
                                      dnd-moved="ratings.rating_2.splice($index, 1);ratings.rating_2size=ratings.rating_2size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -109,7 +107,7 @@
                                 <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating_1">
                                     <li dnd-draggable="statement" dnd-moved="ratings.rating_1.splice($index, 1);ratings.rating_1size=ratings.rating_1size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -127,7 +125,7 @@
                                 <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating0">
                                     <li dnd-draggable="statement" dnd-moved="ratings.rating0.splice($index, 1);ratings.rating0size=ratings.rating0size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -145,7 +143,7 @@
                                 <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating1">
                                     <li dnd-draggable="statement" dnd-moved="ratings.rating1.splice($index, 1);ratings.rating1size=ratings.rating1size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -163,7 +161,7 @@
                                 <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating2">
                                     <li dnd-draggable="statement" dnd-moved="ratings.rating2.splice($index, 1);ratings.rating2size=ratings.rating2size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -181,7 +179,7 @@
                                 <div tooltips tooltip-template="{{statement.statement}}" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating3">
                                     <li dnd-draggable="statement" dnd-moved="ratings.rating3.splice($index, 1);ratings.rating3size=ratings.rating3size - 1;"
                                         dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                        ({{statement.id}}) {{ statement.statement|truncate:10 }}
+                                        {{ statement.statement|truncate:10 }}
                                     </li>
                                 </div>
                             </ul>
@@ -204,7 +202,7 @@
                                     <ul dnd-list="classifications.DISAGREE" dnd-disable-if="true">
                                         <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)"
                                             dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -219,7 +217,7 @@
                                     <ul dnd-list="classifications.NEUTRAL" dnd-disable-if="true">
                                         <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)"
                                             dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -234,7 +232,7 @@
                                     <ul dnd-list="classifications.AGREE" dnd-disable-if="true">
                                         <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)"
                                             dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
