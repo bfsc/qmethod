@@ -168,6 +168,23 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	}
 
 	/*Auxiliary function to help skip to step4 */
+	$scope.aux = function () {
+		for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
+			var ii = i % 3;
+			var s = $rootScope.statements.shift();
+			if (ii == 0) {
+				s.category = "agree";
+				$scope.classifications.AGREE.push(s);
+			} else if (ii == 1) {
+				s.category = "neutral";
+				$scope.classifications.NEUTRAL.push(s);
+			} else if (ii == 2) {
+				s.category = "disagree";
+				$scope.classifications.DISAGREE.push(s);
+			}
+		}
+		//$state.go('step4');
+	}
 	/*  $scope.showHelpMeDialog = function(ev) {
 		  $modal.open({
 			  templateUrl: 'helpModal.html'
@@ -284,9 +301,30 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	}
 	$scope.ratings = $rootScope.ratings;
 
+	$scope.dropAgreeCallback = function (index, item, external, type) {
+		$scope.classifications.AGREE.push(item);
+		var ret = item.category == "agree";
+		console.log("dropAgreeCallback: "+ret+ "expected agree; got: "+ item.category);
+		return ret;
+	};
+
+	$scope.dropNeutralCallback = function (index, item, external, type) {
+		$scope.classifications.NEUTRAL.push(item);
+		var ret = item.category == "neutral";
+		console.log("dropNeutralCallback: "+ret+ "expected neutral; got: "+ item.category);
+		return ret;
+	};
+
+	$scope.dropDisagreeCallback = function (index, item, external, type) {
+		$scope.classifications.DISAGREE.push(item);
+		var ret = item.category == "disagree";
+		console.log("dropDisagreeCallback: "+ret+ "expected disagree; got: "+ item.category);
+		return ret;
+	};
+
 	$scope.done = function () {
 		var ratings = $scope.ratings;
-		return (ratings.rating_3size + ratings.rating_2size + ratings.rating_1size + ratings.rating0size + ratings.rating1size + ratings.rating2size + ratings.rating3size) == 50;
+		var ret = (ratings.rating_3size + ratings.rating_2size + ratings.rating_1size + ratings.rating0size + ratings.rating1size + ratings.rating2size + ratings.rating3size) == 50;
 	};
 
 	$('#helpModal').modal(show = true);
