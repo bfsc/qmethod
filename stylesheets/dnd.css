@@ -88,16 +88,14 @@ tip-cont>.ng-scope>.ng-binding {
     background-color: rgba(255,255,255,0.7);
 /*    border: 1px solid #ddd;*/
     border-color: #555;
-    border-top-style: none;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
-    display: block;
+/*    display: inline-block;*/
 /*    padding-top: 10px;*/
 /*	padding-left:10px;*/
     display: block;
-   /* padding: 6px 6px;*/
-    padding: 0px;
-   /* margin-bottom: -1px;*/
+    padding: 10px 15px;
+    margin-bottom: -1px;
 }
 
 /**
@@ -105,12 +103,10 @@ tip-cont>.ng-scope>.ng-binding {
  * otherwise you can't drop to it once it's empty
  */
 .simpleDemo ul[dnd-list] {
-    min-height: 42px;
-	max-height: 150px;
+    min-height: 40px;
 	width: 300px;
 	padding-top: 10px;
     padding-left: 10px;
-    overflow: auto;
 }
 
 /**
@@ -139,11 +135,10 @@ tip-cont>.ng-scope>.ng-binding {
     border: 1px solid #ddd;
     border-color: #555;
     border-top-right-radius: 4px;
-    border-top-style: none;
     border-top-left-radius: 4px;
     display: block;
     padding: 10px 15px;
-   /* margin-bottom: -1px;*/
+    margin-bottom: -1px;
 }
 
 .simpleDemo ul[dnd-list] li a {
