@@ -1,4 +1,4 @@
-<div class="simpleDemo" ng-controller='step3Ctrl'>
+<div class="simpleDemo">
     <!--ng-keydown="onKeyDown($event)"-->
     <br/>
     <br/>
@@ -48,7 +48,7 @@
              dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
              dnd-effect-allowed="move" dnd-selected="cards.first == statement.id"
               >
-                ({{statement.id}}) {{ statement.statement }}
+                {{ statement.statement }}
             </li>
         </ul>
 
@@ -64,7 +64,7 @@
                                     </div>
                                     <ul dnd-list="classifications" dnd-drop="dropDisagreeCallback(index, item, external, type)">
                                         <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -78,7 +78,7 @@
                                     </div>
                                     <ul dnd-list="classifications" dnd-drop="dropNeutralCallback(index, item, external, type)">
                                         <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -92,7 +92,7 @@
                                     </div>
                                     <ul dnd-list="classifications" dnd-drop="dropAgreeCallback(index, item, external, type)">
                                         <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -119,15 +119,8 @@
                     <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px" data-toggle="modal" data-target="#helpModal">
                         <a href="" ng-click="help()" class="btn btn-default btn-lg btn-block" style="width:100px">Help</a>
                     </div>
-                    
-                    
                 </td>
-
-                <!-- <td> 
-                    <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-                        <a href="" ng-click="aux()" class="btn btn-default btn-lg btn-block" style="width:100px">Skip</a>
-                    </div>
-                </td> -->
+                </td>
 
             </tr>
         </table>

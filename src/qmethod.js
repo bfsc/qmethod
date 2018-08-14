@@ -25,13 +25,14 @@ app.config(function ($stateProvider, $locationProvider) {
 		url: '/step1',
 		templateUrl: 'templates/step1.html',
 		controller: 'step1Ctrl',
+		
 	});
 
 	$stateProvider.state({
 		name: 'step2',
 		url: '/step2',
 		templateUrl: 'templates/step2.html',
-		controller: 'step2Ctrl',
+		controller: 'step2Ctrl'
 	});
 
 	$stateProvider.state({
@@ -39,51 +40,41 @@ app.config(function ($stateProvider, $locationProvider) {
 		url: '/step3',
 		templateUrl: 'templates/step3.html',
 		controller: 'step3Ctrl',
+		resolve: {
+			'promisedata': ['$http', function($http){
+				return $http.get('settings/statements.xml');
+			}]
+		}
 	});
 
 	$stateProvider.state({
 		name: 'step4',
 		url: '/step4',
 		templateUrl: 'templates/step4.html',
-		controller: 'step4Ctrl',
+		controller: 'step4Ctrl'
 	});
 
 	$stateProvider.state({
 		name: 'step5',
 		url: '/step5',
 		templateUrl: 'templates/step5.html',
-		controller: 'step5Ctrl',
+		controller: 'step5Ctrl'
 	});
 
 	$stateProvider.state({
 		name: 'step6',
 		url: '/step6',
 		templateUrl: 'templates/step6.html',
-		controller: 'step6Ctrl',
+		controller: 'step6Ctrl'
 	});
 
 	$stateProvider.state({
 		name: 'step7',
 		url: '/step7',
 		templateUrl: 'templates/step7.html',
-		controller: 'step7Ctrl',
+		controller: 'step7Ctrl'
 	});
 });
-
-// ========== UTIL
-/*
-var config = {
-	apiKey: "AIzaSyA15U4F-Q97flUntlLtVCaKDioVOhpszWA",
-	authDomain: "qmethod-87099.firebaseapp.com",
-	databaseURL: "https://qmethod-87099.firebaseio.com",
-	projectId: "qmethod-87099",
-	storageBucket: "qmethod-87099.appspot.com",
-	messagingSenderId: "639626576200"
-};
-firebase.initializeApp(config);
-var rootRef = firebase.database().ref();
-*/
-
 
   var config = {
     apiKey: "AIzaSyCZKrox4RKsS9jnpxYXoVj982UdQ-4VUHk",
@@ -118,66 +109,22 @@ app.controller("step2Ctrl", function ($scope, $rootScope, $state) {
 	}
 });
 
-app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
+app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
 
+	statements = [];
 	if (typeof $rootScope.statements == "undefined") {
-		statements = [
-			{ id: 1, statement: 'The evidence from rapid reviews is good enough to inform low-risk, emergent policy or decision-making needs when the alternative is the use of no evidence.' },
-			{ id: 2, statement: 'When time allows, a comprehensive systematic review of all available evidence should always be conducted.' },
-			{ id: 3, statement: 'Deviating from accepted systematic review methods may introduce bias and impact the validity of the resulting rapid review, which may be an unacceptable risk for some knowledge users (practitioners).' },
-			{ id: 4, statement: 'Further research comparing the methods and results of rapid reviews and systematic reviews is required before I decide how I feel about rapid reviews.' },
-			{ id: 5, statement: 'Rapid reviews are too focused in scope and/or context to be generalizable to a variety of knowledge users (practitioners).' },
-			{ id: 6, statement: 'Rapid reviews mean different things to different people.' },
-			{ id: 7, statement: 'Rapid reviews should only precede a more comprehensive and rigorous systematic review.' },
-			{ id: 8, statement: 'The opportunity cost of a comprehensive systematic review is too high and it is more advantageous to conduct rapid reviews when timeliness is a factor.' },
-			{ id: 9, statement: 'Rapid reviews do not replace systematic reviews.' },
-			{ id: 10, statement: 'All evidence synthesis products, including rapid reviews and systematic reviews, can be conducted very well or very poorly.' },
-			{ id: 11, statement: 'Rapid reviews are comparable to systematic reviews except they are done in a more timely fashion.' },
-			{ id: 12, statement: 'Rapid reviews are \'quick and dirty\' systematic reviews.' },
-			{ id: 13, statement: 'Rapid reviews need to be tailored to the specific needs of the knowledge user (practitioners).' },
-			{ id: 14, statement: 'Rapid reviews meet the needs of knowledge users (practitioners).' },
-			{ id: 15, statement: 'There are few evidence on rapid reviews, so I cannot support or oppose their use in decision-making.' },
-			{ id: 16, statement: 'There is so much overlap across the various evidence synthesis methods that I cannot generalize my opinion to favor one over the other without the context of the decision at hand.' },
-			{ id: 17, statement: 'There is a risk involved in tailoring accepted systematic review methods to produce rapid reviews that we do not yet understand.' },
-			{ id: 18, statement: 'Using rapid reviews to inform decisions is better than using no evidence at all.' },
-			{ id: 19, statement: 'It is always appropriate to conduct a rapid review.' },
-			{ id: 20, statement: 'Rapid reviews and all other evidence synthesis products hold the same value as long as they retain the core value of being transparent in conduct, include the highest quality evidence available and present results with a qualification on the strength of evidence.' },
-			{ id: 21, statement: 'Appropriateness of a rapid review varies with the type of decision being made, and any financial, legal or other important contextual facets tied to the decision.' },
-			{ id: 22, statement: 'My confidence in a rapid review is impacted by which methods are tailored to speed up the review process.' },
-			{ id: 23, statement: 'My confidence in a rapid review is directly tied to results being presented and contextualized by the strength and applicability of the evidence.' },
-			{ id: 24, statement: 'It is important to have minimum standards for the methodological conduct of rapid reviews.' },
-			{ id: 25, statement: 'It is important to have minimum standards for the reporting of rapid reviews.' },
-			{ id: 26, statement: 'Standardization of rapid review methods may conflict with the needs of knowledge users (practitioners).' },
-			{ id: 27, statement: 'The value of rapid reviews in the context of emergent decision-making needs outweighs the disadvantages or risk of bias and potentially \'imperfect\' evidence.' },
-			{ id: 28, statement: 'Knowledge users don\'t always need all of the evidence, they just need the best evidence to support their decision, and what is \'best evidence\' is specific to the knowledge user (practitioner).' },
-			{ id: 29, statement: 'Knowledge users (practitioners) do not fully understand the implications of streamlining evidence synthesis methods to produce a more timely evidence product.' },
-			{ id: 30, statement: 'Reporting of the results of rapid reviews must be tailored to the knowledge user(s) (practitioners) who commissioned the review.' },
-			{ id: 31, statement: 'Rapid reviews that omit an assessment of the quality of included studies are useless to knowledge users (practitioners).' },
-			{ id: 32, statement: 'Rapid reviews can be timely and valid, even when methodological concessions are made.' },
-			{ id: 33, statement: 'Transparency of process is more important than the actual methods used to produce rapid reviews, as transparency allows the knowledge user (practitioners) to make their own assessment on validity and appropriateness.' },
-			{ id: 34, statement: 'It is appropriate to endeavor to define a single, unique methodology for rapid reviews.' },
-			{ id: 35, statement: 'Rapid reviews are not a unique methodology, they are simply a variation of a systematic review that can fall anywhere on the continuum of evidence synthesis methods.' },
-			{ id: 36, statement: 'The results from a systematic review may not differ from those of a rapid review, but more research is needed to support this theory and quantify why results may be the same or different.' },
-			{ id: 37, statement: 'I put more confidence in evidence produced in a systematic review than of a rapid review.' },
-			{ id: 38, statement: 'The more time spent conducting the review of the evidence, the more valid the results of the review will be.' },
-			{ id: 39, statement: 'Achieving a precise estimate of effect (from a systematic review) may not inform the decision-at-hand any better than a general estimate of effect (produced by a rapid review).' },
-			{ id: 40, statement: 'Rapid reviews should only be conducted when the alternate option is the use of no evidence to inform a decision.' },
-			{ id: 41, statement: 'A well-conducted rapid review may produce better evidence than a poorly conducted systematic review.' },
-			{ id: 42, statement: 'Any review of evidence that takes longer than one month to produce is not a rapid review.' },
-			{ id: 43, statement: 'Any review of evidence that takes longer than two weeks to produce is not a rapid review.' },
-			{ id: 44, statement: 'A rapid review must be justified with a valid rationale for both speeding up the process and tailoring rigourous methods for evidence synthesis.' },
-			{ id: 45, statement: 'A good quality review of evidence is determined by the methods used, not by the speed at which it is completed.' },
-			{ id: 46, statement: 'It is difficult to tell a rapid review from a systematic review unless very specific nomenclature is used in the title or description of methods.' },
-			{ id: 47, statement: 'A rapid review cannot be a systematic review.' },
-			{ id: 48, statement: '\'Rapid review\' is too broad a phrase—doing a review in a more timely way can only be relative to how long it takes the same team to produce a full systematic review.' },
-			{ id: 49, statement: 'Producers (researchers) are more concerned with the methodology and validity of rapid reviews than knowledge users (practitioners).' },
-			{ id: 50, statement: 'It is difficult to judge the validity of a rapid review as the reporting is often truncated and protocols are not published.' },
-		];
+		parser = new DOMParser();
+		xmlDoc = parser.parseFromString(promisedata.data,"application/xml");
+		xmlDocStatementNodes = xmlDoc.getElementsByTagName("statement");
+		for (i=0; i < xmlDocStatementNodes.length; i++) {
+			el = xmlDocStatementNodes[i];
+			el_id = el.getAttribute('id');
+			el_value = el.childNodes[0].nodeValue;
+			statements.push({id: el_id, statement: el_value});
+		}
 		shuffleArray(statements);
 		$rootScope.statements = JSON.parse(JSON.stringify(statements));
-
 	}
-
 
 	$scope.cards = {
 		selected: null,
@@ -208,22 +155,7 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 
 
 	$scope.done = function () {
-		/*		var counter = 0;
-				
-				for(var i = 0; i < $scope.cards.statements.length; i++) {
-					if($scope.cards.statements[i].statement){
-						counter++;
-					}		
-				}*/
-
-		//     var goal = Object.assign({},$rootScope.statements.length);
-		var goal = 50; //Javascript has handing goal an reference
-		var current = $rootScope.classifications.AGREE.length +
-			$rootScope.classifications.DISAGREE.length +
-			$rootScope.classifications.NEUTRAL.length;
-		//        console.log("Goal " + goal + "; Current " + current);
-		return goal == current;
-		//	return counter == 0;
+		return $rootScope.statements.length == 0;
 	};
 
 	$scope.next = function () {
@@ -320,7 +252,7 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 		item.category = "agree";
 		$scope.classifications.AGREE.push(item);
 
-		return item;
+		return true;
 	};
 
 	$scope.dropNeutralCallback = function (index, item, external, type) {
@@ -331,7 +263,7 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 		item.category = "neutral";
 		$scope.classifications.NEUTRAL.push(item);
 
-		return item;
+		return true;
 	};
 
 	$scope.dropDisagreeCallback = function (index, item, external, type) {
@@ -342,9 +274,9 @@ app.controller("step3Ctrl", function ($scope, $rootScope, $state) {
 		item.category = "disagree";
 		$scope.classifications.DISAGREE.push(item);
 
-		return item;
+		return true;
 	};
-});
+}]);
 
 app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	//Copies $rootScope.classifications instead of getting the reference
