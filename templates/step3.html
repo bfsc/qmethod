@@ -64,7 +64,7 @@
                                     </div>
                                     <ul dnd-list="classifications" dnd-drop="dropDisagreeCallback(index, item, external, type)">
                                         <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -78,7 +78,7 @@
                                     </div>
                                     <ul dnd-list="classifications" dnd-drop="dropNeutralCallback(index, item, external, type)">
                                         <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
@@ -92,7 +92,7 @@
                                     </div>
                                     <ul dnd-list="classifications" dnd-drop="dropAgreeCallback(index, item, external, type)">
                                         <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)" dnd-effect-allowed="move">
-                                            ({{statement.id}}) {{ statement.statement }}
+                                            {{ statement.statement }}
                                         </li>
                                     </ul>
                                 </div>
