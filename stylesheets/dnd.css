@@ -79,7 +79,7 @@ tip-cont>.ng-scope>.ng-binding {
 
 .ratings ul[dnd-list] .dndPlaceholder {
     background-color: #ddd;
-    display: inline-block;
+    display: block;
     min-height: 42px;
 }
 
@@ -126,7 +126,7 @@ tip-cont>.ng-scope>.ng-binding {
  */
 .simpleDemo ul[dnd-list] .dndPlaceholder {
     background-color: #ddd;
-    display: inline-block;
+    display: block;
     min-height: 40px;
 }
 

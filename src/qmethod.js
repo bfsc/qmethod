@@ -194,7 +194,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		item.category = "agree";
 		$scope.classifications.AGREE.push(item);
 
-		return item;
+		return true;
 	};
 
 	$scope.dropNeutralCallback = function (index, item, external, type) {
@@ -205,7 +205,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		item.category = "neutral";
 		$scope.classifications.NEUTRAL.push(item);
 
-		return item;
+		return true;
 	};
 
 	$scope.dropDisagreeCallback = function (index, item, external, type) {
@@ -216,7 +216,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		item.category = "disagree";
 		$scope.classifications.DISAGREE.push(item);
 
-		return item;
+		return true;
 	};
 }]);
 
