@@ -302,23 +302,26 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	$scope.ratings = $rootScope.ratings;
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
-		$scope.classifications.AGREE.push(item);
 		var ret = item.category == "agree";
-		console.log("dropAgreeCallback: "+ret+ "expected agree; got: "+ item.category);
+		if (ret) {
+			$scope.classifications.AGREE.push(item);
+		}
 		return ret;
 	};
 
 	$scope.dropNeutralCallback = function (index, item, external, type) {
-		$scope.classifications.NEUTRAL.push(item);
 		var ret = item.category == "neutral";
-		console.log("dropNeutralCallback: "+ret+ "expected neutral; got: "+ item.category);
+		if (ret) {
+			$scope.classifications.NEUTRAL.push(item);
+		}
 		return ret;
 	};
 
 	$scope.dropDisagreeCallback = function (index, item, external, type) {
-		$scope.classifications.DISAGREE.push(item);
 		var ret = item.category == "disagree";
-		console.log("dropDisagreeCallback: "+ret+ "expected disagree; got: "+ item.category);
+		if (ret) {
+			$scope.classifications.DISAGREE.push(item);
+		}
 		return ret;
 	};
 
