@@ -1,11 +1,7 @@
 <div class="simpleDemo">
     <!--ng-keydown="onKeyDown($event)"-->
     <br/>
-    <br/>
-
     <center>If you need to <b>read the instructions of this step again, click on the "Help"</b> button on the bottom fo this page.</center>
-
-    <br/>
     <br/>
     
     <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
@@ -42,15 +38,18 @@
             </div>
         </div>
 
-
-        <ul dnd-list="cards.statements">
-            <li ng-repeat="statement in cards.statements | filter: hasNoCategory | limitTo: 1"
-             dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
-             dnd-effect-allowed="move" dnd-selected="cards.first == statement.id"
-              >
-                {{ statement.statement }}
-            </li>
-        </ul>
+        <div class="statementsHolder" style="height: 170px; bottom: auto;">
+            <ul dnd-list="cards.statements">
+                <li ng-repeat="statement in cards.statements | filter: hasNoCategory | limitTo: 1"
+                 dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
+                 dnd-effect-allowed="move" dnd-selected="cards.first == statement.id"
+                  >
+                    {{ statement.statement }}
+                </li>
+                <li class="dndPlaceholder" style="display: none">
+                </li>
+            </ul>
+        </div>
 
         <div class="simpleDemo row" style="margin:20px ">
             <div class="row">

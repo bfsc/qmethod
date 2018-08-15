@@ -109,6 +109,10 @@ tip-cont>.ng-scope>.ng-binding {
     padding-left: 10px;
 }
 
+div.simpleDemo div.row ul[dnd-list]  {
+    max-width: 300px;
+    overflow: auto;
+}
 /**
  * The dndDraggingSource class will be applied to
  * the source element of a drag operation. It makes
