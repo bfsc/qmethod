@@ -122,6 +122,9 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 			el_value = el.childNodes[0].nodeValue;
 			statements.push({id: el_id, statement: el_value});
 		}
+		//Pick how many statements we have so we can use it for checks
+		$rootScope.numberOfStatements = 
+			JSON.parse(JSON.stringify(statements.length));
 		shuffleArray(statements);
 		$rootScope.statements = JSON.parse(JSON.stringify(statements));
 	}
@@ -326,8 +329,13 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	};
 
 	$scope.done = function () {
-		var ratings = $scope.ratings;
-		var ret = (ratings.rating_3size + ratings.rating_2size + ratings.rating_1size + ratings.rating0size + ratings.rating1size + ratings.rating2size + ratings.rating3size) == 50;
+		var numberOfStatements = 0;
+		$.map($scope.ratings, function(value,index){
+			if (value instanceof Array) {
+				numberOfStatements += value.length;
+			}
+		});
+		return numberOfStatements == $rootScope.numberOfStatements;
 	};
 
 	$('#helpModal').modal(show = true);
