@@ -282,56 +282,42 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	$scope.back = function () {
 		$rootScope.classifications = JSON.parse(JSON.stringify($rootScope.classifications_step3));
 		$rootScope.ratings = {
-			rating_3size: 0,
 			rating_3: [],
-			rating_2size: 0,
 			rating_2: [],
-			rating_1size: 0,
 			rating_1: [],
-			rating0size: 0,
 			rating0: [],
-			rating1size: 0,
 			rating1: [],
-			rating2size: 0,
 			rating2: [],
-			rating3size: 0,
-			rating3: [],
+			rating3: []
 		};
 		$state.go('step3');
 	}
 
 	$scope.dropRating_3Callback = function (index, item, external, type) {
-		$scope.ratings.rating_3size = $scope.ratings.rating_3size + 1;
 		return item;
 	}
 
 	$scope.dropRating_2Callback = function (index, item, external, type) {
-		$scope.ratings.rating_2size = $scope.ratings.rating_2size + 1;
 		return item;
 	}
 
 	$scope.dropRating_1Callback = function (index, item, external, type) {
-		$scope.ratings.rating_1size = $scope.ratings.rating_1size + 1;
 		return item;
 	}
 
 	$scope.dropRating0Callback = function (index, item, external, type) {
-		$scope.ratings.rating0size = $scope.ratings.rating0size + 1;
 		return item;
 	}
 
 	$scope.dropRating1Callback = function (index, item, external, type) {
-		$scope.ratings.rating1size = $scope.ratings.rating1size + 1;
 		return item;
 	}
 
 	$scope.dropRating2Callback = function (index, item, external, type) {
-		$scope.ratings.rating2size = $scope.ratings.rating2size + 1;
 		return item;
 	}
 
 	$scope.dropRating3Callback = function (index, item, external, type) {
-		$scope.ratings.rating3size = $scope.ratings.rating3size + 1;
 		return item;
 	}
 });
