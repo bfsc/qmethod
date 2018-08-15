@@ -122,6 +122,9 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 			el_value = el.childNodes[0].nodeValue;
 			statements.push({id: el_id, statement: el_value});
 		}
+		//Pick how many statements we have so we can use it for checks
+		$rootScope.numberOfStatements = 
+			JSON.parse(JSON.stringify(statements.length));
 		shuffleArray(statements);
 		$rootScope.statements = JSON.parse(JSON.stringify(statements));
 	}
@@ -168,6 +171,23 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	}
 
 	/*Auxiliary function to help skip to step4 */
+	$scope.aux = function () {
+		for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
+			var ii = i % 3;
+			var s = $rootScope.statements.shift();
+			if (ii == 0) {
+				s.category = "agree";
+				$scope.classifications.AGREE.push(s);
+			} else if (ii == 1) {
+				s.category = "neutral";
+				$scope.classifications.NEUTRAL.push(s);
+			} else if (ii == 2) {
+				s.category = "disagree";
+				$scope.classifications.DISAGREE.push(s);
+			}
+		}
+		//$state.go('step4');
+	}
 	/*  $scope.showHelpMeDialog = function(ev) {
 		  $modal.open({
 			  templateUrl: 'helpModal.html'
@@ -284,9 +304,38 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	}
 	$scope.ratings = $rootScope.ratings;
 
+	$scope.dropAgreeCallback = function (index, item, external, type) {
+		var ret = item.category == "agree";
+		if (ret) {
+			$scope.classifications.AGREE.push(item);
+		}
+		return ret;
+	};
+
+	$scope.dropNeutralCallback = function (index, item, external, type) {
+		var ret = item.category == "neutral";
+		if (ret) {
+			$scope.classifications.NEUTRAL.push(item);
+		}
+		return ret;
+	};
+
+	$scope.dropDisagreeCallback = function (index, item, external, type) {
+		var ret = item.category == "disagree";
+		if (ret) {
+			$scope.classifications.DISAGREE.push(item);
+		}
+		return ret;
+	};
+
 	$scope.done = function () {
-		var ratings = $scope.ratings;
-		return (ratings.rating_3size + ratings.rating_2size + ratings.rating_1size + ratings.rating0size + ratings.rating1size + ratings.rating2size + ratings.rating3size) == 50;
+		var numberOfStatements = 0;
+		$.map($scope.ratings, function(value,index){
+			if (value instanceof Array) {
+				numberOfStatements += value.length;
+			}
+		});
+		return numberOfStatements == $rootScope.numberOfStatements;
 	};
 
 	$('#helpModal').modal(show = true);
