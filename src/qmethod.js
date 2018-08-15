@@ -640,4 +640,4 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 
 app.controller("step7Ctrl", function ($scope, $rootScope, $state) {
 
-}););
+});
