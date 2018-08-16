@@ -135,7 +135,6 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		statements: $rootScope.statements,
 	};
 
-
 	$scope.classifications = {
 		'AGREE': [],
 		'NEUTRAL': [],
@@ -144,7 +143,6 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 
 	$('#helpModal').modal(show = true);
 
-	//$rootScope.classifications = $scope.classifications;
 	/*Checks if $rootScope is already defined (the user had made his classifications)*/
 	if (typeof $rootScope.classifications == "undefined") {
 		$rootScope.classifications = $scope.classifications;
@@ -170,82 +168,6 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		$state.go('step2');
 	}
 
-	/*Auxiliary function to help skip to step4 */
-	$scope.aux = function () {
-		for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
-			var ii = i % 3;
-			var s = $rootScope.statements.shift();
-			if (ii == 0) {
-				s.category = "agree";
-				$scope.classifications.AGREE.push(s);
-			} else if (ii == 1) {
-				s.category = "neutral";
-				$scope.classifications.NEUTRAL.push(s);
-			} else if (ii == 2) {
-				s.category = "disagree";
-				$scope.classifications.DISAGREE.push(s);
-			}
-		}
-		//$state.go('step4');
-	}
-	/*  $scope.showHelpMeDialog = function(ev) {
-		  $modal.open({
-			  templateUrl: 'helpModal.html'
-			  backdrop: true,
-			  windowClass: 'modal',
-			  controller: function ($scope, $modalInstance, $log) {
-				  $scope.cancel = function() {]
-					  $modalInstance.dismiss('cancel');
-				  };
-			  }
-		  })
-	};*/
-
-
-	/*
-	$scope.showHelpMeDialog = function(ev) {
-		$mdDialog.show({
-		  contentElement: '#myDialog',
-		  parent: angular.element(document.body),
-		  targetEvent: ev,
-		  clickOutsideToClose: true
-		});
-	  };
-	
-	$scope.showHelpMeDialog = function(ev) {
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Step 3 of 6 - CLASSIFICATION')
-        .textContent(`
-		<b><center>PLEASE READ THESE INSCRUCTIONS<center></b><br/><br/>
-		Read the folowing statements carefully and split them up into 3 piles:<br/><br/>
-	  1. A pile for statements you tend to disagree with;<br/>
-	  2. A pile for cards you tend to agree with;<br/>
-	  3. A pile for the rest.<br/><br/>
-	  
-	  You can either drag the cards into one of the three piles or press 1, 2, 3 on your keyboard.<br/><br/>
-	  
-	  If you want to read this instruction a second time, press the help-button at the bottom right corner.`)
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Got it!')
-        .targetEvent(ev)
-    );
-  };
-	
-	$scope.onKeyDown = function ($event) {
-		document.write('BLA');
-		if ($event.keyCode === 49) {
-			$scope.classifications.AGREE.push($scope.cards.statements[$scope.cards.first]);
-			$scope.cards.statements.splice($scope.cards.first - 1, 1)
-		} else if($event.keyCode === 50) {
-		} else if ($event.keyCode === 51) {
-			
-		}
-	}
-	*/
-	// Documentation ???
 	$scope.dropAgreeCallback = function (index, item, external, type) {
 
 		if ($scope.cards.first == item.id) {
@@ -359,56 +281,42 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	$scope.back = function () {
 		$rootScope.classifications = JSON.parse(JSON.stringify($rootScope.classifications_step3));
 		$rootScope.ratings = {
-			rating_3size: 0,
 			rating_3: [],
-			rating_2size: 0,
 			rating_2: [],
-			rating_1size: 0,
 			rating_1: [],
-			rating0size: 0,
 			rating0: [],
-			rating1size: 0,
 			rating1: [],
-			rating2size: 0,
 			rating2: [],
-			rating3size: 0,
-			rating3: [],
+			rating3: []
 		};
 		$state.go('step3');
 	}
 
 	$scope.dropRating_3Callback = function (index, item, external, type) {
-		$scope.ratings.rating_3size = $scope.ratings.rating_3size + 1;
 		return item;
 	}
 
 	$scope.dropRating_2Callback = function (index, item, external, type) {
-		$scope.ratings.rating_2size = $scope.ratings.rating_2size + 1;
 		return item;
 	}
 
 	$scope.dropRating_1Callback = function (index, item, external, type) {
-		$scope.ratings.rating_1size = $scope.ratings.rating_1size + 1;
 		return item;
 	}
 
 	$scope.dropRating0Callback = function (index, item, external, type) {
-		$scope.ratings.rating0size = $scope.ratings.rating0size + 1;
 		return item;
 	}
 
 	$scope.dropRating1Callback = function (index, item, external, type) {
-		$scope.ratings.rating1size = $scope.ratings.rating1size + 1;
 		return item;
 	}
 
 	$scope.dropRating2Callback = function (index, item, external, type) {
-		$scope.ratings.rating2size = $scope.ratings.rating2size + 1;
 		return item;
 	}
 
 	$scope.dropRating3Callback = function (index, item, external, type) {
-		$scope.ratings.rating3size = $scope.ratings.rating3size + 1;
 		return item;
 	}
 });

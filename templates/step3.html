@@ -3,7 +3,7 @@
     <br/>
     <br/>
 
-    <center>If you need to <b>read the instructions of this step again, click on the "Help"</b> button on the bottom fo this page.</center>
+    <center>If you need to <b>read the instructions of this step again, click on the "Help"</b> button on the bottom left of this page.</center>
 
     <br/>
     <br/>
@@ -42,17 +42,21 @@
             </div>
         </div>
 
+        <div class="cardsholder" style="height: 175px">
+            <ul dnd-list="cards.statements">
+                <li ng-repeat="statement in cards.statements | filter: hasNoCategory | limitTo: 1"
+                 dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
+                 dnd-effect-allowed="move" dnd-selected="cards.first == statement.id"
+                  >
+                    {{ statement.statement }}
+                </li>
+                <li class="dndPlaceholder" style="display: none;">
+                </li>
+            </ul>
+        </div>
 
-        <ul dnd-list="cards.statements">
-            <li ng-repeat="statement in cards.statements | filter: hasNoCategory | limitTo: 1"
-             dnd-draggable="statement" dnd-moved="cards.statements.splice($index, 1)"
-             dnd-effect-allowed="move" dnd-selected="cards.first == statement.id"
-              >
-                {{ statement.statement }}
-            </li>
-        </ul>
-
-        <div class="simpleDemo row" style="margin:20px ">
+        <div class="step3lists">
+            <div class="simpleDemo row" style="margin:20px ">
             <div class="row">
                 <table align="center">
                     <tr>
@@ -102,10 +106,11 @@
                 </table>
             </div>
         </div>
+        </div>
     </center>
 
     <form>
-        <table align="center">
+        <table align="center" style="bottom: 0; position: absolute">
             <tr>
                 <td>
                     <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
