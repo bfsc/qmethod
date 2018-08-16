@@ -36,6 +36,7 @@ cardRatingJustitication  {
     /* Fade in tooltip */
     opacity: 0;
     transition: opacity 0.3s;
+/*    Rotation fix*/
 }
 
 /* Tooltip arrow */
@@ -109,10 +110,7 @@ tip-cont>.ng-scope>.ng-binding {
     padding-left: 10px;
 }
 
-div.simpleDemo div.row ul[dnd-list]  {
-    max-width: 300px;
-    overflow: auto;
-}
+
 /**
  * The dndDraggingSource class will be applied to
  * the source element of a drag operation. It makes
@@ -284,4 +282,19 @@ table tr td .panel {
 tooltip tip {
     text-align: left !important;
     min-width: 300px !important;
+}
+
+div.step3lists ul[dnd-list]{
+    max-height: 300px;
+    overflow: auto;
+}
+div.step4lists ul[dnd-list]{
+    max-height: 300px;
+    overflow: auto;
+}
+div.normaldist h3 {
+    transform: rotate(180deg); 
+}
+div.normaldist ul[dnd-list] li {
+    transform: rotate(180deg);
 }
