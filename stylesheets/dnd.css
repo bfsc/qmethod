@@ -8,22 +8,22 @@ cardRatingJustitication  {
     margin-bottom: -1px;
 }
 
-.ratings ul[dnd-list] {
+.normaldist ul[dnd-list] {
     min-height: 42px;
-	width: 150px;
-	padding-top: 10px;
-    padding-left: 20px;
+    padding-left: 0px;
+    margin: 0px;
 }
-
-/*Fix li clip*/
-/*
-tip-cont>.ng-scope>.ng-binding {
-    width: 94px;
+.normaldist ul[dnd-list] li {
+    background-color: rgba(255,255,255,0.7);
+    border: 1px solid #ddd;
+    border-color: #555;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: block;
     height: 32px;
-    text-overflow: ellipsis !important;
-    overflow: hidden !important;
+    padding: 0px;
+    margin-bottom: -1px;
 }
-*/
 
 .ratings ul[dnd-list] .dndDraggingSource {
     display: none;
@@ -35,16 +35,6 @@ tip-cont>.ng-scope>.ng-binding {
     min-height: 42px;
 }
 
-.ratings ul[dnd-list] li {
-    background-color: rgba(255,255,255,0.7);
-    border: 1px solid #ddd;
-    border-color: #555;
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-    display: block;
-    padding: 10px 15px;
-    margin-bottom: -1px;
-}
 
 /**
  * The dnd-list should always have a min-height,
