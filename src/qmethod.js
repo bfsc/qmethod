@@ -135,6 +135,24 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		statements: $rootScope.statements,
 	};
 
+    	/*Auxiliary function to help skip to step4 */
+	$scope.aux = function () {
+		for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
+			var ii = i % 3;
+			var s = $rootScope.statements.shift();
+			if (ii == 0) {
+				s.category = "agree";
+				$scope.classifications.AGREE.push(s);
+			} else if (ii == 1) {
+				s.category = "neutral";
+				$scope.classifications.NEUTRAL.push(s);
+			} else if (ii == 2) {
+				s.category = "disagree";
+				$scope.classifications.DISAGREE.push(s);
+			}
+		}
+		//$state.go('step4');
+	};
 
 	$scope.classifications = {
 		'AGREE': [],
