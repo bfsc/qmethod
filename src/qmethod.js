@@ -13,6 +13,28 @@ var shuffleArray = function (array) {
 	return array;
 }
 
+var generateMyTd = function(id, rows,) {
+	var toptd = document.createElement('td');
+	var topdiv = document.createElement('div');
+	var paneldiv = document.createElement('div');
+	var panelheadingdiv = document.createElement('div'); 
+	var paneltitleh3 = document.createElement('h3');
+	var innerul = document.createElement('ul');
+	var tooltipdiv = document.createElement('div');
+	var innerli = document.createElement('li');
+	var placeholderli = document.createElement('li');
+	
+
+	tooltipdiv.appendChild(innerli);
+	innerul.appendChild(tooltipdiv);
+	innerul.appendChild(placeholderli);
+	panelheadingdiv.appendChild(paneltitleh3);
+	paneldiv.appendChild(panelheadingdiv);
+	paneldiv.appendChild(innerul);
+	topdiv.appendChild(paneldiv);
+	toptd.appendChild(topdiv);
+}
+
 var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
 
 // ========== CONFIG
@@ -51,7 +73,12 @@ app.config(function ($stateProvider, $locationProvider) {
 		name: 'step4',
 		url: '/step4',
 		templateUrl: 'templates/step4.html',
-		controller: 'step4Ctrl'
+		controller: 'step4Ctrl',
+		resolve: {
+			'promisedata': ['$http', function($http){
+				return $http.get('settings/map.xml');
+			}]
+		}
 	});
 
 	$stateProvider.state({
@@ -202,8 +229,21 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	};
 }]);
 
-app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
+app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
 	//Copies $rootScope.classifications instead of getting the reference
+	$scope.map = [];
+	$scope.totalCells = 0;
+	xmlDoc = parser.parseFromString(promisedata.data,"application/xml");
+	xmlDocStatementNodes = xmlDoc.getElementsByTagName("column");
+	for (i=0; i < xmlDocStatementNodes.length; i++) {
+		el = xmlDocStatementNodes[i];
+		el_id = parseInt(el.getAttribute('id'),10);
+		el_colour = String(el.getAttribute('colour'));
+		el_rows = parseInt(el.childNodes[0].nodeValue,10);
+		$scope.totalCells += el_rows;
+		$scope.map.push({id: el_id, colour: el_colour,rows:el_rows});
+	}
+
 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
 
 	if (typeof $rootScope.ratings == "undefined") {
@@ -319,7 +359,7 @@ app.controller("step4Ctrl", function ($scope, $rootScope, $state) {
 	$scope.dropRating3Callback = function (index, item, external, type) {
 		return item;
 	}
-});
+}]);
 
 app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 

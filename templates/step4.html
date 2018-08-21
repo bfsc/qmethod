@@ -59,26 +59,6 @@
         <div class="normaldist">
             <table align="center" style="transform: rotate(180deg);">
                 <tr>
-                    <td style="vertical-align:top">
-                        <div style="width:150px;padding-right:10px;">
-                            <div class="panel panel-info" id="td-p3">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title" align="center">3</h3>
-                                </div>
-                                <ul dnd-list="ratings.rating3" dnd-drop="dropRating3Callback(index, item, external, type)"
-                                 dnd-disable-if="ratings.rating3.length >= 2" style="height: 63px">
-                                    <div tooltips tooltip-template="<div class='ttiptext'>{{statement.statement}}</div>" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating3">
-                                        <li dnd-draggable="statement" dnd-moved="ratings.rating3.splice($index, 1);"
-                                            dnd-effect-allowed="move" ng-style="getStyle(statement)">
-                                            {{ statement.statement|truncate:10 }}
-                                        </li>
-                                    </div>
-                                        <li class="dndPlaceholder" style="display: none;">
-                                        </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
                    <td style="vertical-align:top">
                         <div style="width:150px;padding-right:10px;">
                             <div class="panel panel-info" id="td-p2">
@@ -109,6 +89,26 @@
                                  dnd-disable-if="ratings.rating1.length >= 10" style="height: 311px">
                                     <div tooltips tooltip-template="<div class='ttiptext'>{{statement.statement}}</div>" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating1">
                                         <li dnd-draggable="statement" dnd-moved="ratings.rating1.splice($index, 1);"
+                                            dnd-effect-allowed="move" ng-style="getStyle(statement)">
+                                            {{ statement.statement|truncate:10 }}
+                                        </li>
+                                    </div>
+                                        <li class="dndPlaceholder" style="display: none;">
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="vertical-align:top">
+                        <div style="width:150px;padding-right:10px;">
+                            <div class="panel panel-info" id="td-p3">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title" align="center">3</h3>
+                                </div>
+                                <ul dnd-list="ratings.rating3" dnd-drop="dropRating3Callback(index, item, external, type)"
+                                 dnd-disable-if="ratings.rating3.length >= 2" style="height: 63px">
+                                    <div tooltips tooltip-template="<div class='ttiptext'>{{statement.statement}}</div>" tooltip-side="right" tooltip-size="large" ng-repeat="statement in ratings.rating3">
+                                        <li dnd-draggable="statement" dnd-moved="ratings.rating3.splice($index, 1);"
                                             dnd-effect-allowed="move" ng-style="getStyle(statement)">
                                             {{ statement.statement|truncate:10 }}
                                         </li>
@@ -202,7 +202,7 @@
                         </div>
                     </td>
  
-                </tr>
+               </tr>
             </table>
         </div>
         
