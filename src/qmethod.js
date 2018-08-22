@@ -13,16 +13,117 @@ var shuffleArray = function (array) {
 	return array;
 }
 
-var generateMyTd = function(id, rows,) {
+var generateMyTd = function(id, rows, colour) {
 	var toptd = document.createElement('td');
+	// toptd attr	
+	var toptdstyle = document.createAttribute('style');
+	toptdstyle.value = "vertical-align:top";
+	toptd.setAttributeNode(toptdstyle);
+
 	var topdiv = document.createElement('div');
+	// topdiv attr	
+	var topdivStyle = document.createAttribute('style');
+	topdivStyle.value = "width:150px;padding-right:10px;";
+	topdiv.setAttributeNode(topdivStyle);
+
 	var paneldiv = document.createElement('div');
+	// paneldiv attr	
+	var paneldivClass = document.createAttribute('class');
+	paneldivClass.value = "panel panel-info";
+	var paneldivId = document.createAttribute('id');
+	paneldivId.value = "td-p2";
+	paneldiv.setAttributeNode(paneldivClass);
+	paneldiv.setAttributeNode(paneldivId);
+
 	var panelheadingdiv = document.createElement('div'); 
+	// panelheadingdiv attr	
+	var panelheadingdivclass = document.createAttribute('class');
+	panelheadingdivclass.value = "panel-heading";
+	panelheadingdiv.setAttributeNode(panelheadingdivclass);
+	panelheadingdiv.setAttribute("style",
+	"background-image:\
+	 linear-gradient(to bottom,"+colour+" 0,"+colour+" 100%)!important;"); //border-color
+
 	var paneltitleh3 = document.createElement('h3');
+	// paneltitleh3 attr	
+	var paneltitleh3class = document.createAttribute('class');
+	paneltitleh3class.value	= "panel-title";
+	var paneltitleAlign = document.createAttribute('align');
+	paneltitleAlign.value = "center";
+	var paneltitleTextNode = document.createTextNode(id);
+	paneltitleh3.setAttributeNode(paneltitleh3class);
+	paneltitleh3.setAttributeNode(paneltitleAlign);
+	paneltitleh3.appendChild(paneltitleTextNode);
+
 	var innerul = document.createElement('ul');
+	// innerul attr	
+	var innerulDndListAttr = document.createAttribute('dnd-list');
+	innerulDndListAttr.value = "ratings.rating"+String(id);
+	var innerulDndDropAttr = document.createAttribute('dnd-drop');
+	innerulDndDropAttr.value = "dropCallback(index, item, external, type)";
+	var innerulDndDisableIfAttr = document.createAttribute('dnd-disable-if');
+	innerulDndDisableIfAttr.value = "ratings.rating2.length >=" + String(rows);
+	var innerulStyleAttr = document.createAttribute('style');
+	innerulStyleAttr.value = "height: " + String(rows*32) + 'px'; // 32 is the height of the cell
+	innerul.setAttributeNode(innerulDndListAttr);
+	innerul.setAttributeNode(innerulDndDropAttr);
+	innerul.setAttributeNode(innerulDndDisableIfAttr);
+	innerul.setAttributeNode(innerulStyleAttr);
+
 	var tooltipdiv = document.createElement('div');
+	// tooltipdiv attr	
+	var tooltipdivTooltipsTemplateAttr =
+	 document.createAttribute('tooltip-template');
+	tooltipdivTooltipsTemplateAttr.value = 
+	   "<div class='ttiptext'>{{statement.statement}}</div>";
+	var tooltipdivTooltipSideAttr =
+	 document.createAttribute('tooltip-side');
+	tooltipdivTooltipSideAttr.value = "right";
+	var tooltipdivTooltipSizeAttr = 
+	 document.createAttribute('tooltip-size');
+	tooltipdivTooltipSizeAttr.value = "large";
+	var tooltipdivNgRepeat =
+	 document.createAttribute('ng-repeat');
+	tooltipdivNgRepeat.value 
+	 = "statement in ratings.rating"+String(id);
+	tooltipdiv.setAttribute("tooltips",'');
+	tooltipdiv.setAttributeNode(tooltipdivTooltipsTemplateAttr);
+	tooltipdiv.setAttributeNode(tooltipdivTooltipSideAttr);
+	tooltipdiv.setAttributeNode(tooltipdivTooltipSizeAttr);
+	tooltipdiv.setAttributeNode(tooltipdivNgRepeat);
+
 	var innerli = document.createElement('li');
+	// innerli attr	
+	//innerli attributes
+	var innerliDndDraggableAttr = document.createAttribute
+		('dnd-draggable');
+	innerliDndDraggableAttr.value = "statement";
+	var innerliDndMovedAttr = document.createAttribute
+		('dnd-moved');
+	innerliDndMovedAttr.value = "ratings.rating"+String(id)+
+		".splice($index,1)";
+	var innerliDndEfctAlwdAttr = document.createAttribute
+	('dnd-effect-allowed');
+	innerliDndEfctAlwdAttr.value = "move";
+	var innerliNgStyle = document.createAttribute
+	('ng-style');
+	innerliNgStyle.value = "getStyle(statement)";
+	var innerliTextNode = document.createTextNode
+		("{{ statement.statement|truncate:10 }}");
+	innerli.setAttributeNode(innerliDndDraggableAttr);
+	innerli.setAttributeNode(innerliDndMovedAttr);
+	innerli.setAttributeNode(innerliDndEfctAlwdAttr);
+	innerli.setAttributeNode(innerliNgStyle);
+	innerli.appendChild(innerliTextNode);
+
 	var placeholderli = document.createElement('li');
+	// placeholderli attr	
+	var placeholderliClass = document.createAttribute("class");
+	placeholderliClass.value="dndPlaceholder";
+	var placeholderliStyle = document.createAttribute("style");
+	placeholderliStyle.value="display: none;";
+	placeholderli.setAttributeNode(placeholderliClass);
+	placeholderli.setAttributeNode(placeholderliStyle);
 	
 
 	tooltipdiv.appendChild(innerli);
@@ -33,6 +134,7 @@ var generateMyTd = function(id, rows,) {
 	paneldiv.appendChild(innerul);
 	topdiv.appendChild(paneldiv);
 	toptd.appendChild(topdiv);
+	return toptd;
 }
 
 var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
@@ -111,8 +213,8 @@ app.config(function ($stateProvider, $locationProvider) {
     storageBucket: "qmethod-16120.appspot.com",
     messagingSenderId: "50670126791"
   };
-  firebase.initializeApp(config);
-  var rootRef = firebase.database().ref();
+//   firebase.initializeApp(config);
+//   var rootRef = firebase.database().ref();
 
   
 // ========== CONTROLLERS
@@ -231,39 +333,31 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 
 app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
 	//Copies $rootScope.classifications instead of getting the reference
-	$scope.map = [];
-	$scope.totalCells = 0;
-	xmlDoc = parser.parseFromString(promisedata.data,"application/xml");
-	xmlDocStatementNodes = xmlDoc.getElementsByTagName("column");
-	for (i=0; i < xmlDocStatementNodes.length; i++) {
-		el = xmlDocStatementNodes[i];
-		el_id = parseInt(el.getAttribute('id'),10);
-		el_colour = String(el.getAttribute('colour'));
-		el_rows = parseInt(el.childNodes[0].nodeValue,10);
-		$scope.totalCells += el_rows;
-		$scope.map.push({id: el_id, colour: el_colour,rows:el_rows});
+	if (typeof $rootScope.ratings == "undefined") {
+
+		$scope.ratings = [];
+		$scope.totalCells = 0;
+		$scope.table = document.getElementsByTagName("table")[0].getElementsByTagName("tr")[0];
+
+		xmlDoc = parser.parseFromString(promisedata.data, "application/xml");
+		xmlDocStatementNodes = xmlDoc.getElementsByTagName("column");
+		for (i = 0; i < xmlDocStatementNodes.length; i++) {
+			el = xmlDocStatementNodes[i];
+			el_id = parseInt(el.getAttribute('id'), 10);
+			var el_rating_id = "rating" + String(el_id);
+			el_colour = String(el.getAttribute('colour'));
+			el_rows = parseInt(el.childNodes[0].nodeValue, 10);
+			$scope.totalCells += el_rows;
+			$scope.ratings.push({ el_rating_id: [] });
+			$scope.table.appendChild(generateMyTd(el_id, el_rows, el_colour));
+		}
+
+		$rootScope.ratings = $scope.ratings;
+		$rootScope.totalCells = $scope.totalCells;
 	}
 
 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
-
-	if (typeof $rootScope.ratings == "undefined") {
-		$rootScope.ratings = {
-			rating_3size: 0,
-			rating_3: [],
-			rating_2size: 0,
-			rating_2: [],
-			rating_1size: 0,
-			rating_1: [],
-			rating0size: 0,
-			rating0: [],
-			rating1size: 0,
-			rating1: [],
-			rating2size: 0,
-			rating2: [],
-			rating3size: 0,
-			rating3: [],
-		};
-	}
+	
 	$scope.ratings = $rootScope.ratings;
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
@@ -297,7 +391,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 				numberOfStatements += value.length;
 			}
 		});
-		return numberOfStatements == $rootScope.numberOfStatements;
+		return numberOfStatements == $rootScope.totalCells;
 	};
 
 	$('#helpModal').modal(show = true);
@@ -332,31 +426,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		$state.go('step3');
 	}
 
-	$scope.dropRating_3Callback = function (index, item, external, type) {
-		return item;
-	}
-
-	$scope.dropRating_2Callback = function (index, item, external, type) {
-		return item;
-	}
-
-	$scope.dropRating_1Callback = function (index, item, external, type) {
-		return item;
-	}
-
-	$scope.dropRating0Callback = function (index, item, external, type) {
-		return item;
-	}
-
-	$scope.dropRating1Callback = function (index, item, external, type) {
-		return item;
-	}
-
-	$scope.dropRating2Callback = function (index, item, external, type) {
-		return item;
-	}
-
-	$scope.dropRating3Callback = function (index, item, external, type) {
+	$scope.dropCallback = function (index, item, external, type) {
 		return item;
 	}
 }]);
