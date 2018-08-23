@@ -146,16 +146,6 @@ var generateMyTd = function(id, rows, colour) {
 
 var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
 
-app.directive('table-dynamic', function ($compile) {
-	return {
-        link: function($scope, element){
-			var template = $scope.table;
-			var linkFn = $compile(template);
-			var content = linkFn($scope);
-			element.append(content);
-        }
-    };
-});
 // ========== CONFIG
 app.config(function ($stateProvider, $locationProvider) {
 
@@ -391,6 +381,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 	}
 
 	if (typeof $rootScope.table == "undefined") {
+		console.log("table is undefined. defining...");
 		var tr_el = document.createElement('tr');
 
 		parser = new DOMParser();
@@ -407,17 +398,29 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 				tr_el.appendChild(generateMyTd(el_id,el_rows,el_colour));
 			}	
 		}
+		$rootScope.table = tr_el;
+	}
+	if ((typeof $rootScope.tablecompiled == "undefined") &&
+	 typeof $rootScope.table != "undefined") {
+		//HIC SUNT DRACONES
 		//Compile table
-		var linkFn = $compile(tr_el);
+		var cpy = $rootScope.table.cloneNode(true);
+		var linkFn = $compile(cpy);
 		//Link table
 		var content = linkFn($scope);
 		//Store table into rootscope
-		$rootScope.table = content[0];
-		console.log(content);
+		$rootScope.tablecompiled = content[0];
 	}
+
+	console.log(JSON.stringify($scope.ratings));
 	if ($rootScope.table != "undefined"){
 		var table = document.getElementsByTagName('table')[0];
-		table.append($rootScope.table);
+
+		while (table.firstChild) {
+			table.removeChild(table.firstChild);
+		}
+
+		table.append($rootScope.tablecompiled);
 	}
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
@@ -497,10 +500,13 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		//Copy ratings defined on this step to rootScope so we can send later
 		$rootScope.ratings = 
 			JSON.parse(JSON.stringify($scope.ratings));
+		delete $rootScope.tablecompiled;
 		$state.go('step5');
 	}
 
 	$scope.back = function () {
+		delete $rootScope.tablecompiled;
+		delete $rootScope.ratings;
 		$state.go('step3');
 	}
 
