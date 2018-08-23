@@ -1,136 +1,141 @@
 <br/>
-    <br/>
+<br/>
 
-    <center>If you need to <b>read the instructions of this step again, click on the "Help"</b> button on the bottom fo this page.</center>
+<center>If you need to <b>read the instructions of this step again, click on the "Help"</b> button on the bottom fo this
+    page.
+</center>
 
-	<br/>
-	
-    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="helpModalLabel">RATING THE STATEMENTS ABOUT RAPID REVIEWS</h4>
-                </div>
-                <div class="modal-body">
-                    <b>
-                        <center>PLEASE READ THESE INSTRUCTIONS.</center>
-                    </b>
-                    <br>
-                    <br> 1. Take the cards from the "AGREE"-pile and read them again.
-                    <br>
-                    <br> 2. Next, select the TWO statements you most agree with and place them on right side of the score sheet, below the "+3".
-                    <br>
-                    <br> 3. Now read the cards in the "DISAGREE"-pile again.
-                    <br>
-                    <br> 4. Just like before, select the TWO statements you most disagree with and place them on the left side of the score sheet, below the "-3".
-                    <br>
-                    <br> 5. Next, select the statements you second most agree/disagree with and place them under "+2"/"-2".
-                    <br>
-                    <br> 5. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-pile.
-                    <br>
-                    <br> 6. Finally, read the "NEUTRAL"-cards again and arange them in the remaining open boxes of the score sheet.
-                    <br>
-                    <br> OBS: The order you put the cards in each colunm is NOT important.
-                    <br>
-                    <br> IF YOUR CARDS BECOME TOO SMALL TO READ: Point the mouse cursor over the card and a tool tip will appear with the full statement.
-                    <br>
-                    <br>
-                    <br> If you need to read this instruction again, scroll to bottom and press help.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
+<br/>
+
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="helpModalLabel">RATING THE STATEMENTS ABOUT RAPID REVIEWS</h4>
+            </div>
+            <div class="modal-body">
+                <b>
+                    <center>PLEASE READ THESE INSTRUCTIONS.</center>
+                </b>
+                <br>
+                <br> 1. Take the cards from the "AGREE"-pile and read them again.
+                <br>
+                <br> 2. Next, select the TWO statements you most agree with and place them on right side of the score sheet,
+                below the "+3".
+                <br>
+                <br> 3. Now read the cards in the "DISAGREE"-pile again.
+                <br>
+                <br> 4. Just like before, select the TWO statements you most disagree with and place them on the left side
+                of the score sheet, below the "-3".
+                <br>
+                <br> 5. Next, select the statements you second most agree/disagree with and place them under "+2"/"-2".
+                <br>
+                <br> 5. Follow this procedure for all cards in the "AGREE"- and "DIAGREE"-pile.
+                <br>
+                <br> 6. Finally, read the "NEUTRAL"-cards again and arange them in the remaining open boxes of the score
+                sheet.
+                <br>
+                <br> OBS: The order you put the cards in each colunm is NOT important.
+                <br>
+                <br> IF YOUR CARDS BECOME TOO SMALL TO READ: Point the mouse cursor over the card and a tool tip will appear
+                with the full statement.
+                <br>
+                <br>
+                <br> If you need to read this instruction again, scroll to bottom and press help.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
             </div>
         </div>
     </div>
+</div>
 
-	<div align="center" ng-show="done()">
-        <div class="col-xs-4 col-xs-offset-4 next-button">
-            <a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
-        </div>
+<div align="center" ng-show="done()">
+    <div class="col-xs-4 col-xs-offset-4 next-button">
+        <a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
     </div>
-	
-	<br/>
-	
-    <div class="ratings row">
-        <div class="normaldist">
-            <table align="center" style="transform: rotate(180deg);">
-            </table>
-        </div>
-        
-        <div class="step4lists">
-            <div class="simpleDemo row" style="margin:20px">
-                <div class="row">
-                    <table align="center">
-                        <tr>
-                            <td style="vertical-align:top">
-                                <div style="width:320px;padding-right:10px;">
-                                    <div class="panel panel-info" id="disagree">
-                                        <div class="panel-heading disagree_panel_heading">
-                                            <h3 class="panel-title" align="center">DISAGREE</h3>
-                                        </div>
-                                        <ul dnd-list="classifications.DISAGREE" dnd-allowed-types="'disagree'" dnd-drop="dropDisagreeCallback(index, item, external, type)">
-                                            <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)"
-                                                dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
-                                                {{ statement.statement }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="vertical-align:top">
-                                <div style="width:320px;padding-right:10px;">
-                                    <div class="panel panel-info" id="neutral">
-                                        <div class="panel-heading neutral_panel_heading">
-                                            <h3 class="panel-title" align="center">NEUTRAL</h3>
-                                        </div>
-                                        <ul dnd-list="classifications.NEUTRAL" dnd-allowed-types="'neutral'" dnd-drop="dropNeutralCallback(index, item, external, type)">
-                                            <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)"
-                                                dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
-                                                {{ statement.statement }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                            <td style="vertical-align:top">
-                                <div style="width:320px;padding-right:10px;">
-                                    <div class="panel panel-info" id="agree">
-                                        <div class="panel-heading agree_panel_heading">
-                                            <h3 class="panel-title" align="center">AGREE</h3>
-                                        </div>
-                                        <ul dnd-list="classifications.AGREE" dnd-allowed-types="'agree'" dnd-drop="dropAgreeCallback(index, item, external, type)">
-                                            <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)"
-                                                dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
-                                                {{ statement.statement }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
+</div>
 
-        <form>
+<br/>
+
+<div class="ratings row" style="margin-top:50px">
+
+    <div class="normaldist" style="transform: rotate(180deg);">
+        <table align="center">
+        </table>
+    </div>
+
+    <div class="simpleDemo row step4lists" style="margin:20px">
+        <div class="row">
             <table align="center">
                 <tr>
-                    <td>
-                        <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-                            <a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
+                    <td style="vertical-align:top">
+                        <div style="width:320px;padding-right:10px;">
+                            <div class="panel panel-info" id="disagree">
+                                <div class="panel-heading disagree_panel_heading">
+                                    <h3 class="panel-title" align="center">DISAGREE</h3>
+                                </div>
+                                <ul dnd-list="classifications.DISAGREE" dnd-allowed-types="'disagree'" dnd-drop="dropDisagreeCallback(index, item, external, type)">
+                                    <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)"
+                                        dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
+                                        {{ statement.statement }}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </td>
-                    <td>
-
+                    <td style="vertical-align:top">
+                        <div style="width:320px;padding-right:10px;">
+                            <div class="panel panel-info" id="neutral">
+                                <div class="panel-heading neutral_panel_heading">
+                                    <h3 class="panel-title" align="center">NEUTRAL</h3>
+                                </div>
+                                <ul dnd-list="classifications.NEUTRAL" dnd-allowed-types="'neutral'" dnd-drop="dropNeutralCallback(index, item, external, type)">
+                                    <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)"
+                                        dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
+                                        {{ statement.statement }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </td>
-                    <td>
-                        <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px" data-toggle="modal" data-target="#helpModal">
-                            <a href="" ng-click="help()" class="btn btn-default btn-lg btn-block" style="width:100px">Help</a>
+                    <td style="vertical-align:top">
+                        <div style="width:320px;padding-right:10px;">
+                            <div class="panel panel-info" id="agree">
+                                <div class="panel-heading agree_panel_heading">
+                                    <h3 class="panel-title" align="center">AGREE</h3>
+                                </div>
+                                <ul dnd-list="classifications.AGREE" dnd-allowed-types="'agree'" dnd-drop="dropAgreeCallback(index, item, external, type)">
+                                    <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)"
+                                        dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
+                                        {{ statement.statement }}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </td>
                 </tr>
             </table>
-</form>
+        </div>
+    </div>
+
+    <form>
+        <table align="center">
+            <tr>
+                <td>
+                    <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+                        <a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
+                    </div>
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px" data-toggle="modal" data-target="#helpModal">
+                        <a href="" ng-click="help()" class="btn btn-default btn-lg btn-block" style="width:100px">Help</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>

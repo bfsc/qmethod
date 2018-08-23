@@ -13,6 +13,16 @@ var shuffleArray = function (array) {
 	return array;
 }
 
+var nId = function(id) {
+	return id < 0 ? '_'+Math.abs(id) : ''+id;
+}
+
+//Warning for future maintainers: for some reason, the column was growing bigger
+//than value set here, so (rows-1)+3 basically works around this issue
+ // 32 is the height of the cell
+var workAroundpx = function(rows){
+	return (rows*32) - rows+2;
+}
 var generateMyTd = function(id, rows, colour) {
 	var toptd = document.createElement('td');
 	// toptd attr	
@@ -30,10 +40,7 @@ var generateMyTd = function(id, rows, colour) {
 	// paneldiv attr	
 	var paneldivClass = document.createAttribute('class');
 	paneldivClass.value = "panel panel-info";
-	var paneldivId = document.createAttribute('id');
-	paneldivId.value = "td-p2";
 	paneldiv.setAttributeNode(paneldivClass);
-	paneldiv.setAttributeNode(paneldivId);
 
 	var panelheadingdiv = document.createElement('div'); 
 	// panelheadingdiv attr	
@@ -58,13 +65,13 @@ var generateMyTd = function(id, rows, colour) {
 	var innerul = document.createElement('ul');
 	// innerul attr	
 	var innerulDndListAttr = document.createAttribute('dnd-list');
-	innerulDndListAttr.value = "ratings[rating"+String(id)+"]";
+	innerulDndListAttr.value = "ratings.rating" + nId(id);
 	var innerulDndDropAttr = document.createAttribute('dnd-drop');
 	innerulDndDropAttr.value = "dropCallback(index, item, external, type)";
 	var innerulDndDisableIfAttr = document.createAttribute('dnd-disable-if');
-	innerulDndDisableIfAttr.value = "ratings[rating"+String(id)+"].length >=" + String(rows);
+	innerulDndDisableIfAttr.value = "ratings.rating"+nId(id)+".length >=" + rows;
 	var innerulStyleAttr = document.createAttribute('style');
-	innerulStyleAttr.value = "height: " + String(rows*32) + 'px'; // 32 is the height of the cell
+	innerulStyleAttr.value = "height: " + workAroundpx(rows) + 'px';
 	innerul.setAttributeNode(innerulDndListAttr);
 	innerul.setAttributeNode(innerulDndDropAttr);
 	innerul.setAttributeNode(innerulDndDisableIfAttr);
@@ -85,7 +92,7 @@ var generateMyTd = function(id, rows, colour) {
 	var tooltipdivNgRepeat =
 	 document.createAttribute('ng-repeat');
 	tooltipdivNgRepeat.value 
-	 = "statement in "+"ratings[rating"+String(id)+"]";
+	 = "statement in "+"ratings.rating"+nId(id);
 	tooltipdiv.setAttribute("tooltips",'');
 	tooltipdiv.setAttributeNode(tooltipdivTooltipsTemplateAttr);
 	tooltipdiv.setAttributeNode(tooltipdivTooltipSideAttr);
@@ -100,7 +107,7 @@ var generateMyTd = function(id, rows, colour) {
 	innerliDndDraggableAttr.value = "statement";
 	var innerliDndMovedAttr = document.createAttribute
 		('dnd-moved');
-	innerliDndMovedAttr.value = "ratings[rating"+String(id)+"]"+
+	innerliDndMovedAttr.value = "ratings.rating"+nId(id)+
 		".splice($index,1)";
 	var innerliDndEfctAlwdAttr = document.createAttribute
 	('dnd-effect-allowed');
@@ -139,6 +146,16 @@ var generateMyTd = function(id, rows, colour) {
 
 var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
 
+app.directive('table-dynamic', function ($compile) {
+	return {
+        link: function($scope, element){
+			var template = $scope.table;
+			var linkFn = $compile(template);
+			var content = linkFn($scope);
+			element.append(content);
+        }
+    };
+});
 // ========== CONFIG
 app.config(function ($stateProvider, $locationProvider) {
 
@@ -289,6 +306,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	};
 
 	$scope.next = function () {
+		$rootScope.classifications = JSON.parse(JSON.stringify($scope.classifications));
 		$rootScope.classifications_step3 = JSON.parse(JSON.stringify($rootScope.classifications));
 		$state.go('step4');
 	}
@@ -350,13 +368,22 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	};
 }]);
 
-app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
+app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$compile', function (promisedata, $scope, $rootScope, $state, $compile) {
 	//Copies $rootScope.classifications instead of getting the reference
-	if (typeof $rootScope.ratings == "undefined") {
+	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
+	$scope.columns = [];
+	var tr_el = document.createElement('tr');
 
-		ratings = {};
-		$scope.totalCells = 0;
-		$scope.table = document.getElementsByTagName("table")[0];
+	if (typeof $rootScope.ratings == "undefined") {
+		$rootScope.ratings = {
+			rating_3: [],
+			rating_2: [],
+			rating_1: [],
+			rating0: [],
+			rating1: [],
+			rating2: [],
+			rating3: []
+		};
 
 		parser = new DOMParser();
 		xmlDoc = parser.parseFromString(promisedata.data, "application/xml");
@@ -368,22 +395,23 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 			var el_colour = String(el.getAttribute('colour'));
 			var el_rows = parseInt(el.childNodes[0].nodeValue, 10);
 			if (el_colour != "null" && el_id != "NaN" && el_rows != "NaN") {
-				console.log(''+el_id + ' '+el_colour + ' '+el_rows);
-				$scope.table.appendChild(generateMyTd(el_id, el_rows, el_colour));
-				console.log(''+el_rating_id);
-				ratings[el_rating_id] = [];
-				$scope.totalCells += el_rows;
+				//$scope.ratings[el_rating_id] = [];
+				$scope.columns.push({id:el_id, rows:el_rows,
+					 colour: el_colour,ratingref:el_rating_id});
+				tr_el.appendChild(generateMyTd(el_id,el_rows,el_colour));
 			}	
 		}
-		console.log(JSON.stringify(ratings));
+		console.log("totalCells: "+JSON.stringify($scope.columns));
 
-		$rootScope.ratings = ratings;
-		$rootScope.totalCells = $scope.totalCells;
+		var table = document.getElementsByTagName('table')[0];
+		var linkFn = $compile(tr_el);
+		var content = linkFn($scope);
+		console.log(content);
+		table.append(content[0]);
 	}
-
-	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
-	
 	$scope.ratings = $rootScope.ratings;
+
+	
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
 		var ret = item.category == "agree";
@@ -411,12 +439,13 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 
 	$scope.done = function () {
 		var numberOfStatements = 0;
-		$.map(ratings, function(value,index){
+		$.map($scope.ratings, function(value,index){
 			if (value instanceof Array) {
 				numberOfStatements += value.length;
 			}
 		});
-		return numberOfStatements == $rootScope.totalCells;
+		console.log("numberOfStatements "+numberOfStatements);
+		return numberOfStatements == $rootScope.numberOfStatements;
 	};
 
 	$('#helpModal').modal(show = true);

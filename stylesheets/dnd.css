@@ -12,6 +12,7 @@ cardRatingJustitication  {
     min-height: 42px;
     padding-left: 0px;
     margin: 0px;
+    display: block;
 }
 .normaldist ul[dnd-list] li {
     background-color: rgba(255,255,255,0.7);
@@ -25,16 +26,15 @@ cardRatingJustitication  {
     margin-bottom: -1px;
 }
 
-.ratings ul[dnd-list] .dndDraggingSource {
+.normaldist ul[dnd-list] .dndDraggingSource {
     display: none;
 }
 
-.ratings ul[dnd-list] .dndPlaceholder {
+.normaldist ul[dnd-list] .dndPlaceholder {list-style-type: none;
     background-color: #ddd;
     display: block;
     min-height: 42px;
 }
-
 
 /**
  * The dnd-list should always have a min-height,
