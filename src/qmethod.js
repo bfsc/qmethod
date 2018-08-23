@@ -370,27 +370,8 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 }]);
 
 app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$compile', function (promisedata, $scope, $rootScope, $state, $compile) {
-	// $scope.classifications = {
-	// 	'AGREE': [],
-	// 	'NEUTRAL': [],
-	// 	'DISAGREE': [],
-	// };
+
 	// //If user has distributed over normal distribution re-use it
-	// if ($rootScope.ratings == "undefined"){
-	// 	$scope.ratings = {
-	// 		rating_3: [],
-	// 		rating_2: [],
-	// 		rating_1: [],
-	// 		rating0: [],
-	// 		rating1: [],
-	// 		rating2: [],
-	// 		rating3: []
-	// 	};
-	// 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
-	// } else {
-	// 	$scope.ratings = JSON.parse(JSON.stringify($rootScope.ratings));
-	// }
-	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
 	$scope.ratings = {
 			rating_3: [],
 			rating_2: [],
@@ -399,7 +380,15 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 			rating1: [],
 			rating2: [],
 			rating3: []
-	};
+		};
+	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
+
+	if (typeof $rootScope.ratings != "undefined"){
+		$scope.ratings = JSON.parse(JSON.stringify($rootScope.ratings));
+		$scope.classifications.AGREE = [];
+		$scope.classifications.NEUTRAL = [];
+		$scope.classifications.DISAGREE = [];
+	}
 
 	if (typeof $rootScope.table == "undefined") {
 		var tr_el = document.createElement('tr');
@@ -435,6 +424,8 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		var ret = item.category == "agree";
 		if (ret) {
 			$scope.classifications.AGREE.push(item);
+		} else {
+			console.log("refused drop. expeted agree, got: "+item.category);
 		}
 		return ret;
 	};
@@ -462,7 +453,6 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 				numberOfStatements += value.length;
 			}
 		});
-		console.log("numberOfStatements "+numberOfStatements);
 		return numberOfStatements == $rootScope.numberOfStatements;
 	};
 
@@ -475,6 +465,31 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 			return {"background-color":"#BAB9B9"};
 		} else {
 			return {"background-color":"#FF6666"};
+		}
+	}
+
+	$scope.help = function() {
+		var concatlists = [];
+		concatlists = concatlists.concat($scope.classifications.AGREE,
+			$scope.classifications.NEUTRAL ,
+			$scope.classifications.DISAGREE);
+		$scope.classifications.AGREE = [];
+		$scope.classifications.NEUTRAL = [];
+		$scope.classifications.DISAGREE = [];
+		for(var i = 0; i < 2; ++i){
+			$scope.ratings.rating3.push(concatlists.shift());
+			$scope.ratings.rating_3.push(concatlists.shift());
+		}
+		for(var i = 0; i < 6; ++i){
+			$scope.ratings.rating2.push(concatlists.shift());
+			$scope.ratings.rating_2.push(concatlists.shift());
+		}
+		for(var i = 0; i < 10; ++i){
+			$scope.ratings.rating1.push(concatlists.shift());
+			$scope.ratings.rating_1.push(concatlists.shift());
+		}
+		for(var i = 0; i < 14; ++i){
+			$scope.ratings.rating0.push(concatlists.shift());
 		}
 	}
 

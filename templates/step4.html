@@ -76,9 +76,9 @@
                                 <div class="panel-heading disagree_panel_heading">
                                     <h3 class="panel-title" align="center">DISAGREE</h3>
                                 </div>
-                                <ul dnd-list="classifications.DISAGREE" dnd-allowed-types="'disagree'" dnd-drop="dropDisagreeCallback(index, item, external, type)">
+                                <ul dnd-list="classifications.DISAGREE" dnd-drop="dropDisagreeCallback(index, item, external, type)">
                                     <li ng-repeat="statement in classifications.DISAGREE" dnd-draggable="statement" dnd-moved="classifications.DISAGREE.splice($index, 1)"
-                                        dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
+                                        dnd-effect-allowed="move">
                                         {{ statement.statement }}
                                     </li>
                                 </ul>
@@ -91,9 +91,9 @@
                                 <div class="panel-heading neutral_panel_heading">
                                     <h3 class="panel-title" align="center">NEUTRAL</h3>
                                 </div>
-                                <ul dnd-list="classifications.NEUTRAL" dnd-allowed-types="'neutral'" dnd-drop="dropNeutralCallback(index, item, external, type)">
+                                <ul dnd-list="classifications.NEUTRAL" dnd-drop="dropNeutralCallback(index, item, external, type)">
                                     <li ng-repeat="statement in classifications.NEUTRAL" dnd-draggable="statement" dnd-moved="classifications.NEUTRAL.splice($index, 1)"
-                                        dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
+                                        dnd-effect-allowed="move">
                                         {{ statement.statement }}
                                     </li>
                                 </ul>
@@ -106,9 +106,9 @@
                                 <div class="panel-heading agree_panel_heading">
                                     <h3 class="panel-title" align="center">AGREE</h3>
                                 </div>
-                                <ul dnd-list="classifications.AGREE" dnd-allowed-types="'agree'" dnd-drop="dropAgreeCallback(index, item, external, type)">
+                                <ul dnd-list="classifications.AGREE" dnd-drop="dropAgreeCallback(index, item, external, type)">
                                     <li ng-repeat="statement in classifications.AGREE" dnd-draggable="statement" dnd-moved="classifications.AGREE.splice($index, 1)"
-                                        dnd-effect-allowed="move" dnd-type="statement.category" dnd-disable-if="statement.category == 'unknown'">
+                                        dnd-effect-allowed="move">
                                         {{ statement.statement }}
                                     </li>
                                 </ul>
