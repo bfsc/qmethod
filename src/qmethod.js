@@ -291,6 +291,8 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 
 	/*Checks if $rootScope is already defined (the user had made his classifications)*/
 	if (typeof $rootScope.classifications == "undefined") {
+		if (typeof $rootScope.classifications_step3 != "undefined") {
+		}
 		$rootScope.classifications = $scope.classifications;
 	} else {
 		$scope.classifications = $rootScope.classifications;
@@ -306,7 +308,6 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	};
 
 	$scope.next = function () {
-		$rootScope.classifications = JSON.parse(JSON.stringify($scope.classifications));
 		$rootScope.classifications_step3 = JSON.parse(JSON.stringify($rootScope.classifications));
 		$state.go('step4');
 	}
@@ -369,13 +370,28 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 }]);
 
 app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$compile', function (promisedata, $scope, $rootScope, $state, $compile) {
-	//Copies $rootScope.classifications instead of getting the reference
+	// $scope.classifications = {
+	// 	'AGREE': [],
+	// 	'NEUTRAL': [],
+	// 	'DISAGREE': [],
+	// };
+	// //If user has distributed over normal distribution re-use it
+	// if ($rootScope.ratings == "undefined"){
+	// 	$scope.ratings = {
+	// 		rating_3: [],
+	// 		rating_2: [],
+	// 		rating_1: [],
+	// 		rating0: [],
+	// 		rating1: [],
+	// 		rating2: [],
+	// 		rating3: []
+	// 	};
+	// 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
+	// } else {
+	// 	$scope.ratings = JSON.parse(JSON.stringify($rootScope.ratings));
+	// }
 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
-	$scope.columns = [];
-	var tr_el = document.createElement('tr');
-
-	if (typeof $rootScope.ratings == "undefined") {
-		$rootScope.ratings = {
+	$scope.ratings = {
 			rating_3: [],
 			rating_2: [],
 			rating_1: [],
@@ -383,7 +399,10 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 			rating1: [],
 			rating2: [],
 			rating3: []
-		};
+	};
+
+	if (typeof $rootScope.table == "undefined") {
+		var tr_el = document.createElement('tr');
 
 		parser = new DOMParser();
 		xmlDoc = parser.parseFromString(promisedata.data, "application/xml");
@@ -396,22 +415,21 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 			var el_rows = parseInt(el.childNodes[0].nodeValue, 10);
 			if (el_colour != "null" && el_id != "NaN" && el_rows != "NaN") {
 				//$scope.ratings[el_rating_id] = [];
-				$scope.columns.push({id:el_id, rows:el_rows,
-					 colour: el_colour,ratingref:el_rating_id});
 				tr_el.appendChild(generateMyTd(el_id,el_rows,el_colour));
 			}	
 		}
-		console.log("totalCells: "+JSON.stringify($scope.columns));
-
-		var table = document.getElementsByTagName('table')[0];
+		//Compile table
 		var linkFn = $compile(tr_el);
+		//Link table
 		var content = linkFn($scope);
+		//Store table into rootscope
+		$rootScope.table = content[0];
 		console.log(content);
-		table.append(content[0]);
 	}
-	$scope.ratings = $rootScope.ratings;
-
-	
+	if ($rootScope.table != "undefined"){
+		var table = document.getElementsByTagName('table')[0];
+		table.append($rootScope.table);
+	}
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
 		var ret = item.category == "agree";
@@ -461,22 +479,13 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 	}
 
 	$scope.next = function () {
-
-		$rootScope.classifications = $scope.classifications;
+		//Copy ratings defined on this step to rootScope so we can send later
+		$rootScope.ratings = 
+			JSON.parse(JSON.stringify($scope.ratings));
 		$state.go('step5');
 	}
 
 	$scope.back = function () {
-		$rootScope.classifications = JSON.parse(JSON.stringify($rootScope.classifications_step3));
-		$rootScope.ratings = {
-			rating_3: [],
-			rating_2: [],
-			rating_1: [],
-			rating0: [],
-			rating1: [],
-			rating2: [],
-			rating3: []
-		};
 		$state.go('step3');
 	}
 
