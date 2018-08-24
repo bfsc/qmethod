@@ -144,7 +144,7 @@ var generateMyTd = function(id, rows, colour) {
 	return toptd;
 }
 
-var app = angular.module('qmethod', ['ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
+var app = angular.module('qmethod', ['formly','formlyBootstrap','ui.router', 'dndLists', 'igTruncate', '720kb.tooltips']);
 
 // ========== CONFIG
 app.config(function ($stateProvider, $locationProvider) {
@@ -566,6 +566,44 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 		comments: null,
 		email: null,
 	};
+	var vm = this;
+	vm.user = {};
+	vm.userFields = [
+	{
+		key: 'email',
+		type: 'input',
+		templateOptions: {
+			type: 'email',
+			label: 'Email address',
+			placeholder: 'Enter email'
+		}
+	},
+	{
+		key: 'password',
+		type: 'input',
+		templateOptions: {
+			type: 'password',
+			label: 'Password',
+			placeholder: 'Password'
+		}
+	},
+	{
+		key: 'file',
+		type: 'file',
+		templateOptions: {
+			label: 'File input',
+			description: 'Example block-level help text here',
+			url: 'https://example.com/upload'
+		}
+	},
+	{
+		key: 'checked',
+		type: 'checkbox',
+		templateOptions: {
+			label: 'Check me out'
+		}
+	}
+	];
 
 	$scope.back = function () {
 		$state.go('step5');
