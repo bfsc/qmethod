@@ -31,52 +31,33 @@
 
 	<table align="center">
 		<tr>
-			<td align="center" bgcolor="#06960D" colspan="2" style="font-size: 20px;padding:10px;"><b>AGREE (+3)</b></td>
+			<td align="center" bgcolor="#06960D" colspan="2" style="font-size: 20px;padding:10px;"><b>AGREE +({{positiveExtreme}})</b></td>
 		</tr>
 		<tr><td style=" padding:5px;"></td></tr>
-		<tr>
+		<tr ng-repeat="value in explanations.agree">
 			<td width="400" style="vertical-align:top">
 				<div class="cardRatingJustitication">
-					{{ explanations.agree[0].statement.statement }}
+					{{value.statement}}
 				</div>
 			</td>
 			<td width="500">
-				<textarea ng-model="explanations.agree[0].explanation" style="width:99%" rows="4" cols="50"> </textarea>
+				<textarea ng-model="value.explanation" style="width:99%" rows="4" cols="50"> </textarea>
 			</td>
 		</tr>
-		<tr>
-			<td style="vertical-align:top">
-				<div class="cardRatingJustitication">
-					{{ explanations.agree[1].statement.statement }}
-				</div>
-			</td>
-			<td>
-				<textarea ng-model="explanations.agree[1].explanation" style="width:99%" rows="4" cols="50"> </textarea>
-			</td>
 		</tr>
 		<tr><td style=" padding:10px;"></td></tr>
 		<tr>
-			<td align="center" bgcolor="#E82A2A" colspan="2" style="font-size: 20px;padding:10px;"><b>DISAGREE (-3)</b></td>
+			<td align="center" bgcolor="#E82A2A" colspan="2" style="font-size: 20px;padding:10px;"><b>DISAGREE -({{positiveExtreme}})</b></td>
 		</tr>
 		<tr><td style=" padding:5px;"></td></tr>
-		<tr>
+		<tr ng-repeat="value in explanations.disagree">
 			<td style="vertical-align:top">
 				<div class="cardRatingJustitication">
-					{{ explanations.disagree[0].statement.statement }}
+					{{value.statement}}
 				</div>
 			</td>
 			<td>
-				<textarea ng-model="explanations.disagree[0].explanation" style="width:99%" rows="4" cols="50"> </textarea>
-			</td>
-		</tr>
-		<tr>
-			<td style="vertical-align:top">
-				<div class="cardRatingJustitication">
-					{{ explanations.disagree[1].statement.statement }}
-				</div>
-			</td>
-			<td>
-				<textarea ng-model="explanations.disagree[1].explanation" style="width:99%" rows="4" cols="50"> </textarea>
+				<textarea ng-model="value.explanation" style="width:99%" rows="4" cols="50"> </textarea>
 			</td>
 		</tr>
 	</table>
