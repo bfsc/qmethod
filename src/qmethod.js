@@ -17,6 +17,38 @@ var nId = function(id) {
 	return id < 0 ? '_'+Math.abs(id) : ''+id;
 }
 
+function clone(obj) {
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+        var copy = new Date();
+        copy.setTime(obj.getTime());
+        return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+        var copy = [];
+        for (var i = 0, len = obj.length; i < len; i++) {
+            copy[i] = clone(obj[i]);
+        }
+        return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+        var copy = {};
+        for (var attr in obj) {
+            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+        }
+        return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
+}
+
 //Warning for future maintainers: for some reason, the column was growing bigger
 //than value set here, so (rows-1)+3 basically works around this issue
  // 32 is the height of the cell
@@ -362,15 +394,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$compile', function (promisedata, $scope, $rootScope, $state, $compile) {
 
 	// //If user has distributed over normal distribution re-use it
-	$scope.ratings = {
-			rating_3: [],
-			rating_2: [],
-			rating_1: [],
-			rating0: [],
-			rating1: [],
-			rating2: [],
-			rating3: []
-		};
+	$scope.ratings = [];
 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
 
 	if (typeof $rootScope.ratings != "undefined"){
@@ -379,6 +403,13 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		$scope.classifications.NEUTRAL = [];
 		$scope.classifications.DISAGREE = [];
 	}
+	var smallerLabel = {};
+		 smallerLabel.value = 0;
+		smallerLabel.rating_id = '';
+
+	var biggerLabel = {};
+		biggerLabel.value = 0;
+		biggerLabel.rating_id = '';
 
 	if (typeof $rootScope.table == "undefined") {
 		console.log("table is undefined. defining...");
@@ -394,11 +425,24 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 			var el_colour = String(el.getAttribute('colour'));
 			var el_rows = parseInt(el.childNodes[0].nodeValue, 10);
 			if (el_colour != "null" && el_id != "NaN" && el_rows != "NaN") {
-				//$scope.ratings[el_rating_id] = [];
+				if (el_id < smallerLabel.value){
+					smallerLabel.value = el_id;
+					smallerLabel.rating_id = el_rating_id;
+				}
+				if (el_id > biggerLabel.value){
+					biggerLabel.value = el_id;
+					biggerLabel.rating_id = el_rating_id;
+				}
 				tr_el.appendChild(generateMyTd(el_id,el_rows,el_colour));
+				$scope.ratings[el_rating_id] = [];
 			}	
 		}
+
 		$rootScope.table = tr_el;
+		$rootScope.ratingsNegExt = smallerLabel.rating_id;
+		$rootScope.ratingsPosExt = biggerLabel.rating_id;
+		$rootScope.ratingsPosExtId = biggerLabel.value;
+		$rootScope.ratingsNegExtId = smallerLabel.value;
 	}
 	if ((typeof $rootScope.tablecompiled == "undefined") &&
 	 typeof $rootScope.table != "undefined") {
@@ -451,11 +495,11 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 
 	$scope.done = function () {
 		var numberOfStatements = 0;
-		$.map($scope.ratings, function(value,index){
-			if (value instanceof Array) {
-				numberOfStatements += value.length;
+		for (var key in $scope.ratings) {
+			if ($scope.ratings.hasOwnProperty(key)) {
+				numberOfStatements += $scope.ratings[key].length;
 			}
-		});
+		}
 		return numberOfStatements == $rootScope.numberOfStatements;
 	};
 
@@ -498,8 +542,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 
 	$scope.next = function () {
 		//Copy ratings defined on this step to rootScope so we can send later
-		$rootScope.ratings = 
-			JSON.parse(JSON.stringify($scope.ratings));
+		$rootScope.ratings = Object.assign({}, $scope.ratings);
 		delete $rootScope.tablecompiled;
 		$state.go('step5');
 	}
@@ -517,26 +560,44 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 
 app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 
+//		$rootScope.ratingsNegExt = smallerLabel.rating_id;
+//		$rootScope.ratingsPosExt = biggerLabel.rating_id;
+	$scope.positiveExtreme = $rootScope.ratingsPosExtId; 
+	$scope.negativeExtreme = $rootScope.ratingsNegExtId; 
+	var negativeExtremesArr = $rootScope.ratings[$rootScope.ratingsNegExt]; 
+	var positiveExtremesArr = $rootScope.ratings[$rootScope.ratingsPosExt]; 
 	if (typeof $rootScope.explanations == "undefined") {
+		var posextremeExplanations = [];
+		var negextremeExplanations = [];
+		for (var key in negativeExtremesArr) {
+			console.log(negativeExtremesArr[key].statement)
+			negextremeExplanations.push({statement:negativeExtremesArr[key].statement,explanation:""});
+		}
+		for (var key in positiveExtremesArr) {
+			posextremeExplanations.push({statement:positiveExtremesArr[key].statement,explanation:""});
+		}
 		$rootScope.explanations = {
-			agree: [{ statement: $rootScope.ratings.rating3[0], explanation: null }, { statement: $rootScope.ratings.rating3[1], explanation: null }],
-			disagree: [{ statement: $rootScope.ratings.rating_3[0], explanation: null }, { statement: $rootScope.ratings.rating_3[1], explanation: null }],
+			agree: posextremeExplanations,
+			disagree: negextremeExplanations
 		};
-
 	}
-	
-	$scope.explanations = $rootScope.explanations;
 
 	$('#helpModal').modal(show = true);
 
 	$scope.done = function () {
-		if ($scope.explanations.agree[0].explanation === null || $scope.explanations.agree[1].explanation === null ||
-			$scope.explanations.disagree[0].explanation === null || $scope.explanations.disagree[1].explanation === null) {
-			return false;
-		} else {
-			return !$scope.explanations.agree[0].explanation.isEmpty() && !$scope.explanations.agree[1].explanation.isEmpty() &&
-				!$scope.explanations.disagree[0].explanation.isEmpty() && !$scope.explanations.disagree[1].explanation.isEmpty();
+		var explanationsDone = 1;
+		for (var key in $rootScope.explanations.agree){
+			//prevent overflow
+			explanationsDone = explanationsDone *
+			($rootScope.explanations.agree[key].explanation.length > 0  ? 1 : 0);
 		}
+		for (var key in $rootScope.explanations.disagree){
+			console.log('key '+key);
+			console.log('obj '+JSON.stringify($rootScope.explanations.agree[key]));
+			explanationsDone = explanationsDone*
+			($rootScope.explanations.disagree[key].explanation.length > 0 ? 1 : 0);
+		}
+		return explanationsDone > 0;
 	}
 
 	$scope.next = function () {
