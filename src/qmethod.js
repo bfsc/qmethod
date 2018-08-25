@@ -78,37 +78,6 @@ var xml2form = function (xml) {
 	return forms;
 }
 
-function clone(obj) {
-    // Handle the 3 simple types, and null or undefined
-    if (null == obj || "object" != typeof obj) return obj;
-
-    // Handle Date
-    if (obj instanceof Date) {
-        var copy = new Date();
-        copy.setTime(obj.getTime());
-        return copy;
-    }
-
-    // Handle Array
-    if (obj instanceof Array) {
-        var copy = [];
-        for (var i = 0, len = obj.length; i < len; i++) {
-            copy[i] = clone(obj[i]);
-        }
-        return copy;
-    }
-
-    // Handle Object
-    if (obj instanceof Object) {
-        var copy = {};
-        for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
-        }
-        return copy;
-    }
-
-    throw new Error("Unable to copy obj! Its type isn't supported.");
-}
 
 //Warning for future maintainers: for some reason, the column was growing bigger
 //than value set here, so (rows-1)+3 basically works around this issue
@@ -403,25 +372,6 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	$scope.back = function () {
 		$state.go('step2');
 	}
-	
-		/*Auxiliary function to help skip to step4 */
-	$scope.help = function () {
-		for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
-			var ii = i % 3;
-			var s = $rootScope.statements.shift();
-			if (ii == 0) {
-				s.category = "agree";
-				$scope.classifications.AGREE.push(s);
-			} else if (ii == 1) {
-				s.category = "neutral";
-				$scope.classifications.NEUTRAL.push(s);
-			} else if (ii == 2) {
-				s.category = "disagree";
-				$scope.classifications.DISAGREE.push(s);
-			}
-		}
-		//$state.go('step4');
-	}
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
 
@@ -578,31 +528,6 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 			return {"background-color":"#BAB9B9"};
 		} else {
 			return {"background-color":"#FF6666"};
-		}
-	}
-
-	$scope.help = function() {
-		var concatlists = [];
-		concatlists = concatlists.concat($scope.classifications.AGREE,
-			$scope.classifications.NEUTRAL ,
-			$scope.classifications.DISAGREE);
-		$scope.classifications.AGREE = [];
-		$scope.classifications.NEUTRAL = [];
-		$scope.classifications.DISAGREE = [];
-		for(var i = 0; i < 2; ++i){
-			$scope.ratings.rating3.push(concatlists.shift());
-			$scope.ratings.rating_3.push(concatlists.shift());
-		}
-		for(var i = 0; i < 6; ++i){
-			$scope.ratings.rating2.push(concatlists.shift());
-			$scope.ratings.rating_2.push(concatlists.shift());
-		}
-		for(var i = 0; i < 10; ++i){
-			$scope.ratings.rating1.push(concatlists.shift());
-			$scope.ratings.rating_1.push(concatlists.shift());
-		}
-		for(var i = 0; i < 14; ++i){
-			$scope.ratings.rating0.push(concatlists.shift());
 		}
 	}
 
