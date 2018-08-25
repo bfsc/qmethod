@@ -1,25 +1,21 @@
 <item id="form">
 
 	<input type="input" required="true" maxlength="4" restricted="0-9" key="age">
-		<label>AGE</label>
-		<note>Please enter your year of birth (YYYY, eg. 1980).</note>
+		<label>Please enter your year of birth (YYYY, eg. 1980).</label>
 	</input>
 
 	<input type="radio" required="true" key="gender">
-		<label>GENDER</label>
-		<note>Please select your gender.</note>
+		<label>Please select your gender.</label>
 		<option name="female">female</option>
 		<option name="male">male</option>
 	</input>
 
 	<input type="input" required="true" maxlength="40" key="geo">
-		<label>GEOGRAPHIC LOCATION</label>
-		<note>Please enter the country you currently work on.</note>
+		<label>Please enter the country you currently work on.</label>
 	</input>
 
 	<input type="select" required="true" maxlength="40" key="edu">
-		<label>EDUCATION</label>
-		<note>Please select your educational level.</note>
+		<label>Please select your educational level.</label>
 		<option name="PhD">phd</option>
 		<option name="PhD Candidate">phdc</option>
 		<option name="Master">msc</option>
@@ -29,8 +25,7 @@
 	</input>
 
 	<input type="select" required="true" maxlength="40" key="occupation">
-		<label>OCCUPATION</label>
-		<note>Please select your main occupation.</note>
+		<label>Please select your main occupation.</label>
 		<option name="Research in Academia-academia">research</option>
 		<option name="Research in Industry-industry">research</option>
 		<option name="Practice in Industry-industry">practice</option>
@@ -65,7 +60,6 @@
 	</input>
 
 	<input type="input" required="false" key="email">
-		<label>Email</label>
-		<note>Please enter your e-mail (it will not be disclosed), if you want to participate on the raflle of US$ 100 voucher at Amazon.com</note>
+		<label>Please enter your e-mail (it will not be disclosed), if you want to participate on the raflle of US$ 100 voucher at Amazon.com</label>
 	</input>
 </item>
