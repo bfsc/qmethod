@@ -33,11 +33,11 @@
 		<tr>
 			<td align="center" bgcolor="#06960D" colspan="2" style="font-size: 20px;padding:10px;"><b>AGREE +({{positiveExtreme}})</b></td>
 		</tr>
-		<tr><td style=" padding:5px;"></td></tr>
+		<tr><td style=" padding:5px;margin-left: 10px;"></td></tr>
 		<tr ng-repeat="value in explanations.agree">
 			<td width="400" style="vertical-align:top">
 				<div class="cardRatingJustitication">
-					{{value.statement}}
+					{{value.statement.statement}}
 				</div>
 			</td>
 			<td width="500">
@@ -49,11 +49,11 @@
 		<tr>
 			<td align="center" bgcolor="#E82A2A" colspan="2" style="font-size: 20px;padding:10px;"><b>DISAGREE -({{positiveExtreme}})</b></td>
 		</tr>
-		<tr><td style=" padding:5px;"></td></tr>
+		<tr><td style=" padding:5px;margin-left: 10px;"></td></tr>
 		<tr ng-repeat="value in explanations.disagree">
 			<td style="vertical-align:top">
 				<div class="cardRatingJustitication">
-					{{value.statement}}
+					{{value.statement.statement}}
 				</div>
 			</td>
 			<td>

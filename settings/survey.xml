@@ -1,0 +1,71 @@
+<item id="form">
+
+	<input type="input" required="true" maxlength="4" restricted="0-9" key="age">
+		<label>AGE</label>
+		<note>Please enter your year of birth (YYYY, eg. 1980).</note>
+	</input>
+
+	<input type="radio" required="true" key="gender">
+		<label>GENDER</label>
+		<note>Please select your gender.</note>
+		<option name="female">female</option>
+		<option name="male">male</option>
+	</input>
+
+	<input type="input" required="true" maxlength="40" key="geo">
+		<label>GEOGRAPHIC LOCATION</label>
+		<note>Please enter the country you currently work on.</note>
+	</input>
+
+	<input type="select" required="true" maxlength="40" key="edu">
+		<label>EDUCATION</label>
+		<note>Please select your educational level.</note>
+		<option name="PhD">phd</option>
+		<option name="PhD Candidate">phdc</option>
+		<option name="Master">msc</option>
+		<option name="Master Candidate">mscc</option>
+		<option name="Undergraduate">bsc</option>
+		<option name="Undergraduate Candidate">bscc</option>
+	</input>
+
+	<input type="select" required="true" maxlength="40" key="occupation">
+		<label>OCCUPATION</label>
+		<note>Please select your main occupation.</note>
+		<option name="Research in Academia-academia">research</option>
+		<option name="Research in Industry-industry">research</option>
+		<option name="Practice in Industry-industry">practice</option>
+	</input>
+
+	<input type="radio" required="true" key="heard_sr">
+		<label>Have you ever heard about systematic reviews before?</label>
+		<option name="yes">yes</option>
+		<option name="no">no</option>
+	</input>
+
+	<input type="radio" required="true" key="read_sr">
+		<label>Have you ever read a systematic review?</label>
+		<option name="yes">yes</option>
+		<option name="no">no</option>
+	</input>
+
+	<input type="radio" required="true" key="author_sr">
+		<label>Have you ever been the author of a systematic review?</label>
+		<option name="yes">yes</option>
+		<option name="no">no</option>
+	</input>
+
+	<input type="radio" required="true" key="heard_rr">
+		<label>Have you ever heard about RAPID REVIEWS before?</label>
+		<option name="yes">yes</option>
+		<option name="no">no</option>
+	</input>
+
+	<input type="textarea" required="false" key="comments">
+		<label>Comments</label>
+	</input>
+
+	<input type="input" required="false" key="email">
+		<label>Email</label>
+		<note>Please enter your e-mail (it will not be disclosed), if you want to participate on the raflle of US$ 100 voucher at Amazon.com</note>
+	</input>
+</item>

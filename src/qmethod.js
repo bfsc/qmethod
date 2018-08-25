@@ -13,8 +13,69 @@ var shuffleArray = function (array) {
 	return array;
 }
 
+var validateAge = function(age){
+	return /\d{1,3}/.test(value);
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+var isOK = function (t){
+		if (t === undefined) {return false;}
+		else {return t != "";}
+}
+
 var nId = function(id) {
 	return id < 0 ? '_'+Math.abs(id) : ''+id;
+}
+
+var xml2form = function (xml) {
+	var	parser = new DOMParser();
+	var	xmlDoc = parser.parseFromString(xml, "application/xml");
+	var	xmlDocStatementNodes = xmlDoc.getElementsByTagName("input");
+	var forms = [];
+
+	for (i = 0; i < xmlDocStatementNodes.length; i++) {
+		var el = xmlDocStatementNodes[i];
+		var type = el.getAttribute('type'); //ok
+		var req = el.getAttribute('required'); //ok
+		if (isOK(req)) {
+			req = req == "true" ? true : false;
+		}
+		var key = el.getAttribute('key');// ok
+		var label = el.getElementsByTagName('label')[0].childNodes[0].nodeValue;
+		
+		var form = {};
+		form.key = key;
+		form.type = type;
+		form.templateOptions = {};
+		if (isOK(label)){
+			form.templateOptions.label = label;
+		}
+		if (isOK(req)){
+			form.templateOptions.required = req;
+		}
+
+		if (type == 'select' || type == 'radio') {
+			var options = el.getElementsByTagName('option');
+			form.templateOptions.options = [];
+			for (let opt of options) {
+				if (isOK(opt)) {
+					var opt_name = opt.getAttribute('name');
+					var opt_value = opt.childNodes[0].nodeValue;
+					if (isOK(opt_name)&&isOK(opt_value)) {
+						form.templateOptions.options.push({name:opt_name,value:opt_value});
+					} else if (isOK(opt_value)&&!isOK(opt_name)) {
+						form.templateOptions.options.push({name:opt_value,value:opt_value});
+					}
+				}
+			}
+		} 
+		forms.push(form);
+	}
+	return forms;
 }
 
 function clone(obj) {
@@ -188,7 +249,11 @@ app.config(function ($stateProvider, $locationProvider) {
 		url: '/step1',
 		templateUrl: 'templates/step1.html',
 		controller: 'step1Ctrl',
-		
+		resolve: {
+			'promisedata': ['$http', function($http){
+				return $http.get('settings/survey.xml');
+			}]
+		}
 	});
 
 	$stateProvider.state({
@@ -252,8 +317,8 @@ app.config(function ($stateProvider, $locationProvider) {
     storageBucket: "qmethod-16120.appspot.com",
     messagingSenderId: "50670126791"
   };
-//   firebase.initializeApp(config);
-//   var rootRef = firebase.database().ref();
+  firebase.initializeApp(config);
+  var rootRef = firebase.database().ref();
 
   
 // ========== CONTROLLERS
@@ -261,11 +326,12 @@ app.controller("appCtrl", function ($scope, $rootScope, $state) {
 	$state.go('step1');
 });
 
-app.controller("step1Ctrl", function ($scope, $rootScope, $state) {
+app.controller("step1Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
+	$rootScope.formFields = xml2form(promisedata.data);
 	$scope.next = function () {
 		$state.go('step2');
 	}
-});
+}]);
 
 app.controller("step2Ctrl", function ($scope, $rootScope, $state) {
 	$scope.next = function () {
@@ -412,7 +478,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		biggerLabel.rating_id = '';
 
 	if (typeof $rootScope.table == "undefined") {
-		console.log("table is undefined. defining...");
+		// console.log("table is undefined. defining...");
 		var tr_el = document.createElement('tr');
 
 		parser = new DOMParser();
@@ -456,7 +522,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		$rootScope.tablecompiled = content[0];
 	}
 
-	console.log(JSON.stringify($scope.ratings));
+	// console.log(JSON.stringify($scope.ratings));
 	if ($rootScope.table != "undefined"){
 		var table = document.getElementsByTagName('table')[0];
 
@@ -472,7 +538,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		if (ret) {
 			$scope.classifications.AGREE.push(item);
 		} else {
-			console.log("refused drop. expeted agree, got: "+item.category);
+			// console.log("refused drop. expeted agree, got: "+item.category);
 		}
 		return ret;
 	};
@@ -570,11 +636,11 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 		var posextremeExplanations = [];
 		var negextremeExplanations = [];
 		for (var key in negativeExtremesArr) {
-			console.log(negativeExtremesArr[key].statement)
-			negextremeExplanations.push({statement:negativeExtremesArr[key].statement,explanation:""});
+			// console.log(negativeExtremesArr[key].statement)
+			negextremeExplanations.push({statement:negativeExtremesArr[key],explanation:""});
 		}
 		for (var key in positiveExtremesArr) {
-			posextremeExplanations.push({statement:positiveExtremesArr[key].statement,explanation:""});
+			posextremeExplanations.push({statement:positiveExtremesArr[key],explanation:""});
 		}
 		$rootScope.explanations = {
 			agree: posextremeExplanations,
@@ -592,8 +658,8 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 			($rootScope.explanations.agree[key].explanation.length > 0  ? 1 : 0);
 		}
 		for (var key in $rootScope.explanations.disagree){
-			console.log('key '+key);
-			console.log('obj '+JSON.stringify($rootScope.explanations.agree[key]));
+			// console.log('key '+key);
+			// console.log('obj '+JSON.stringify($rootScope.explanations.agree[key]));
 			explanationsDone = explanationsDone*
 			($rootScope.explanations.disagree[key].explanation.length > 0 ? 1 : 0);
 		}
@@ -613,191 +679,62 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 	};
 });
 
-app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
-	$scope.questionnaire = {
-		age: null,
-		gender: null,
-		country: null,
-		education: null,
-		occupation: null,
-		heard_sr: null,
-		read_sr: null,
-		author_sr: null,
-		heard_rr: null,
-		comments: null,
-		email: null,
-	};
+app.controller("step6Ctrl",['$scope', '$rootScope', '$state', function ($scope, $rootScope, $state) {
+//	console.log($rootScope.formFields);
+
 	var vm = this;
-	vm.user = {};
-	vm.userFields = [
-	{
-		key: 'email',
-		type: 'input',
-		templateOptions: {
-			type: 'email',
-			label: 'Email address',
-			placeholder: 'Enter email'
-		}
-	},
-	{
-		key: 'password',
-		type: 'input',
-		templateOptions: {
-			type: 'password',
-			label: 'Password',
-			placeholder: 'Password'
-		}
-	},
-	{
-		key: 'file',
-		type: 'file',
-		templateOptions: {
-			label: 'File input',
-			description: 'Example block-level help text here',
-			url: 'https://example.com/upload'
-		}
-	},
-	{
-		key: 'checked',
-		type: 'checkbox',
-		templateOptions: {
-			label: 'Check me out'
-		}
+	vm.model = {};
+	vm.onSubmit = $scope.onSubmit;
+	vm.userForm = $scope.userForm;
+	vm.userFields = $rootScope.formFields;
+	
+	$scope.submit = function() {
+		$scope.send();
 	}
-	];
 
 	$scope.back = function () {
 		$state.go('step5');
 	}
 
-	$scope.done = function () {
-		if ($scope.questionnaire.age === null || $scope.questionnaire.gender === null || $scope.questionnaire.country === null ||
-			$scope.questionnaire.education === null || $scope.questionnaire.occupation === null || $scope.questionnaire.heard_sr === null ||
-			$scope.questionnaire.read_sr === null || $scope.questionnaire.author_sr === null || $scope.questionnaire.heard_rr === null) {
-			return false;
-		} else {
-			return !$scope.questionnaire.age.isEmpty() && !$scope.questionnaire.country.isEmpty();
-		}
-	}
-
-	String.prototype.isEmpty = function () {
-		return (this.length === 0 || !this.trim());
-	};
-
 	$scope.send = function () {
-		$rootScope.questionnaire = $scope.questionnaire;
-
 		var response = {
-			classifications: {},
+			classifications: {
+				'AGREE':[],
+				'DISAGREE':[],
+				'NEUTRAL':[]
+			},
 			ratings: {},
-			explanations: {},
-			questionnaire: {},
+			explanations: {agree:[],disagree:[]},
+			questionnaire: {}
 		}
-
-		if (response.classifications === null || response.classifications === undefined){
-			response.classifications = "no_response";
-		} else {
-			 response.classifications = parseClassifications($rootScope.classifications_step3);
-		}
-
-		if ($rootScope.ratings === null || $rootScope.ratings === undefined) {
-			response.ratings = "no_response";
-		} else {
-
-			response.ratings.rating_3 = parseExplanations($rootScope.ratings.rating_3);
-			response.ratings.rating_2 = parseExplanations($rootScope.ratings.rating_2);
-			response.ratings.rating_1 = parseExplanations($rootScope.ratings.rating_1);
-			response.ratings.rating0 = parseExplanations($rootScope.ratings.rating0);
-			response.ratings.rating1 = parseExplanations($rootScope.ratings.rating1);
-			response.ratings.rating2 = parseExplanations($rootScope.ratings.rating2);
-			response.ratings.rating3 = parseExplanations($rootScope.ratings.rating3);
-		}
-
-		if ($rootScope.explanations === null || $rootScope.explanations === undefined) {
-			response.explanations = "no_response";
-		} else {
-			response.explanations.agree = [];
-			for (var i = 0; i < $rootScope.explanations.agree.length; i++) {
-				var explanation = {};
-				explanation.statementId = $rootScope.explanations.agree[i].statement.id;
-				explanation.text = $rootScope.explanations.agree[i].explanation;
-				response.explanations.agree.push(explanation);
+		response.questionnaire = angular.copy(vm.model);
+		
+		// Send classifications statement only 
+		angular.forEach($rootScope.classifications_step3, function(value, key) {
+			for(let stat of $rootScope.classifications_step3[key]) {
+				response.classifications[key].push(stat.id);
 			}
+		});
 
-			response.explanations.disagree = [];
-			for (var i = 0; i < $rootScope.explanations.disagree.length; i++) {
-				var explanation = {};
-				explanation.statementId = $rootScope.explanations.disagree[i].statement.id;
-				explanation.text = $rootScope.explanations.disagree[i].explanation;
-				response.explanations.disagree.push(explanation);
+		//Send ratings but with statement id only
+		angular.forEach($rootScope.ratings, function(value, key) {
+			for(let stat of $rootScope.ratings[key]) {
+				if(response.ratings[key] === undefined) {
+					response.ratings[key] = [];
+				}
+				response.ratings[key].push(stat.id);
 			}
+		});
+
+		//Send explanations text paired with staexplanationstement id only
+		for (let exp of $rootScope.explanations.agree){
+			response.explanations.agree.push({statementId:exp.statement.id,text:exp.explanation});
+		}
+		for (let exp of $rootScope.explanations.disagree){
+			response.explanations.disagree.push({statementId:exp.statement.id,text:exp.explanation});
 		}
 
-		if ($rootScope.questionnaire.age === null || $rootScope.questionnaire.age === undefined) {
-			response.questionnaire.age = "no_response";
-		} else {
-			response.questionnaire.age = $rootScope.questionnaire.age;
-		}
-
-		if ($rootScope.questionnaire.gender === null || $rootScope.questionnaire.gender === undefined) {
-			response.questionnaire.gender = "no_response";
-		} else {
-			response.questionnaire.gender = $rootScope.questionnaire.gender;
-		}
-
-		if ($rootScope.questionnaire.country === null || $rootScope.questionnaire.country === undefined) {
-			response.questionnaire.country = "no_response";
-		} else {
-			response.questionnaire.country = $rootScope.questionnaire.country;
-		}
-
-		if ($rootScope.questionnaire.education === null || $rootScope.questionnaire.education === undefined) {
-			response.questionnaire.education = "no_response";
-		} else {
-			response.questionnaire.education = $rootScope.questionnaire.education;
-		}
-
-		if ($rootScope.questionnaire.occupation === null || $rootScope.questionnaire.occupation === undefined) {
-			response.questionnaire.occupation = "no_response";
-		} else {
-			response.questionnaire.occupation = $rootScope.questionnaire.occupation;
-		}
-
-		if ($rootScope.questionnaire.heard_sr === null || $rootScope.questionnaire.heard_sr === undefined) {
-			response.questionnaire.heard_sr = "no_response";
-		} else {
-			response.questionnaire.heard_sr = $rootScope.questionnaire.heard_sr;
-		}
-
-		if ($rootScope.questionnaire.read_sr === null || $rootScope.questionnaire.read_sr === undefined) {
-			response.questionnaire.read_sr = "no_response";
-		} else {
-			response.questionnaire.read_sr = $rootScope.questionnaire.read_sr;
-		}
-
-		if ($rootScope.questionnaire.author_sr === null || $rootScope.questionnaire.author_sr === undefined) {
-			response.questionnaire.author_sr = "no_response";
-		} else {
-			response.questionnaire.author_sr = $rootScope.questionnaire.author_sr;
-		}
-
-		if ($rootScope.questionnaire.heard_rr === null || $rootScope.questionnaire.heard_rr === undefined) {
-			response.questionnaire.heard_rr = "no_response";
-		} else {
-			response.questionnaire.heard_rr = $rootScope.questionnaire.heard_rr;
-		}
-
-		if ($rootScope.questionnaire.comments === null || $rootScope.questionnaire.comments === undefined) {
-			response.questionnaire.comments = "no_response";
-		} else {
-			response.questionnaire.comments = $rootScope.questionnaire.comments;
-		}
-
-		if ($rootScope.questionnaire.email === null || $rootScope.questionnaire.email === undefined) {
-			response.questionnaire.email = "no_response";
-		} else {
-			response.questionnaire.email = $rootScope.questionnaire.email;
-		}
+//		console.log(JSON.stringify(response));
 
 		rootRef.push(response, function (error) {
 			if (error) {
@@ -807,37 +744,9 @@ app.controller("step6Ctrl", function ($scope, $rootScope, $state) {
 				$state.go('step7');
 			}
 		});
-
-		function parseExplanations(arrayorig) {
-			var arraydest = [];
-
-			for (var i = 0; i < arrayorig.length; i++) {
-				arraydest.push(arrayorig[i].id);
-			}
-
-			return arraydest;
-		}
-		
-		function parseClassifications(classificationsOrig) {
-			var parsedClassifications = {'AGREE': [],'NEUTRAL': [],'DISAGREE': [],};
-			
-			for(var i = 0; i < classificationsOrig.AGREE.length; i++) {
-				parsedClassifications.AGREE.push(classificationsOrig.AGREE[i].id);
-			}
-			
-			for(var i = 0; i < classificationsOrig.NEUTRAL.length; i++) {
-				parsedClassifications.NEUTRAL.push(classificationsOrig.NEUTRAL[i].id);
-			}
-			
-			for(var i = 0; i < classificationsOrig.DISAGREE.length; i++) {
-				parsedClassifications.DISAGREE.push(classificationsOrig.DISAGREE[i].id);
-			}
-			
-			return parsedClassifications;
-		}
 	}
 
-});
+}]);
 
 app.controller("step7Ctrl", function ($scope, $rootScope, $state) {
 

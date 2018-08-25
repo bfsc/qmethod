@@ -1,25 +1,12 @@
-<div ng-controller="step6Ctrl as vm">
-	<formly-form model="vm.user" fields="vm.userFields">
-	</formly-form>	
+<div ng-controller="step6Ctrl as vm" style="margin-left:100px; margin-right:100px; margin-bottom:20px; margin-top:50px;">
+	<formly-form model="vm.model" fields="vm.userFields" form="vm.userForm">
+			<button type="submit" class="btn btn-default btn-lg btn-block" style="width:100px" 
+			ng-click="submit()" ng-disabled="vm.userForm.$invalid" class="btn btn-primary submit-button">Submit</button>
 
-	<form>
-		<table align="center">
-			<tr>
-				<td>
-					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-						<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
-					</div>
-				</td>
-				<td>
-					<div align="center" ng-show="done()">
-						<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-							<a href="" ng-click="send()" class="btn btn-default btn-lg btn-block" style="width:100px">Continue</a>
-						</div>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</form>
+			<button type="button" class="btn btn-default btn-lg btn-block" style="width:100px" 
+			ng-click="back()" class="btn btn-primary submit-button">Back</button>
+	</formly-form>	
 	<br/>
 	<br/>
 </div>
+
