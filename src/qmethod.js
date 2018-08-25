@@ -279,15 +279,11 @@ app.config(function ($stateProvider, $locationProvider) {
 });
 
   var config = {
-    apiKey: "AIzaSyCZKrox4RKsS9jnpxYXoVj982UdQ-4VUHk",
-    authDomain: "qmethod-16120.firebaseapp.com",
-    databaseURL: "https://qmethod-16120.firebaseio.com",
-    projectId: "qmethod-16120",
-    storageBucket: "qmethod-16120.appspot.com",
-    messagingSenderId: "50670126791"
   };
-  firebase.initializeApp(config);
-  var rootRef = firebase.database().ref();
+  if (!angular.equals({},config)) {
+  	  firebase.initializeApp(config);
+	  var rootRef = firebase.database().ref();
+  }
 
   
 // ========== CONTROLLERS
@@ -428,7 +424,6 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		biggerLabel.rating_id = '';
 
 	if (typeof $rootScope.table == "undefined") {
-		// console.log("table is undefined. defining...");
 		var tr_el = document.createElement('tr');
 
 		parser = new DOMParser();
@@ -472,7 +467,6 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		$rootScope.tablecompiled = content[0];
 	}
 
-	// console.log(JSON.stringify($scope.ratings));
 	if ($rootScope.table != "undefined"){
 		var table = document.getElementsByTagName('table')[0];
 
@@ -488,7 +482,6 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 		if (ret) {
 			$scope.classifications.AGREE.push(item);
 		} else {
-			// console.log("refused drop. expeted agree, got: "+item.category);
 		}
 		return ret;
 	};
@@ -561,7 +554,6 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 		var posextremeExplanations = [];
 		var negextremeExplanations = [];
 		for (var key in negativeExtremesArr) {
-			// console.log(negativeExtremesArr[key].statement)
 			negextremeExplanations.push({statement:negativeExtremesArr[key],explanation:""});
 		}
 		for (var key in positiveExtremesArr) {
@@ -583,8 +575,6 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 			($rootScope.explanations.agree[key].explanation.length > 0  ? 1 : 0);
 		}
 		for (var key in $rootScope.explanations.disagree){
-			// console.log('key '+key);
-			// console.log('obj '+JSON.stringify($rootScope.explanations.agree[key]));
 			explanationsDone = explanationsDone*
 			($rootScope.explanations.disagree[key].explanation.length > 0 ? 1 : 0);
 		}
@@ -605,7 +595,6 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 });
 
 app.controller("step6Ctrl",['$scope', '$rootScope', '$state', function ($scope, $rootScope, $state) {
-//	console.log($rootScope.formFields);
 
 	var vm = this;
 	vm.model = {};
@@ -659,16 +648,18 @@ app.controller("step6Ctrl",['$scope', '$rootScope', '$state', function ($scope, 
 			response.explanations.disagree.push({statementId:exp.statement.id,text:exp.explanation});
 		}
 
-//		console.log(JSON.stringify(response));
-
-		rootRef.push(response, function (error) {
-			if (error) {
-				$scope.send();
-				return;
-			} else {
-				$state.go('step7');
-			}
-		});
+		if (typeof rootRef != "undefined") {
+			rootRef.push(response, function (error) {
+				if (error) {
+					$scope.send();
+					return;
+				} else {
+					$state.go('step7');
+				}
+			});
+		} else {
+			console.log (JSON.stringify(response));
+		}
 	}
 
 }]);
