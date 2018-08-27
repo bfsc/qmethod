@@ -78,6 +78,18 @@ var xml2form = function (xml) {
 	return forms;
 }
 
+var xml2html = function (xml) {
+	var	parser = new DOMParser();
+	var	xmlDoc = parser.parseFromString(xml, "application/xml");
+	var	xmlDocStatementNodes = xmlDoc.getElementsByTagName("div");
+	var pages = [];
+	for (i = 0; i < xmlDocStatementNodes.length; i++) {
+		var el = xmlDocStatementNodes[i];
+		pages.push (el); 
+	}
+	return pages;
+}
+
 
 //Warning for future maintainers: for some reason, the column was growing bigger
 //than value set here, so (rows-1)+3 basically works around this issue
@@ -221,6 +233,9 @@ app.config(function ($stateProvider, $locationProvider) {
 		resolve: {
 			'promisedata': ['$http', function($http){
 				return $http.get('settings/survey.xml');
+			}],
+			'startingPages': ['$http', function($http){
+				return $http.get('settings/startingPages.xml');
 			}]
 		}
 	});
@@ -291,10 +306,35 @@ app.controller("appCtrl", function ($scope, $rootScope, $state) {
 	$state.go('step1');
 });
 
-app.controller("step1Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
+app.controller("step1Ctrl",['promisedata','startingPages',
+		'$scope','$rootScope','$state','$sce',function
+	   	(promisedata,startingPages,$scope,$rootScope,$state,$sce) {
 	$rootScope.formFields = xml2form(promisedata.data);
+	$scope.currentPageIndex = 0;
+	$scope.pageData = xml2html(startingPages.data);
+	$scope.currentPage = $sce.trustAsHtml($scope.pageData[0].outerHTML);
+
+	$scope.maxPages = $scope.pageData.length;
+	console.log($scope.pageData);
+	
+	$scope.changePage = function() {
+		$scope.currentPage = $sce.trustAsHtml($scope.pageData[$scope.currentPageIndex].outerHTML);
+	}
+
+
 	$scope.next = function () {
-		$state.go('step2');
+		if ($scope.currentPageIndex+1 >= $scope.maxPages) {
+			$state.go('step3');
+		} else {
+			$scope.currentPageIndex += 1;	
+			$scope.changePage();
+		}
+	}
+	$scope.back = function () {
+		if ($scope.currentPageIndex-1 >= 0) {
+			$scope.currentPageIndex -= 1;
+			$scope.changePage();
+		}
 	}
 }]);
 
@@ -366,7 +406,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 	}
 
 	$scope.back = function () {
-		$state.go('step2');
+		$state.go('step1');
 	}
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {

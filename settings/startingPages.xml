@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<div>
+		<center><h2><b>ABOUT THIS RESEARCH</b></h2></center>
+
+		<p style="margin-left:100px; margin-right:100px; margin-bottom:20px; margin-top:50px;">
+			This research is being conducted by Bruno Cartaxo (PhD), Gustavo Pinto (PhD), Márcio Ribeiro (PhD), Maria Teresa Baldassarre (PhD), and Sergio Soares (PhD).<br/><br/>
+
+			We are researchers at UFPE (Federal University of Pernambuco, Brazil), UFPA (Federal University of Para, Brazil), UFAL (Federal University of Alagoas, Brazil)and UNIBARI (Univeristy of Bari, Italy) studying methods to transfer knowledge to software engineering practice.<br/><br/>
+
+			One way to do this, is to make systematic reviews more connected to practitioners' needs. To achieve this goal, we are planning to borrow the idea of Rapid Reviews from Medicine, but before, we would like to know your opinion about the use of Rapid Reviews in software engineering.<br/><br/>
+
+			The estimated time to complete the questionnaire is 45 minutes.<br/><br/>
+
+			If you have any doubt, do not hesitate to contact us in bfsc@cin.ufpe.br and/or visit our website on http://cin.ufpe.br/eseg<br/><br/>
+
+			<b>ON THE BENEFITS TO DE RESPONDENTS</b><br/>
+			1. By filling this research instrument, you can participate in a Raffle of US$ 100 voucher at Amazon.com<br/><br/>
+
+			2. The raffle will occur only if more than one third of the invited researchers fill this research instrument.<br/><br/>
+
+			3. For each respondent of this research instrument, R$ 1 will be donated (limited to a maximum of R$ 200) to the Center for Support Children with Cancer (Núcleo de Apoio a Criança com Câncer - NACC), which is a Brazilian NGO with more than 30 years of existence. More information about NACC, you can find in its official website http://www.nacc.org.br (portuguse only).<br/><br/>
+
+			<b>STATEMENT OF INFORMED CONSENT</b><br/>
+			By filling this research instrument, you agree to permit the researcher to obtain, use and disclose the anonymous information provided as described below.<br/><br/>
+
+			<b>CONDITIONS AND STIPULATIONS</b><br/>
+			1. I understand that all information is confidential. I will not be personally identified. I agree to fill this research instrument for research purposes and that the data derived from this anonymous research instrument may be published in journals, conferences and blog posts.<br/><br/>
+
+			2. I understand that my participation in this research instrument is totally voluntary, and that declining to participate will involve no penalty or loss of benefits. If I choose, I may withdraw my participation at any time. I also understand that if I choose to participate, that I may decline to answer any question that I am not comfortable answering.<br/><br/>
+
+			3. I understand that I can contact the researcher if I have any questions about this research. I am aware that my consent will not directly benefit me. I am also aware that the author will maintain the data collected in perpetuity and may utilize data for future academic work.<br/><br/>
+
+			4. By clicking the button below I freely provide consent and acknowledge my rights as a voluntary research participant as outlined above and provide consent to the researcher to use my information in conducting research on the areas noted above.<br/><br/>
+		</p>
+	</div>
+	<div>
+		<center><h2><b>ABOUT RAPID REVIEWS</b></h2></center><br/>
+		<b><center>PLEASE READ THIS BOX ENTIRELY, IT IS CRUCIAL TO THE NEXT STEPS</center></b><br/><br/>
+
+		<p style="margin-left:100px; margin-right:100px; margin-bottom:20px; margin-top:0px;">
+
+			This study is about the perceptions and attitudes of software engineering researchers on applying Rapid Reviews in software engineering research.<br/><br/>
+
+			<b>WHAT IS A RAPID REVIEW?</b><br/>
+			Rapid Reviews are lightweight Systematic Reviews aiming to deliver evidence to practitioners in a more timely manner, and considering others constraints inherent to software engineering practice. Some steps of traditional Systematic Reviews are deliberately omitted or simplified to achieve this goal.<br/><br/>
+
+			The most notable characteristics of a Rapid Review are:<br/>
+			1. It reduces the costs of heavyweight methods;<br/>
+			2. It delivers evidence in a timely manner to practitioners;<br/>
+			3. It is guided by a practical problem, identified in practice;<br/>
+			4. It is performed in close collaboration with practitioners;<br/>
+			5. It reports results through mediums more appealing to practitioners than the traditional research paper format.<br/><br/>
+
+			To achieve these goals, Rapid Reviews may limit literature search, use just one person to screen studies, do not conduct quality appraisal, or present results with no formal synthesis.<br/><br/>
+
+			As a shortcoming, it lowers the validity of the results.<br/><br/>
+
+			It is important to note that, by any means, Rapid Reviews were not conceived to replace traditional systematic reviews. Instead, both can and should coexist. While traditional systematic reviews are important to provide in-depth insights, Rapid Reviews are important to easily and quickly transfer established knowledge to practice.<br/><br/>
+
+			<b>WHERE THE IDEA OF RAPID REVIEWS COME FROM?</b><br/>
+			Although Rapid Reviews are not well-known in software engineering, they are facing a growing interest in health-related fields like medicine.<br/><br/>
+
+			A scoping study identified 100 Rapid Reviews published between 1997 and 2013, and observed that 56% of them were published on the last five years of investigation [1]. Additionally, major medicine venues, such as the prestigious Systematic Reviews journal, are officially recognizing Rapid Reviews as one of the Evidence Based Practice methods [2]. Moreover, Cochrane - a global renowned group of researchers and practitioners specialized in evidence diffusion in health-care - announced in 2016 a group to play a leading role guiding the production of Rapid Reviews [3]. Even the World Health Organization (WHO) has recently published a guide presenting the importance of Rapid Reviews [4].<br/><br/> 
+
+			<b>REFERENCES</b><br/>
+			[1] Andrea C. Tricco et al. A scoping review of rapid review methods. BMC Medicine, 2015.<br/>
+			[2] David Moher et al. All in the Family: systematic reviews, rapid reviews, scoping reviews, realist reviews, and more. Systematic Reviews, 2015.<br/>
+			[3] Chantelle Garritty et al. Cochrane Rapid Reviews Methods Group to play a leading role in guiding the production of informed high-quality, timely research evidence syntheses. Systematic reviews, 2016.<br/>
+			[4] Andrea C. Tricco et al. Rapid reviews to strengthen health policy and systems: a practical guide. World Health Organization, 2017. http://apps.who.int/iris/bitstream/10665/258698/1/9789241512763-eng.pdf<br/>
+		</p>
+	</div>
+
+</pages>
+
