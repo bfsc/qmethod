@@ -81,8 +81,14 @@ var xml2form = function (xml) {
 var xml2html = function (xml) {
 	var	parser = new DOMParser();
 	var	xmlDoc = parser.parseFromString(xml, "application/xml");
+
+	if (xmlDoc.documentElement.nodeName == "parsererror") {
+		return {};
+	}
+
 	var	xmlDocStatementNodes = xmlDoc.getElementsByTagName("div");
 	var pages = [];
+
 	for (i = 0; i < xmlDocStatementNodes.length; i++) {
 		var el = xmlDocStatementNodes[i];
 		pages.push (el); 
@@ -305,11 +311,15 @@ app.controller("step1Ctrl",['promisedata','startingPages',
 	$rootScope.formFields = xml2form(promisedata.data);
 	$scope.currentPageIndex = 0;
 	$scope.pageData = xml2html(startingPages.data);
-	$scope.currentPage = $sce.trustAsHtml($scope.pageData[0].outerHTML);
 
-	$scope.maxPages = $scope.pageData.length;
-	console.log($scope.pageData);
-	
+  	if (!angular.equals({},$scope.pageData)) {
+		$scope.currentPage = $sce.trustAsHtml($scope.pageData[0].outerHTML);
+		$scope.maxPages = $scope.pageData.length;
+	} else {
+		$scope.currentPage = $sce.trustAsHtml("<h3>Error parsing settings/startingPages.xml; Please, check for syntax errors.</h3>");
+		$scope.maxPages = $scope.pageData.length;
+	}
+
 	$scope.changePage = function() {
 		$scope.currentPage = $sce.trustAsHtml($scope.pageData[$scope.currentPageIndex].outerHTML);
 	}
