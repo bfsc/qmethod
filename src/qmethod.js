@@ -241,13 +241,6 @@ app.config(function ($stateProvider, $locationProvider) {
 	});
 
 	$stateProvider.state({
-		name: 'step2',
-		url: '/step2',
-		templateUrl: 'templates/step2.html',
-		controller: 'step2Ctrl'
-	});
-
-	$stateProvider.state({
 		name: 'step3',
 		url: '/step3',
 		templateUrl: 'templates/step3.html',
@@ -337,16 +330,6 @@ app.controller("step1Ctrl",['promisedata','startingPages',
 		}
 	}
 }]);
-
-app.controller("step2Ctrl", function ($scope, $rootScope, $state) {
-	$scope.next = function () {
-		$state.go('step3');
-	}
-
-	$scope.back = function () {
-		$state.go('step1');
-	}
-});
 
 app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
 
