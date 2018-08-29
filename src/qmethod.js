@@ -1,3 +1,4 @@
+var debugging = false;
 var shuffleArray = function (array) {
 	var m = array.length, t, i;
 
@@ -58,7 +59,7 @@ var xml2form = function (xml) {
 			form.templateOptions.required = req;
 		}
 
-		if (type == 'select' || type == 'radio' || type == 'multicheckbox') {
+		if (type == 'select' || type == 'radio' || type == 'multiCheckbox') {
 			var options = el.getElementsByTagName('option');
 			form.templateOptions.options = [];
 			for (let opt of options) {
@@ -303,10 +304,10 @@ var config = {
 	storageBucket: "qmethod-87099.appspot.com",
 	messagingSenderId: "639626576200"
 };
-  if (!angular.equals({},config)) {
+if (!angular.equals({},config)) {
   	  firebase.initializeApp(config);
 	  var rootRef = firebase.database().ref();
-  }
+}
 
   
 // ========== CONTROLLERS
@@ -320,7 +321,7 @@ app.controller("step1Ctrl",['promisedata','startingPages',
 	$rootScope.formFields = xml2form(promisedata.data);
 	$scope.currentPageIndex = 0;
 	$scope.pageData = xml2html(startingPages.data);
-
+	$scope.debugging = angular.copy(debugging);
   	if (!angular.equals({},$scope.pageData)) {
 		$scope.currentPage = $sce.trustAsHtml($scope.pageData[0].outerHTML);
 		$scope.maxPages = $scope.pageData.length;
@@ -335,7 +336,7 @@ app.controller("step1Ctrl",['promisedata','startingPages',
 
 
 	$scope.next = function () {
-		if ($scope.currentPageIndex+1 >= $scope.maxPages) {
+		if ($scope.currentPageIndex+1 >= $scope.maxPages || debugging) {
 			$state.go('step3');
 		} else {
 			$scope.currentPageIndex += 1;	
@@ -353,6 +354,7 @@ app.controller("step1Ctrl",['promisedata','startingPages',
 app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', function (promisedata, $scope, $rootScope, $state) {
 
 	statements = [];
+	$scope.debugging = angular.copy(debugging);
 	if (typeof $rootScope.statements == "undefined") {
 		parser = new DOMParser();
 		xmlDoc = parser.parseFromString(promisedata.data,"application/xml");
@@ -400,7 +402,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 
 	$scope.done = function () {
 		return $rootScope.statements.length == 0;
-	};
+	}
 
 	$scope.next = function () {
 		$rootScope.classifications_step3 = JSON.parse(JSON.stringify($rootScope.classifications));
@@ -409,6 +411,26 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 
 	$scope.back = function () {
 		$state.go('step1');
+	}
+
+	if (debugging) {
+		$scope.help = function () {
+			for (var i = 0; i < 50 && ($rootScope.classifications.length != 0); ++i) {
+				var ii = i % 3;
+				var s = $rootScope.statements.shift();
+				if (ii == 0) {
+					s.category = "agree";
+					$scope.classifications.AGREE.push(s);
+				} else if (ii == 1) {
+					s.category = "neutral";
+					$scope.classifications.NEUTRAL.push(s);
+				} else if (ii == 2) {
+					s.category = "disagree";
+					$scope.classifications.DISAGREE.push(s);
+				}
+			}
+		}
+		$scope.help();
 	}
 
 	$scope.dropAgreeCallback = function (index, item, external, type) {
@@ -420,7 +442,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		$scope.classifications.AGREE.push(item);
 
 		return true;
-	};
+	}
 
 	$scope.dropNeutralCallback = function (index, item, external, type) {
 		if ($scope.cards.first == item.id) {
@@ -431,7 +453,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		$scope.classifications.NEUTRAL.push(item);
 
 		return true;
-	};
+	}
 
 	$scope.dropDisagreeCallback = function (index, item, external, type) {
 		if ($scope.cards.first == item.id) {
@@ -442,7 +464,7 @@ app.controller("step3Ctrl",['promisedata','$scope', '$rootScope', '$state', func
 		$scope.classifications.DISAGREE.push(item);
 
 		return true;
-	};
+	}
 }]);
 
 app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$compile', function (promisedata, $scope, $rootScope, $state, $compile) {
@@ -450,6 +472,7 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 	// //If user has distributed over normal distribution re-use it
 	$scope.ratings = [];
 	$scope.classifications = JSON.parse(JSON.stringify($rootScope.classifications));
+	$scope.debugging = angular.copy(debugging);
 
 	if (typeof $rootScope.ratings != "undefined"){
 		$scope.ratings = JSON.parse(JSON.stringify($rootScope.ratings));
@@ -582,6 +605,33 @@ app.controller("step4Ctrl",['promisedata','$scope', '$rootScope', '$state','$com
 	$scope.dropCallback = function (index, item, external, type) {
 		return item;
 	}
+	if (debugging) {
+		$scope.help = function() {
+			var concatlists = [];
+			concatlists = concatlists.concat($scope.classifications.AGREE,
+					$scope.classifications.NEUTRAL ,
+					$scope.classifications.DISAGREE);
+			$scope.classifications.AGREE = [];
+			$scope.classifications.NEUTRAL = [];
+			$scope.classifications.DISAGREE = [];
+			for(var i = 0; i < 2; ++i){
+				$scope.ratings.rating3.push(concatlists.shift());
+				$scope.ratings.rating_3.push(concatlists.shift());
+			}
+			for(var i = 0; i < 6; ++i){
+				$scope.ratings.rating2.push(concatlists.shift());
+				$scope.ratings.rating_2.push(concatlists.shift());
+			}
+			for(var i = 0; i < 10; ++i){
+				$scope.ratings.rating1.push(concatlists.shift());
+				$scope.ratings.rating_1.push(concatlists.shift());
+			}
+			for(var i = 0; i < 14; ++i){
+				$scope.ratings.rating0.push(concatlists.shift());
+			}
+		}
+		$scope.help();
+	}
 }]);
 
 app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
@@ -590,6 +640,7 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 //		$rootScope.ratingsPosExt = biggerLabel.rating_id;
 	$scope.positiveExtreme = $rootScope.ratingsPosExtId; 
 	$scope.negativeExtreme = $rootScope.ratingsNegExtId; 
+	$scope.debugging = angular.copy(debugging);
 	var negativeExtremesArr = $rootScope.ratings[$rootScope.ratingsNegExt]; 
 	var positiveExtremesArr = $rootScope.ratings[$rootScope.ratingsPosExt]; 
 	if (typeof $rootScope.explanations == "undefined") {
@@ -607,6 +658,15 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 		};
 	}
 
+	if (debugging) {
+		for (let obj of $rootScope.explanations.agree) {
+			obj.explanation = "TEST EXPLANATION";
+		}
+		for (let obj of $rootScope.explanations.disagree) {
+			obj.explanation = "TEST EXPLANATION";
+		}
+	}
+
 	$('#helpModal').modal(show = true);
 
 	$scope.done = function () {
@@ -618,9 +678,7 @@ app.controller("step5Ctrl", function ($scope, $rootScope, $state) {
 		}
 		for (var key in $rootScope.explanations.disagree){
 			explanationsDone = explanationsDone*
-			($rootScope.explanations.disagree[key].explanation.length > 0 ? 1 : 0);
-		}
-		return explanationsDone > 0;
+			($rootScope.explanations.disagree[key].explanation.length > 0 ? 1 : 0); } return explanationsDone > 0;
 	}
 
 	$scope.next = function () {
@@ -643,6 +701,7 @@ app.controller("step6Ctrl",['$scope', '$rootScope', '$state', function ($scope, 
 	vm.onSubmit = $scope.onSubmit;
 	vm.userForm = $scope.userForm;
 	vm.userFields = $rootScope.formFields;
+	$scope.debugging = angular.copy(debugging);
 	
 	$scope.submit = function() {
 		$scope.send();
@@ -708,5 +767,5 @@ app.controller("step6Ctrl",['$scope', '$rootScope', '$state', function ($scope, 
 }]);
 
 app.controller("step7Ctrl", function ($scope, $rootScope, $state) {
-
+	$scope.debugging = angular.copy(debugging);
 });

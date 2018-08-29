@@ -31,6 +31,13 @@
 		<option name="Practice in Industry-industry">practice</option>
 	</input>
 
+	<input type="multiCheckbox" required="true" maxlength="40" key="occupation">
+		<label>Please select your main occupation.</label>
+		<option name="Research in Academia-academia">research</option>
+		<option name="Research in Industry-industry">research</option>
+		<option name="Practice in Industry-industry">practice</option>
+	</input>
+
 	<input type="radio" required="true" key="heard_sr">
 		<label>Have you ever heard about systematic reviews before?</label>
 		<option name="yes">yes</option>
