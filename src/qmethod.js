@@ -292,8 +292,14 @@ app.config(function ($stateProvider, $locationProvider) {
 	});
 });
 
-  var config = {
-  };
+var config = {
+	apiKey: "AIzaSyA15U4F-Q97flUntlLtVCaKDioVOhpszWA",
+	authDomain: "qmethod-87099.firebaseapp.com",
+	databaseURL: "https://qmethod-87099.firebaseio.com",
+	projectId: "qmethod-87099",
+	storageBucket: "qmethod-87099.appspot.com",
+	messagingSenderId: "639626576200"
+};
   if (!angular.equals({},config)) {
   	  firebase.initializeApp(config);
 	  var rootRef = firebase.database().ref();
@@ -684,6 +690,7 @@ app.controller("step6Ctrl",['$scope', '$rootScope', '$state', function ($scope, 
 		if (typeof rootRef != "undefined") {
 			rootRef.push(response, function (error) {
 				if (error) {
+					alert("Couldn't send data to firebase. Cause:"+error);
 					$scope.send();
 					return;
 				} else {
