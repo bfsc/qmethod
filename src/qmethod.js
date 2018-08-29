@@ -65,7 +65,7 @@ var xml2form = function (xml) {
 				if (isOK(opt)) {
 					var opt_name = opt.getAttribute('name');
 					var opt_value = opt.childNodes[0].nodeValue;
-					if (tylpe == 'multicheckbox') {
+					if (type == 'multicheckbox') {
 						form.templateOptions.options.push({title:opt_name,value:opt_value});
 					}
 					else if (isOK(opt_name)&&isOK(opt_value)) {
