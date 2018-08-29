@@ -58,14 +58,17 @@ var xml2form = function (xml) {
 			form.templateOptions.required = req;
 		}
 
-		if (type == 'select' || type == 'radio') {
+		if (type == 'select' || type == 'radio' || type == 'multicheckbox') {
 			var options = el.getElementsByTagName('option');
 			form.templateOptions.options = [];
 			for (let opt of options) {
 				if (isOK(opt)) {
 					var opt_name = opt.getAttribute('name');
 					var opt_value = opt.childNodes[0].nodeValue;
-					if (isOK(opt_name)&&isOK(opt_value)) {
+					if (tylpe == 'multicheckbox') {
+						form.templateOptions.options.push({title:opt_name,value:opt_value});
+					}
+					else if (isOK(opt_name)&&isOK(opt_value)) {
 						form.templateOptions.options.push({name:opt_name,value:opt_value});
 					} else if (isOK(opt_value)&&!isOK(opt_name)) {
 						form.templateOptions.options.push({name:opt_value,value:opt_value});
