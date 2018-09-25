@@ -1,0 +1,25 @@
+<item id="form">
+	<input type="input" required="true" key="inputex">
+		<label>Input example.</label>
+	</input>
+	<input type="radio" required="true" key="radioex">
+		<label>Radio example.</label>
+		<option name="Radio 1">Example1</option>
+		<option name="Radio 2">Example2</option>
+	</input>
+	<input type="select" required="true" key="selectex">
+		<label>Select example.</label>
+		<option name="Select example 1">select1</option>
+		<option name="Select example 2">select2</option>
+		<option name="Select example 3">select3</option>
+	</input>
+	<input type="multiCheckbox" required="true" key="multicheckboxex">
+		<label>Multi-checkbox example.</label>
+		<option name="Checkbox 1">checkbox1</option>
+		<option name="Checkbox 2">checkbox2</option>
+		<option name="Checkbox 3">checkbox3</option>
+	</input>
+	<input type="textarea" required="false" key="textareaex">
+		<label>Text Area example.</label>
+	</input>
+</item>

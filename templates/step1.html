@@ -1,40 +1,26 @@
-<div ng-controller='step1Ctrl'>
-	<center><h2><b>ABOUT THIS RESEARCH</b></h2></center>
-	
-	<p style="margin-left:100px; margin-right:100px; margin-bottom:20px; margin-top:50px;">
-	This research is being conducted by Bruno Cartaxo (PhD), Gustavo Pinto (PhD), Márcio Ribeiro (PhD), Maria Teresa Baldassarre (PhD), and Sergio Soares (PhD).<br/><br/>
-
-	We are researchers at UFPE (Federal University of Pernambuco, Brazil), UFPA (Federal University of Para, Brazil), UFAL (Federal University of Alagoas, Brazil)and UNIBARI (Univeristy of Bari, Italy) studying methods to transfer knowledge to software engineering practice.<br/><br/>
-
-	One way to do this, is to make systematic reviews more connected to practitioners' needs. To achieve this goal, we are planning to borrow the idea of Rapid Reviews from Medicine, but before, we would like to know your opinion about the use of Rapid Reviews in software engineering.<br/><br/>
-
-	The estimated time to complete the questionnaire is 45 minutes.<br/><br/>
-
-	If you have any doubt, do not hesitate to contact us in bfsc@cin.ufpe.br and/or visit our website on http://cin.ufpe.br/eseg<br/><br/>
-
-	<b>ON THE BENEFITS TO DE RESPONDENTS</b><br/>
-	1. By filling this research instrument, you can participate in a Raffle of US$ 100 voucher at Amazon.com<br/><br/>
-	
-	2. The raffle will occur only if more than one third of the invited researchers fill this research instrument.<br/><br/>
-	
-	3. For each respondent of this research instrument, R$ 1 will be donated (limited to a maximum of R$ 200) to the Center for Support Children with Cancer (Núcleo de Apoio a Criança com Câncer - NACC), which is a Brazilian NGO with more than 30 years of existence. More information about NACC, you can find in its official website http://www.nacc.org.br (portuguse only).<br/><br/>
-	
-	<b>STATEMENT OF INFORMED CONSENT</b><br/>
-	By filling this research instrument, you agree to permit the researcher to obtain, use and disclose the anonymous information provided as described below.<br/><br/>
-
-	<b>CONDITIONS AND STIPULATIONS</b><br/>
-	1. I understand that all information is confidential. I will not be personally identified. I agree to fill this research instrument for research purposes and that the data derived from this anonymous research instrument may be published in journals, conferences and blog posts.<br/><br/>
-
-	2. I understand that my participation in this research instrument is totally voluntary, and that declining to participate will involve no penalty or loss of benefits. If I choose, I may withdraw my participation at any time. I also understand that if I choose to participate, that I may decline to answer any question that I am not comfortable answering.<br/><br/>
-
-	3. I understand that I can contact the researcher if I have any questions about this research. I am aware that my consent will not directly benefit me. I am also aware that the author will maintain the data collected in perpetuity and may utilize data for future academic work.<br/><br/>
-
-	4. By clicking the button below I freely provide consent and acknowledge my rights as a voluntary research participant as outlined above and provide consent to the researcher to use my information in conducting research on the areas noted above.<br/><br/>
-	</p>
-	
-	<form>
-	<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
-		<a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
+<div>
+	<div ng-show="debugging" align="center" style="background-color:red;color:white">
+		<b>DEBUGGING</b>
 	</div>
+	<div class="dynamicpages" ng-bind-html="currentPage"> 
+	</div>
+
+	<form>
+		<table align="center">
+			<tr>
+				<td>
+					<div class="col-xs-4 col-xs-offset-4 next-button" ng-show="currentPageIndex > 0" align="center" style="margin-bottom:50px">
+						<a href="" ng-click="back()" class="btn btn-default btn-lg btn-block" style="width:100px">Back</a>
+					</div>
+				</td>
+				<td>
+					<div class="col-xs-4 col-xs-offset-4 next-button" align="center" style="margin-bottom:50px">
+						<a href="" ng-click="next()" class="btn btn-default btn-lg btn-block" style="width:300px">Continue</a>
+					</div>
+				</td>
+				<td>
+				</td>
+			</tr>
+		</table>
 	</form>
 </div>
