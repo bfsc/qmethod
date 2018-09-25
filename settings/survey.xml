@@ -1,72 +1,25 @@
 <item id="form">
-
-	<input type="input" required="true" maxlength="4" restricted="0-9" key="age">
-		<label>Please enter your year of birth (YYYY, eg. 1980).</label>
+	<input type="input" required="true" key="inputex">
+		<label>Input example.</label>
 	</input>
-
-	<input type="radio" required="true" key="gender">
-		<label>Please select your gender.</label>
-		<option name="female">female</option>
-		<option name="male">male</option>
+	<input type="radio" required="true" key="radioex">
+		<label>Radio example.</label>
+		<option name="Radio 1">Example1</option>
+		<option name="Radio 2">Example2</option>
 	</input>
-
-	<input type="input" required="true" maxlength="40" key="geo">
-		<label>Please enter the country you currently work on.</label>
+	<input type="select" required="true" key="selectex">
+		<label>Select example.</label>
+		<option name="Select example 1">select1</option>
+		<option name="Select example 2">select2</option>
+		<option name="Select example 3">select3</option>
 	</input>
-
-	<input type="select" required="true" maxlength="40" key="edu">
-		<label>Please select your educational level.</label>
-		<option name="PhD">phd</option>
-		<option name="PhD Candidate">phdc</option>
-		<option name="Master">msc</option>
-		<option name="Master Candidate">mscc</option>
-		<option name="Undergraduate">bsc</option>
-		<option name="Undergraduate Candidate">bscc</option>
+	<input type="multiCheckbox" required="true" key="multicheckboxex">
+		<label>Multi-checkbox example.</label>
+		<option name="Checkbox 1">checkbox1</option>
+		<option name="Checkbox 2">checkbox2</option>
+		<option name="Checkbox 3">checkbox3</option>
 	</input>
-
-	<input type="select" required="true" maxlength="40" key="occupation">
-		<label>Please select your main occupation.</label>
-		<option name="Research in Academia-academia">research</option>
-		<option name="Research in Industry-industry">research</option>
-		<option name="Practice in Industry-industry">practice</option>
-	</input>
-
-	<input type="multiCheckbox" required="true" maxlength="40" key="occupation">
-		<label>Please select your main occupation.</label>
-		<option name="Research in Academia-academia">research</option>
-		<option name="Research in Industry-industry">research</option>
-		<option name="Practice in Industry-industry">practice</option>
-	</input>
-
-	<input type="radio" required="true" key="heard_sr">
-		<label>Have you ever heard about systematic reviews before?</label>
-		<option name="yes">yes</option>
-		<option name="no">no</option>
-	</input>
-
-	<input type="radio" required="true" key="read_sr">
-		<label>Have you ever read a systematic review?</label>
-		<option name="yes">yes</option>
-		<option name="no">no</option>
-	</input>
-
-	<input type="radio" required="true" key="author_sr">
-		<label>Have you ever been the author of a systematic review?</label>
-		<option name="yes">yes</option>
-		<option name="no">no</option>
-	</input>
-
-	<input type="radio" required="true" key="heard_rr">
-		<label>Have you ever heard about RAPID REVIEWS before?</label>
-		<option name="yes">yes</option>
-		<option name="no">no</option>
-	</input>
-
-	<input type="textarea" required="false" key="comments">
-		<label>Comments</label>
-	</input>
-
-	<input type="input" required="false" key="email">
-		<label>Please enter your e-mail (it will not be disclosed), if you want to participate on the raflle of US$ 100 voucher at Amazon.com</label>
+	<input type="textarea" required="false" key="textareaex">
+		<label>Text Area example.</label>
 	</input>
 </item>
