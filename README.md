@@ -41,7 +41,8 @@ You may use the same python 3 trick or download, install and then use Fenix web 
 <a name="qme">1</a>: https://www.betterevaluation.org/en/evaluation-options/qmethodology
 
 
-For more information on how to configure and run Qmethod, head to the [wiki.](https://github.com/bfsc/qmethod/wiki)
+For more information on how to configure and run Qmethod, head to the [wiki](https://github.com/bfsc/qmethod/wiki) or
+download our [guide.](https://github.com/bfsc/qmethod/blob/res/res/getting-started.pdf)
 
 # License  
 Licensed under the Apache License, Version 2.0 (the "License");
