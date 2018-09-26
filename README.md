@@ -41,8 +41,6 @@ You may use the same python 3 trick or download, install and then use Fenix web 
 <a name="qme">1</a>: https://www.betterevaluation.org/en/evaluation-options/qmethodology
 
 # License  
-Copyright 2018 Bruno Cartaxo
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
