@@ -7,16 +7,16 @@ Qmethod allows users to create their own q-methodology survey by customizing XML
 
 Qmethod works by parsing xml files. The xml files located at src/settings defines the configurations for starting pages, statements, normal distribuition and the final survey. The user may edit these xml files to make his own survey.
 
-## Requirements
+# Requirements
 
 We need:
 
 * Python 3
 * Git
 
-## Installing
+# Installing
 
-### UNIX based systems (GNU/Linux, MacOS)
+## UNIX based systems (GNU/Linux, MacOS)
 
 Clone the repository
 
@@ -32,7 +32,7 @@ python3 -m http.server 8080 --bind 127.0.0.1
 ```
 Then, you may access by typing on your browser address bar: 127.0.0.1:8080
 
-### Windows 7/8/10:
+## Windows 7/8/10:
 
 Clone the repository using Github app.
 
@@ -43,6 +43,20 @@ You may use the same python 3 trick or download, install and then use Fenix web 
 
 For more information on how to configure and run Qmethod, head to the [wiki](https://github.com/bfsc/qmethod/wiki) or
 download our [guide.](https://github.com/bfsc/qmethod/blob/res/res/getting-started.pdf)
+
+# Citation
+
+If you plan to use this tool in a research project, please do not forget to cite the corresponding work as follows:
+
+```
+@INPROCEEDINGS {cartaxo2019esem,
+    author    = "Bruno Cartaxo, Gustavo Pinto, Baldoino Fonseca, Márcio Ribeiro, Pedro Pinheiro, Sergio Soares and Maria Teresa Baldassarre",
+    title     = "Software Engineering Research Community Viewpoints on Rapid Reviews",
+    booktitle = "Proceedings of the 13th ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM)",
+    year      = "2019",
+    series    = "ESEM '19"
+}
+```
 
 # License  
 Licensed under the Apache License, Version 2.0 (the "License");
