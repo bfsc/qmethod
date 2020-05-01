@@ -48,6 +48,7 @@ download our [guide.](https://github.com/bfsc/qmethod/blob/res/res/getting-start
 
 If you plan to use this tool in a research project, please do not forget to cite the corresponding work as follows:
 
+BibTeX
 ```
 @INPROCEEDINGS {cartaxo2019esem,
     author    = "Bruno Cartaxo, Gustavo Pinto, Baldoino Fonseca, Márcio Ribeiro, Pedro Pinheiro, Sergio Soares and Maria Teresa Baldassarre",
@@ -57,6 +58,12 @@ If you plan to use this tool in a research project, please do not forget to cite
     series    = "ESEM '19"
 }
 ```
+
+MLA
+```
+Cartaxo, Bruno, et al. "Software Engineering Research Community Viewpoints on Rapid Reviews." 2019 ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM). IEEE, 2019.
+```
+
 
 # License  
 Licensed under the Apache License, Version 2.0 (the "License");
